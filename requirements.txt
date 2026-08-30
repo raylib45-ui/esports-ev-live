@@ -1,3 +1,1 @@
-fastapi
-uvicorn[standard]
-requests
+streamlit==1.35.0
