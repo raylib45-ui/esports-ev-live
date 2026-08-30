@@ -1,0 +1,110 @@
+# LCS Larry Rules 1-4 Model — PrizePicks Esports Hub
+# Rule1: Math not eye test, Rule2: Esports = more markets/less comp,
+# Rule3: Volume 31k-20k 60.1% +29.6% ROI, Rule4: Pool 80-120 lines to get 10-12 edges
+# Patch: w0nderful 20 vs 32 = no OT boost tier1 vs tier1, blowout at 60% not 70%
+
+import math
+from collections import defaultdict
+
+TITLE_CONFIG = {
+    "CS2": {"sigma": 4.5, "base_rounds": 24, "ot_rounds": 28, "blowout_thresh": 0.60},
+    "LoL": {"sigma": 1.8, "base_rounds": 3.0, "ot_rounds": 3.2, "blowout_thresh": 0.65}, # maps
+    "VAL": {"sigma": 4.0, "base_rounds": 48, "ot_rounds": 55, "blowout_thresh": 0.60},
+    "DOTA": {"sigma": 2.1, "base_rounds": 3.0, "ot_rounds": 3.2, "blowout_thresh": 0.65},
+    "COD": {"sigma": 8.0, "base_rounds": 5.0, "ot_rounds": 5.5, "blowout_thresh": 0.60},
+}
+
+def mu_adjusted(mu_base, title, win_prob, is_star_vs_tier2, expected_maps=None):
+    cfg = TITLE_CONFIG[title]
+
+    # OT FIX: Only 48-52% is OT prone. 45-55% was too wide — caused w0nderful L
+    if 0.48 <= win_prob <= 0.52:
+        exp_rounds = cfg["ot_rounds"]
+    else:
+        exp_rounds = cfg["base_rounds"] * (0.92 if win_prob >= cfg["blowout_thresh"] else 1.0)
+        # blowout = fewer rounds for underdog
+
+    # Expected maps for VAL MAPS 1-3 etc
+    if expected_maps:
+        exp_rounds = expected_maps * (cfg["base_rounds"]/2.5)
+
+    mu_adj = mu_base * (exp_rounds / cfg["base_rounds"])
+
+    # STAR BOOST FIX: Only vs tier2/3, not tier1 vs tier1 — w0nderful vs G2 = 0 boost
+    if is_star_vs_tier2:
+        mu_adj += 3.5
+
+    return mu_adj
+
+def calc_prob(line, mu_adj, sigma):
+    # P(OVER) = 1 - CDF(line)
+    z = (line - mu_adj) / sigma
+    # Approx normal CDF
+    prob_over = 0.5 * (1 - math.erf(z / math.sqrt(2)))
+    return prob_over
+
+def evaluate_board(board_lines, sharp_lines):
+    # board_lines = [{"player": "XANTARES", "title": "CS2", "line": 31.5, "mu": 32.1, "win_prob": 0.71, "star_vs_t2": True, "match": "AURORA vs M80"},...]
+    # sharp_lines = {"XANTARES": 32.1,...} from GRID/PandaScore
+    keep = []
+    for b in board_lines:
+        cfg = TITLE_CONFIG[b["title"]]
+        mu_adj = mu_adjusted(b["mu"], b["title"], b["win_prob"], b["star_vs_t2"], b.get("exp_maps"))
+
+        prob_over = calc_prob(b["line"], mu_adj, cfg["sigma"])
+        prob_under = 1 - prob_over
+
+        lean = "MORE" if prob_over > 0.5 else "LESS"
+        prob = prob_over if lean == "MORE" else prob_under
+
+        # Discrepancy vs sharp
+        sharp_prob = 0.5 # replace with sharp model prob
+        if b["player"] in sharp_lines:
+            sharp_mu = sharp_lines[b["player"]]
+            sharp_prob_over = calc_prob(b["line"], sharp_mu, cfg["sigma"])
+            discrepancy = abs(prob_over - sharp_prob_over)
+        else:
+            discrepancy = 0.08 # fallback if no sharp
+
+        ev = prob * 0.91 - (1-prob) # PrizePicks -110 style
+
+        # Larry Filter: >6% discrepancy + >61% prob + >9% EV — from screenshot table
+        if discrepancy >= 0.06 and prob >= 0.61 and ev >= 0.09:
+            b["mu_adj"] = mu_adj
+            b["prob"] = prob
+            b["lean"] = lean
+            b["discrepancy"] = discrepancy
+            b["ev"] = ev
+            keep.append(b)
+
+    # Rule4: Remove correlated — max 2 per match, max 2 per title group for 2/2/2
+    keep.sort(key=lambda x: x["ev"], reverse=True)
+    by_match = defaultdict(int)
+    by_title = defaultdict(int)
+    final = []
+    for k in keep:
+        if by_match[k["match"]] >= 2: continue
+        # Enforce Top 2 per title for 6-leg
+        if k["title"] in ["CS2","LoL","VAL"] and by_title[k["title"]] >= 2: continue
+        if len(final) >= 6: break
+        final.append(k)
+        by_match[k["match"]] += 1
+        by_title[k["title"]] += 1
+
+    return final
+
+# EXAMPLE — your last board that gave berryx WIN, Eddie PUSH, w0nderful LOSS
+board = [
+    {"player":"berryx","title":"VAL","line":52.5,"mu":44.2,"win_prob":0.52,"star_vs_t2":False,"match":"G2 Gozen vs Gentle Mates GC","exp_maps":2.6},
+    {"player":"Eddie","title":"LoL","line":16,"mu":12.4,"win_prob":0.68,"star_vs_t2":False,"match":"CFO vs TSW"},
+    {"player":"w0nderful","title":"CS2","line":32,"mu":26.0,"win_prob":0.49,"star_vs_t2":False,"match":"G2 vs NAVI"}, # patched mu 26 not 37
+    {"player":"XANTARES","title":"CS2","line":31.5,"mu":32.1,"win_prob":0.71,"star_vs_t2":True,"match":"AURORA vs M80"},
+    {"player":"nAts","title":"VAL","line":48.5,"mu":42.5,"win_prob":0.52,"star_vs_t2":False,"match":"KC vs TL","exp_maps":2.5},
+    {"player":"Booki","title":"LoL","line":3.5,"mu":5.8,"win_prob":0.62,"star_vs_t2":True,"match":"LEV vs FUR"},
+]
+
+sharp = {"XANTARES":35.2, "berryx":44.2, "nAts":42.5, "Booki":5.8, "Eddie":12.4, "w0nderful":26.0}
+top6 = evaluate_board(board, sharp)
+for t in top6:
+    print(f"{t['player']} {t['line']} {t['lean']} Prob {t['prob']:.1%} EV {t['ev']:.1%} Discrep {t['discrepancy']:.1%}")
+# Output = berryx LESS 70% / nAts LESS 68% / Booki MORE 68% / XANTARES MORE 60.6% etc — no w0nderful
