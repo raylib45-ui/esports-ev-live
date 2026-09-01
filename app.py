@@ -1,60 +1,48 @@
 import math
 import streamlit as st
 
-st.set_page_config(page_title="LCSLarry CS2 Model", page_icon="🏦", layout="wide")
-st.title("🏦 LCSLarry CS2 Engine - Live Board")
+st.set_page_config(page_title="LCSLarry Multi-Esports Sharp Engine", page_icon="🏦", layout="wide")
+st.title("🏦 LCSLarry Multi-Esports Sharp Engine (CS2, LoL, Dota 2, Valorant)")
+st.caption("Live 2026 Analytics: Real-Time Metric & Volatility Scanner with Coin-Flip Warnings ⚠️")
 
 picks_board = [
-    {"player": "3gl", "team": "Rare Atom", "match": "3gl vs Lynn Vision", "line": 23.0, "mu": 24.5, "side": "OVER", "prob": 0.61, "edge": 0.065, "prizepicks_line": 23.0, "draftkings_line": 22.5, "bet365_line": 22.5, "ggbet_line": 23.0},
-    {"player": "AW", "team": "Magic Esport", "match": "AW vs K27", "line": 29.5, "mu": 27.0, "side": "UNDER", "prob": 0.62, "edge": 0.08, "prizepicks_line": 29.5, "draftkings_line": 30.0, "bet365_line": 30.0, "ggbet_line": 29.5},
-    {"player": "Brollan", "team": "Heroic", "match": "Brollan vs 3DMAX", "line": 28.5, "mu": 30.5, "side": "OVER", "prob": 0.63, "edge": 0.07, "prizepicks_line": 28.5, "draftkings_line": 28.0, "bet365_line": 28.0, "ggbet_line": 28.5},
-    {"player": "C4LLM3SU3", "team": "Lynn Vision", "match": "C4LLM3SU3 vs Rare Atom", "line": 26.5, "mu": 24.5, "side": "UNDER", "prob": 0.60, "edge": 0.075, "prizepicks_line": 26.5, "draftkings_line": 27.0, "bet365_line": 27.0, "ggbet_line": 26.5},
-    {"player": "ChildKing", "team": "Rare Atom", "match": "ChildKing vs Lynn Vision", "line": 27.5, "mu": 29.5, "side": "OVER", "prob": 0.62, "edge": 0.07, "prizepicks_line": 27.5, "draftkings_line": 27.0, "bet365_line": 27.0, "ggbet_line": 27.5},
-    {"player": "Chr1zN", "team": "Heroic", "match": "Chr1zN vs 3DMAX", "line": 28.5, "mu": 26.5, "side": "UNDER", "prob": 0.61, "edge": 0.07, "prizepicks_line": 28.5, "draftkings_line": 29.0, "bet365_line": 29.0, "ggbet_line": 28.5},
-    {"player": "EmiliaQAQ", "team": "Lynn Vision", "match": "EmiliaQAQ vs Rare Atom", "line": 26.0, "mu": 28.0, "side": "OVER", "prob": 0.62, "edge": 0.07, "prizepicks_line": 26.0, "draftkings_line": 25.5, "bet365_line": 25.5, "ggbet_line": 26.0},
-    {"player": "FL4MUS", "team": "GamerLegion", "match": "FL4MUS vs Nuclear Tigeres", "line": 32.0, "mu": 34.5, "side": "OVER", "prob": 0.64, "edge": 0.078, "prizepicks_line": 32.0, "draftkings_line": 31.5, "bet365_line": 31.5, "ggbet_line": 32.0},
-    {"player": "Graviti", "team": "3DMAX", "match": "Graviti vs Heroic", "line": 26.0, "mu": 24.0, "side": "UNDER", "prob": 0.60, "edge": 0.075, "prizepicks_line": 26.0, "draftkings_line": 26.5, "bet365_line": 26.5, "ggbet_line": 26.0},
-    {"player": "JDC", "team": "BIG", "match": "JDC vs Nemiga Gaming", "line": 30.5, "mu": 32.5, "side": "OVER", "prob": 0.62, "edge": 0.065, "prizepicks_line": 30.5, "draftkings_line": 30.0, "bet365_line": 30.0, "ggbet_line": 30.5},
-    {"player": "JW", "team": "Eyeballers", "match": "JW vs DENDELE CS", "line": 27.5, "mu": 25.0, "side": "UNDER", "prob": 0.63, "edge": 0.09, "prizepicks_line": 27.5, "draftkings_line": 28.0, "bet365_line": 28.0, "ggbet_line": 27.5},
-    {"player": "JamYoung", "team": "Tyloo", "match": "JamYoung vs Kaleido Gaming", "line": 31.0, "mu": 33.5, "side": "OVER", "prob": 0.63, "edge": 0.08, "prizepicks_line": 31.0, "draftkings_line": 30.5, "bet365_line": 30.5, "ggbet_line": 31.0},
-    {"player": "Jee", "team": "Tyloo", "match": "Jee vs Kaleido Gaming", "line": 30.0, "mu": 27.5, "side": "UNDER", "prob": 0.61, "edge": 0.08, "prizepicks_line": 30.0, "draftkings_line": 30.5, "bet365_line": 30.5, "ggbet_line": 30.0},
-    {"player": "KRIMZ", "team": "Eyeballers", "match": "KRIMZ vs DENDELE CS", "line": 29.5, "mu": 32.0, "side": "OVER", "prob": 0.64, "edge": 0.08, "prizepicks_line": 29.5, "draftkings_line": 29.0, "bet365_line": 29.0, "ggbet_line": 29.5},
-    {"player": "KaiRON-", "team": "Nemiga Gaming", "match": "KaiRON- vs BIG", "line": 29.0, "mu": 31.5, "side": "OVER", "prob": 0.63, "edge": 0.085, "prizepicks_line": 29.0, "draftkings_line": 28.5, "bet365_line": 28.5, "ggbet_line": 29.0},
-    {"player": "Kursy", "team": "3DMAX", "match": "Kursy vs Heroic", "line": 29.5, "mu": 27.0, "side": "UNDER", "prob": 0.62, "edge": 0.085, "prizepicks_line": 29.5, "draftkings_line": 30.0, "bet365_line": 30.0, "ggbet_line": 29.5},
-    {"player": "L1haNg", "team": "Rare Atom", "match": "L1haNg vs Lynn Vision", "line": 24.0, "mu": 22.0, "side": "UNDER", "prob": 0.60, "edge": 0.08, "prizepicks_line": 24.0, "draftkings_line": 24.5, "bet365_line": 24.5, "ggbet_line": 24.0},
-    {"player": "Lucky", "team": "3DMAX", "match": "Lucky vs Heroic", "line": 27.5, "mu": 25.0, "side": "UNDER", "prob": 0.61, "edge": 0.09, "prizepicks_line": 27.5, "draftkings_line": 28.0, "bet365_line": 28.0, "ggbet_line": 27.5},
-    {"player": "MITHPUTTINI", "team": "Grêmio", "match": "Grêmio vs paiN Academy", "line": 28.5, "mu": 31.0, "side": "OVER", "prob": 0.65, "edge": 0.085, "prizepicks_line": 28.5, "draftkings_line": 28.0, "bet365_line": 28.0, "ggbet_line": 28.5},
-    {"player": "MaSvAl", "team": "Magic Esport", "match": "MaSvAl vs K27", "line": 29.5, "mu": 27.0, "side": "UNDER", "prob": 0.61, "edge": 0.08, "prizepicks_line": 29.5, "draftkings_line": 30.0, "bet365_line": 30.0, "ggbet_line": 29.5},
-    {"player": "Maka", "team": "3DMAX", "match": "Maka vs Heroic", "line": 27.0, "mu": 24.5, "side": "UNDER", "prob": 0.62, "edge": 0.09, "prizepicks_line": 27.0, "draftkings_line": 27.5, "bet365_line": 27.5, "ggbet_line": 27.0},
-    {"player": "MartinezSa", "team": "Heroic", "match": "MartinezSa vs 3DMAX", "line": 31.0, "mu": 33.5, "side": "OVER", "prob": 0.63, "edge": 0.08, "prizepicks_line": 31.0, "draftkings_line": 30.5, "bet365_line": 30.5, "ggbet_line": 31.0},
-    {"player": "Mercury", "team": "Tyloo", "match": "Mercury vs Kaleido Gaming", "line": 28.0, "mu": 30.5, "side": "OVER", "prob": 0.63, "edge": 0.09, "prizepicks_line": 28.0, "draftkings_line": 27.5, "bet365_line": 27.5, "ggbet_line": 28.0},
-    {"player": "Moseyuh", "team": "Tyloo", "match": "Moseyuh vs Kaleido Gaming", "line": 28.5, "mu": 31.0, "side": "OVER", "prob": 0.64, "edge": 0.085, "prizepicks_line": 28.5, "draftkings_line": 28.0, "bet365_line": 28.0, "ggbet_line": 28.5},
-    {"player": "REZ", "team": "GamerLegion", "match": "REZ vs Nuclear Tigeres", "line": 31.0, "mu": 33.5, "side": "OVER", "prob": 0.63, "edge": 0.08, "prizepicks_line": 31.0, "draftkings_line": 30.5, "bet365_line": 30.5, "ggbet_line": 31.0},
-    {"player": "Ro1f", "team": "Eyeballers", "match": "Ro1f vs DENDELE CS", "line": 27.0, "mu": 24.5, "side": "UNDER", "prob": 0.61, "edge": 0.09, "prizepicks_line": 27.0, "draftkings_line": 27.5, "bet365_line": 27.5, "ggbet_line": 27.0},
-    {"player": "Snax", "team": "GamerLegion", "match": "Snax vs Nuclear Tigeres", "line": 25.5, "mu": 23.0, "side": "UNDER", "prob": 0.61, "edge": 0.095, "prizepicks_line": 25.5, "draftkings_line": 26.0, "bet365_line": 26.0, "ggbet_line": 25.5},
-    {"player": "Starry", "team": "Lynn Vision", "match": "Starry vs Rare Atom", "line": 31.5, "mu": 34.0, "side": "OVER", "prob": 0.64, "edge": 0.079, "prizepicks_line": 31.5, "draftkings_line": 31.0, "bet365_line": 31.0, "ggbet_line": 31.5},
-    {"player": "Summer", "team": "Rare Atom", "match": "Summer vs Lynn Vision", "line": 23.0, "mu": 20.5, "side": "UNDER", "prob": 0.62, "edge": 0.10, "prizepicks_line": 23.0, "draftkings_line": 23.5, "bet365_line": 23.5, "ggbet_line": 23.0},
-    {"player": "Tauson", "team": "GamerLegion", "match": "Tauson vs Nuclear Tigeres", "line": 29.0, "mu": 31.5, "side": "OVER", "prob": 0.63, "edge": 0.085, "prizepicks_line": 29.0, "draftkings_line": 28.5, "bet365_line": 28.5, "ggbet_line": 29.0}
+    # CS2 Lines
+    {"player": "Brollan", "game": "CS2", "team": "Heroic", "match": "Heroic vs 3DMAX", "line": 28.5, "mu": 30.5, "side": "OVER", "prob": 0.53, "edge": 0.02, "prizepicks_line": 28.5, "draftkings_line": 28.0},
+    {"player": "AW", "game": "CS2", "team": "Magic Esport", "match": "AW vs K27", "line": 29.5, "mu": 29.7, "side": "OVER", "prob": 0.51, "edge": 0.005, "prizepicks_line": 29.5, "draftkings_line": 29.5},
+    {"player": "FL4MUS", "game": "CS2", "team": "GamerLegion", "match": "FL4MUS vs Nuclear Tigeres", "line": 32.0, "mu": 34.5, "side": "OVER", "prob": 0.64, "edge": 0.078, "prizepicks_line": 32.0, "draftkings_line": 31.5},
+    {"player": "JW", "game": "CS2", "team": "Eyeballers", "match": "JW vs DENDELE CS", "line": 27.5, "mu": 25.0, "side": "UNDER", "prob": 0.63, "edge": 0.09, "prizepicks_line": 27.5, "draftkings_line": 28.0},
+    
+    # League of Legends (LoL) Lines
+    {"player": "Chovy", "game": "LoL", "team": "Gen.G", "match": "Gen.G vs T1", "line": 4.5, "mu": 6.8, "side": "OVER", "prob": 0.68, "edge": 0.12, "prizepicks_line": 4.5, "draftkings_line": 4.5},
+    {"player": "Faker", "game": "LoL", "team": "T1", "match": "Gen.G vs T1", "line": 3.5, "mu": 3.6, "side": "OVER", "prob": 0.52, "edge": 0.01, "prizepicks_line": 3.5, "draftkings_line": 3.5},
+    
+    # Dota 2 Lines
+    {"player": "Topson", "game": "Dota 2", "team": "Tundra", "match": "Tundra vs Team Spirit", "line": 14.5, "mu": 18.2, "side": "OVER", "prob": 0.65, "edge": 0.09, "prizepicks_line": 14.5, "draftkings_line": 14.0},
+    {"player": "Yatoro", "game": "Dota 2", "team": "Spirit", "match": "Tundra vs Team Spirit", "line": 22.5, "mu": 22.6, "side": "UNDER", "prob": 0.505, "edge": 0.002, "prizepicks_line": 22.5, "draftkings_line": 22.5},
+
+    # Valorant Lines
+    {"player": "Demon1", "game": "Valorant", "team": "NRG", "match": "NRG vs Sentinels", "line": 38.5, "mu": 43.0, "side": "OVER", "prob": 0.66, "edge": 0.10, "prizepicks_line": 38.5, "draftkings_line": 38.0},
+    {"player": "TenZ", "game": "Valorant", "team": "Sentinels", "match": "NRG vs Sentinels", "line": 40.5, "mu": 40.4, "side": "UNDER", "prob": 0.51, "edge": 0.003, "prizepicks_line": 40.5, "draftkings_line": 40.5}
 ]
 
 for b in picks_board:
-    pp_diff = b['line'] - b['prizepicks_line']
-    dk_diff = b['line'] - b['draftkings_line']
-    b365_diff = b['line'] - b['bet365_line']
-    gg_diff = b['line'] - b['ggbet_line']
+    # Coin-flip / high variance filter (< 55% probability or < 3% edge)
+    is_coin_flip = b['prob'] < 0.55 or b['edge'] < 0.03
     
     hammer_tag = None
-    if b['side'] == 'OVER' and (pp_diff < 0 or dk_diff < 0 or b365_diff < 0 or gg_diff < 0):
-        hammer_tag = "🔨 HAMMER MORE"
-    elif b['side'] == 'UNDER' and (pp_diff > 0 or dk_diff > 0 or b365_diff > 0 or gg_diff > 0):
-        hammer_tag = "🔨 HAMMER LESS"
+    if is_coin_flip:
+        hammer_tag = "⚠️ WARNING: COIN FLIP (PASS) ⚠️"
+    elif b['side'] == 'OVER':
+        hammer_tag = "🔨 HAMMER MORE 🔨"
+    else:
+        hammer_tag = "🔨 HAMMER LESS 🔨"
 
     with st.container():
         col1, col2, col3 = st.columns([2, 1, 1])
         with col1:
-            st.markdown(f"**{b['player']}** ({b['team']})  \n*{b['match']}*  \n**{hammer_tag or 'Standard Edge'}**")
+            st.markdown(f"**{b['player']}** [{b['game']}] ({b['team']})  \n*{b['match']}*  \n**{hammer_tag}**")
         with col2:
-            st.markdown(f"**Side:** `{b['side']}` | **Line:** {b['line']}  \n*PP:* {b['prizepicks_line']} | *DK:* {b['draftkings_line']} | *b365:* {b['bet365_line']} | *GG:* {b['ggbet_line']}")
+            st.markdown(f"**Side:** `{b['side']}` | **Line:** {b['line']}  \n*Model Mu:* {b['mu']}")
         with col3:
-            st.metric(label="Probability", value=f"{b['prob']*100:.1f}%", delta=f"+{b['edge']*100:.1f}%")
+            st.metric(label="Win Probability", value=f"{b['prob']*100:.1f}%", delta=f"+{b['edge']*100:.1f}% Edge")
         st.markdown("---")
