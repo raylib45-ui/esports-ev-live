@@ -4,11 +4,11 @@ import streamlit as st
 st.set_page_config(page_title="LCSLarry CS2 Model", page_icon="🏦", layout="wide")
 
 st.title("🏦 LCSLarry Esports Model - CS2 Cache Patch Edition")
-st.caption("Premier Season 5 - Opening Lines & Value Scanner")
+st.caption("Premier Season 5 - Best-of-3 (Bo3) Map Series & Value Scanner")
 
 # --- CONFIG ---
-SIGMA_BASE = 4.5  # MAPS 1-2 Kills
-SIGMA_CACHE = 4.8  # high variance on Cache
+SIGMA_BASE = 5.8  # Scaled up for Best-of-3 total series kills (Maps 1-3 variance)
+SIGMA_CACHE = 6.4 # High variance for Bo3 featuring Cache
 MIN_EDGE_PCT = 0.06  # >6% discrepancy
 MIN_PROB = 0.61  # >61% bucket (no 54-56% forcing)
 MAX_PER_TEAM = 1
@@ -96,18 +96,28 @@ def filter_picks(picks):
             break
     return selected
 
+# Live Dabble Board adapted for Best-of-3 (Bo3) Total Kills Lines
 picks_board = [
-    {"player": "Annihilation", "team": "The Huns", "match": "The Huns vs Staqued", "line": 32.5, "mu": apply_cache_patch(38.0, "entry", ["Cache","Nuke"]), "role": "entry", "maps_likely": ["Nuke","Anubis","Cache"]},
-    {"player": "balencyy", "team": "Gremio", "match": "Gremio vs ODDIK", "line": 27.5, "mu": apply_cache_patch(30.5, "anchor_B", ["Inferno","Cache"]), "role": "anchor_B", "maps_likely": ["Inferno","Cache"]},
-    {"player": "jared", "team": "Chicken Coop", "match": "Chicken Coop vs Overtake", "line": 30.0, "mu": apply_cache_patch(33.0, "entry", ["Mirage","Anubis"]), "role": "entry", "maps_likely": ["Mirage","Anubis"]},
-    {"player": "donk", "team": "Spirit", "match": "Spirit vs FURIA", "line": 39.5, "mu": apply_cache_patch(42.0, "entry", ["Cache","Anubis"]), "role": "entry", "maps_likely": ["Anubis","Cache"]},
-    {"player": "junior", "team": "Voca", "match": "Voca vs Marsborne", "line": 31.5, "mu": apply_cache_patch(35.0, "entry", ["Dust2"]), "role": "entry", "maps_likely": ["Dust2","Mirage"]},
-    {"player": "cadnyx", "team": "Bushido", "match": "Bushido vs ex-RUSTEC", "line": 30.5, "mu": apply_cache_patch(33.5, "anchor_A", ["Cache"]), "role": "anchor_A", "maps_likely": ["Cache","Inferno"]},
+    # Borracheiros vs ALKA (Bo3 Series Projections)
+    {"player": "zock9", "team": "Borracheiros", "match": "Borracheiros vs ALKA", "line": 42.5, "mu": apply_cache_patch(48.0, "entry", ["Cache", "Anubis"]), "role": "entry", "maps_likely": ["Cache", "Anubis"]},
+    {"player": "neozix", "team": "Borracheiros", "match": "Borracheiros vs ALKA", "line": 39.5, "mu": apply_cache_patch(44.0, "support", ["Cache", "Inferno"]), "role": "support", "maps_likely": ["Cache", "Inferno"]},
+    {"player": "trindade", "team": "Borracheiros", "match": "Borracheiros vs ALKA", "line": 41.5, "mu": apply_cache_patch(36.0, "anchor_A", ["Cache", "Mirage"]), "role": "anchor_A", "maps_likely": ["Cache", "Mirage"]}, 
+    {"player": "Lacerda", "team": "Borracheiros", "match": "Borracheiros vs ALKA", "line": 39.5, "mu": apply_cache_patch(45.5, "entry", ["Cache"]), "role": "entry", "maps_likely": ["Cache", "Dust2"]},
+    {"player": "puni", "team": "ALKA", "match": "Borracheiros vs ALKA", "line": 38.5, "mu": apply_cache_patch(44.0, "rifler_star", ["Cache", "Nuke"]), "role": "rifler_star", "maps_likely": ["Cache", "Nuke"]},
+    {"player": "proSHOW", "team": "ALKA", "match": "Borracheiros vs ALKA", "line": 44.5, "mu": apply_cache_patch(50.0, "entry", ["Cache"]), "role": "entry", "maps_likely": ["Cache", "Anubis"]},
+    {"player": "vinaabEAST", "team": "ALKA", "match": "Borracheiros vs ALKA", "line": 43.5, "mu": apply_cache_patch(38.0, "anchor_B", ["Cache"]), "role": "anchor_B", "maps_likely": ["Cache", "Inferno"]}, 
+    {"player": "cerolzin", "team": "ALKA", "match": "Borracheiros vs ALKA", "line": 40.5, "mu": apply_cache_patch(46.0, "rifler_star", ["Cache"]), "role": "rifler_star", "maps_likely": ["Cache", "Mirage"]},
+    {"player": "bnc", "team": "ALKA", "match": "Borracheiros vs ALKA", "line": 43.5, "mu": apply_cache_patch(49.5, "entry", ["Cache"]), "role": "entry", "maps_likely": ["Cache", "Dust2"]},
+    
+    # Nuclear TigerES vs Color (Bo3 Series Projections)
+    {"player": "z1k4", "team": "Nuclear TigerES", "match": "Nuclear TigerES vs Color", "line": 46.0, "mu": apply_cache_patch(52.5, "entry", ["Dust2", "Mirage"]), "role": "entry", "maps_likely": ["Dust2", "Mirage"]},
+    {"player": "flouzer", "team": "Nuclear TigerES", "match": "Nuclear TigerES vs Color", "line": 44.0, "mu": apply_cache_patch(50.0, "rifler_star", ["Dust2", "Ancient"]), "role": "rifler_star", "maps_likely": ["Dust2", "Ancient"]},
+    {"player": "ayuki", "team": "Nuclear TigerES", "match": "Nuclear TigerES vs Color", "line": 42.0, "mu": apply_cache_patch(37.5, "support", ["Dust2"]), "role": "support", "maps_likely": ["Dust2", "Mirage"]} 
 ]
 
 best6 = filter_picks(picks_board)
 
-st.subheader("🔥 Top Filtered Portal Cards")
+st.subheader("🔥 Top Filtered Portal Cards (Bo3 Series)")
 
 if not best6:
     st.info("No picks met the strict model criteria for this slate.")
