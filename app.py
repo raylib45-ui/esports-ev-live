@@ -1,4 +1,10 @@
 import math
+import streamlit as st
+
+st.set_page_config(page_title="LCSLarry CS2 Model", page_icon="🏦", layout="wide")
+
+st.title("🏦 LCSLarry Esports Model - CS2 Cache Patch Edition")
+st.caption("Premier Season 5 - Opening Lines & Value Scanner")
 
 # --- CONFIG ---
 SIGMA_BASE = 4.5  # MAPS 1-2 Kills
@@ -9,21 +15,19 @@ MAX_PER_TEAM = 1
 MAX_PER_MATCH = 2  # if Cache in pool, treat as 1
 MAX_PER_MATCH_CACHE = 1
 
-# Patch adjustments - post July 9 only data weighted 100%, pre July 9 weighted 50%
 PATCH = {
-    "mid_duels": 1.5,  # removed CT mid boost hole = more aim duels
-    "self_boost_A": 0.8,  # Shroud boost A
-    "ebox_checkers": 1.0,  # E-box visibility + Checkers/Vent light
-    "post_plant_smoke_molly": 1.5,  # July 21 bomb disperses smoke + extinguishes molly
-    "awp_save_buff": 1.0,  # July 10 no min 1 dmg = more saves = + mu next round for AWPer
-    "exit_frag_nerf": -0.5,  # fewer exit frags
+    "mid_duels": 1.5,
+    "self_boost_A": 0.8,
+    "ebox_checkers": 1.0,
+    "post_plant_smoke_molly": 1.5,
+    "awp_save_buff": 1.0,
+    "exit_frag_nerf": -0.5,
 }
 
 def norm_cdf(x):
     return 0.5 * (1 + math.erf(x / math.sqrt(2)))
 
 def apply_cache_patch(mu, role, maps_likely):
-    """ role: 'entry', 'anchor_A', 'anchor_B', 'awp', 'support' """
     adj = PATCH.get("post_plant_smoke_molly", 1.5)
     if role in ["entry", "rifler_star"]:
         adj += PATCH.get("mid_duels", 1.5)
@@ -32,7 +36,7 @@ def apply_cache_patch(mu, role, maps_likely):
     if role == "anchor_B":
         adj += PATCH.get("ebox_checkers", 1.0)
     if "Cache" in maps_likely:
-        adj += 0.5  # extra chaos
+        adj += 0.5
     return mu + adj
 
 def calc_prob(mu, line, sigma, side="OVER"):
@@ -52,9 +56,6 @@ def calc_edge(mu, line, sigma, side="OVER"):
     return gap_pct, prob
 
 def filter_picks(picks):
-    """
-    picks = list of dict {player, team, match, line, mu, role, maps_likely, sigma}
-    """
     valid = []
     for p in picks:
         sigma = SIGMA_CACHE if "Cache" in p["maps_likely"] else SIGMA_BASE
@@ -95,7 +96,6 @@ def filter_picks(picks):
             break
     return selected
 
-# --- EXAMPLE USAGE ---
 picks_board = [
     {"player": "Annihilation", "team": "The Huns", "match": "The Huns vs Staqued", "line": 32.5, "mu": apply_cache_patch(38.0, "entry", ["Cache","Nuke"]), "role": "entry", "maps_likely": ["Nuke","Anubis","Cache"]},
     {"player": "balencyy", "team": "Gremio", "match": "Gremio vs ODDIK", "line": 27.5, "mu": apply_cache_patch(30.5, "anchor_B", ["Inferno","Cache"]), "role": "anchor_B", "maps_likely": ["Inferno","Cache"]},
@@ -106,5 +106,19 @@ picks_board = [
 ]
 
 best6 = filter_picks(picks_board)
-for b in best6:
-    print(f"{b['player']} {b['side']} {b['line']} -> mu {b['mu']:.1f} prob {b['prob']*100:.1f}% edge {b['edge']*100:.1f}% match {b['match']}")
+
+st.subheader("🔥 Top Filtered Portal Cards")
+
+if not best6:
+    st.info("No picks met the strict model criteria for this slate.")
+else:
+    for b in best6:
+        with st.container():
+            col1, col2, col3 = st.columns([2, 1, 1])
+            with col1:
+                st.markdown(f"**{b['player']}** ({b['team']})  \n*Match:* {b['match']}")
+            with col2:
+                st.markdown(f"**Side:** `{b['side']}`  \n**Line:** {b['line']}")
+            with col3:
+                st.metric(label="Model Probability", value=f"{b['prob']*100:.1f}%", delta=f"+{b['edge']*100:.1f}% Edge")
+            st.markdown("---")
