@@ -8,18 +8,31 @@ st.caption("Live 2026 Analytics: Screenshot Board Parser & Discrepancy Scanner �
 st.markdown("---")
 uploaded_file = st.file_uploader("Upload PrizePicks Esports Board Screenshot", type=["png", "jpg", "jpeg"])
 
+# Starts completely empty - no old or mock players cached
 picks_board = []
 
 if uploaded_file is not None:
-    st.success("Screenshot processed successfully! Displaying detected active lines:")
-    # Automatically populated model data when a screenshot is uploaded
-    picks_board = [
-        {"player": "MITHPUTTINI", "game": "CS2", "team": "Grêmio", "match": "Grêmio vs paiN Academy", "line": 28.5, "mu": 31.0, "side": "OVER", "prob": 0.65, "edge": 0.085},
-        {"player": "balencyy", "game": "CS2", "team": "Grêmio", "match": "Grêmio vs paiN Academy", "line": 31.5, "mu": 29.0, "side": "UNDER", "prob": 0.52, "edge": 0.015},  # Coin flip example
-        {"player": "s1lent", "game": "CS2", "team": "Grêmio", "match": "Grêmio vs paiN Academy", "line": 28.5, "mu": 24.0, "side": "UNDER", "prob": 0.64, "edge": 0.07}
-    ]
+    st.success("Screenshot uploaded successfully!")
+    
+    # NOTE: When your live OCR parser script extracts the players from your 
+    # uploaded image, append them to the picks_board list dynamically like this:
+    # 
+    # picks_board.append({
+    #     "player": "ExtractedPlayerName", 
+    #     "game": "CS2", 
+    #     "team": "TeamName", 
+    #     "match": "TeamA vs TeamB", 
+    #     "line": 25.5, 
+    #     "mu": 28.0, 
+    #     "side": "OVER", 
+    #     "prob": 0.62, 
+    #     "edge": 0.07
+    # })
+    
+    # Left empty intentionally until your custom extraction logic hooks into uploaded_file
+    st.info("Awaiting dynamic OCR extraction mapping for this screenshot...")
 else:
-    st.warning("⚠️ Upload a screenshot above to trigger live analysis.")
+    st.warning("⚠️ No active board loaded. Upload a screenshot above to run real-time analysis.")
 
 if picks_board:
     st.markdown("### 🔥 Live Scans & Discrepancy Results")
