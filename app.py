@@ -71,5 +71,4 @@ if __name__ == "__main__":
     engine = LCSLarryEsportsEngine(target_games=games, supported_books=books)
     live_slate_df = engine.generate_daily_slate()
     
-    print("--- LCS LARRY 2026 LIVE MODEL ALLOCATION ---")
-    print(live_slate_df.to_markdown(index=False))
+   ⁠st.dataframe(live_slate_df, use_container_width=True)
