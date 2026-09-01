@@ -71,4 +71,4 @@ if __name__ == "__main__":
     engine = LCSLarryEsportsEngine(target_games=games, supported_books=books)
     live_slate_df = engine.generate_daily_slate()
     
-  st.dataframe(live_slate_df)
+      st.dataframe(live_slate_df)
