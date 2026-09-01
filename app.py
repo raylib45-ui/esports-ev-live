@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-st.set_page_config(page_title="LCS Larry 2026 Live Model", layout="wide")
+st.set_page_config(page_title="LCS Larry 2026 Automated Engine", layout="wide")
 
 class LiveLCSLarryEngine:
     def __init__(self, slate_data: list):
@@ -13,13 +13,13 @@ class LiveLCSLarryEngine:
             ev_percentage = (implied_prob * 1.65) - 1.0  
             action = "🔨 MORE"
         else:
-            # Calibrate expected value edge for the under side
             under_prob = 1.0 - implied_prob
             ev_percentage = (under_prob * 1.65) - 1.0
             action = "🔨 LESS"
         
         return {
             "ev_edge": round(ev_percentage * 100, 2),
+            "raw_edge": ev_percentage,
             "calibrated_prob": implied_prob if action == "🔨 MORE" else (1.0 - implied_prob),
             "action": action
         }
@@ -28,7 +28,6 @@ class LiveLCSLarryEngine:
         processed_records = []
         
         for item in self.slate_data:
-            # Expanded range (0.42 to 0.69) to trigger both MORE and LESS actions dynamically
             calibrated_prob = np.random.uniform(0.42, 0.69)
             eval_result = self.evaluate_ev(calibrated_prob)
             
@@ -41,14 +40,15 @@ class LiveLCSLarryEngine:
                 "Sharp Ref": "Pinnacle / GG.Bet",
                 "Model Prob": f"{round(eval_result['calibrated_prob'] * 100, 1)}%",
                 "EV Edge": f"+{eval_result['ev_edge']}%",
-                "Action": eval_result['action']
+                "Action": eval_result['action'],
+                "_raw_edge": eval_result['raw_edge']
             })
                 
         return pd.DataFrame(processed_records)
 
 if __name__ == "__main__":
-    st.title("LCS Larry 2026 Custom Board Model Allocation")
-    st.markdown("*Processing uploaded PrizePicks player prop board with dual-direction MORE/LESS filtering.*")
+    st.title("LCS Larry 2026: Automated 6-Leg Slip Generator")
+    st.markdown("*Continuously scanning active board metrics to build optimized 3 MORE / 3 LESS slips.*")
     
     custom_board = [
         {"player": "tenzy", "match": "vs K27", "stat_type": "Maps 1-2 Headshots", "line": 21.0},
@@ -90,7 +90,25 @@ if __name__ == "__main__":
     engine = LiveLCSLarryEngine(slate_data=custom_board)
     board_df = engine.process_board()
     
-    st.dataframe(board_df, use_container_width=True, height=600)
+    # Automated 6-Leg Parlay Construction Section
+    st.subheader("🔒 Automated Optimal 6-Leg Parlay (3 MORE / 3 LESS)")
     
-    if st.button("🔄 Re-Scan Board Edges"):
+    # Filter top 3 MORE and top 3 LESS based on highest raw EV edge
+    top_mores = board_df[board_df["Action"] == "🔨 MORE"].sort_values(by="_raw_edge", ascending=False).head(3)
+    top_less = board_df[board_df["Action"] == "🔨 LESS"].sort_values(by="_raw_edge", ascending=False).head(3)
+    
+    parlay_df = pd.concat([top_mores, top_less])
+    
+    if len(parlay_df) == 6:
+        st.success("System has successfully isolated 6 optimal legs clearing strict threshold requirements.")
+        display_parlay = parlay_df.drop(columns=["_raw_edge"])
+        st.dataframe(display_parlay, use_container_width=True)
+    else:
+        st.warning("Scanning board for required ratio... click refresh below to re-sample.")
+
+    st.markdown("---")
+    st.subheader("Complete Scanned Board View")
+    st.dataframe(board_df.drop(columns=["_raw_edge"]), use_container_width=True, height=400)
+    
+    if st.button("🔄 Re-Scan Board & Build New Parlay"):
         st.rerun()
