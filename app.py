@@ -2,7 +2,7 @@ import math
 import streamlit as st
 
 st.set_page_config(page_title="LCSLarry CS2 Model", page_icon="🏦", layout="wide")
-st.title("🏦 LCSLarry CS2 Engine")
+st.title("🏦 LCSLarry CS2 Engine - Sharp Book Comparison")
 
 picks_board = [
     {"player": "MITHPUTTINI", "team": "Grêmio", "match": "Grêmio vs paiN Academy", "line": 28.5, "mu": 29.0, "side": "OVER", "prob": 0.62, "edge": 0.05, "prizepicks_line": 29.0, "draftkings_line": 28.5, "bet365_line": 28.5, "ggbet_line": 29.0},
@@ -13,12 +13,23 @@ picks_board = [
 ]
 
 for b in picks_board:
+    pp_diff = b['line'] - b['prizepicks_line']
+    dk_diff = b['line'] - b['draftkings_line']
+    b365_diff = b['line'] - b['bet365_line']
+    gg_diff = b['line'] - b['ggbet_line']
+    
+    hammer_tag = None
+    if b['side'] == 'OVER' and (pp_diff < 0 or dk_diff < 0 or b365_diff < 0 or gg_diff < 0):
+        hammer_tag = "🔨 HAMMER MORE (Book Discrepancy)"
+    elif b['side'] == 'UNDER' and (pp_diff > 0 or dk_diff > 0 or b365_diff > 0 or gg_diff > 0):
+        hammer_tag = "🔨 HAMMER LESS (Book Discrepancy)"
+
     with st.container():
         col1, col2, col3 = st.columns([2, 1, 1])
         with col1:
-            st.markdown(f"**{b['player']}** ({b['team']})  \n*{b['match']}*")
+            st.markdown(f"**{b['player']}** ({b['team']})  \n*{b['match']}*  \n**{hammer_tag or 'Standard Edge'}**")
         with col2:
-            st.markdown(f"**Side:** `{b['side']}` | **Line:** {b['line']}")
+            st.markdown(f"**Side:** `{b['side']}` | **Line:** {b['line']}  \n*PP:* {b['prizepicks_line']} | *DK:* {b['draftkings_line']} | *b365:* {b['bet365_line']} | *GG:* {b['ggbet_line']}")
         with col3:
             st.metric(label="Probability", value=f"{b['prob']*100:.1f}%", delta=f"+{b['edge']*100:.1f}%")
         st.markdown("---")
