@@ -146,51 +146,33 @@ class LiveLCSLarryEngine:
 
 if __name__ == "__main__":
     st.title("LCS Larry 2026: Sharp Line Comparison Engine")
-    st.markdown("*Evaluating updated CS2 player props from fresh board entries (Images 22, 23, & 24).*")
+    st.markdown("*Evaluating VALORANT player props from fresh board entries (Images 25 & 26). Older rosters completely purged.*")
 
-    # Strictly current board entries extracted from Images 22, 23, and 24 (Older rosters fully purged)
+    # Strictly current board entries extracted from Images 25 and 26
     custom_board = [
-        # Image 22 Entries
-        {"player": "Starry", "match": "vs DEPO • Thu 2:00am", "stat_type": "MAPS 1-2 Kills", "line": 31.0},
-        {"player": "EmiliaQAQ", "match": "vs DEPO • Thu 2:00am", "stat_type": "MAPS 1-2 Kills", "line": 26.0},
-        {"player": "C4LLM3SU3", "match": "vs DEPO • Thu 2:00am", "stat_type": "MAPS 1-2 Kills", "line": 26.5},
-        {"player": "z4kr", "match": "vs DEPO • Thu 2:00am", "stat_type": "MAPS 1-2 Kills", "line": 32.5},
-        {"player": "Westmelon", "match": "vs DEPO • Thu 2:00am", "stat_type": "MAPS 1-2 Kills", "line": 29.5},
-        {"player": "Krad", "match": "vs Lynn Vision • Thu 2:00am", "stat_type": "MAPS 1-2 Kills", "line": 26.5},
-        {"player": "shoxs", "match": "vs Lynn Vision • Thu 2:00am", "stat_type": "MAPS 1-2 Kills", "line": 24.5},
-        {"player": "buster", "match": "vs Lynn Vision • Thu 2:00am", "stat_type": "MAPS 1-2 Kills", "line": 24.5},
-        {"player": "sh1seido", "match": "vs Lynn Vision • Thu 2:00am", "stat_type": "MAPS 1-2 Kills", "line": 23.0},
-        {"player": "wetfy", "match": "vs Lynn Vision • Thu 2:00am", "stat_type": "MAPS 1-2 Kills", "line": 27.0},
-        {"player": "cej0t", "match": "vs OG • Thu 4:00am", "stat_type": "MAPS 1-2 Kills", "line": 27.5},
-        {"player": "TMB", "match": "vs OG • Thu 4:00am", "stat_type": "MAPS 1-2 Kills", "line": 25.5},
+        # Image 25 Entries
+        {"player": "BuZz", "match": "vs VARREL • Fri 7:00am", "stat_type": "MAPS 1-2 Kills", "line": 34.5},
+        {"player": "Francis", "match": "vs Global Esports • Fri 4:00am", "stat_type": "MAPS 1-2 Kills", "line": 31.0},
+        {"player": "brawk", "match": "vs 100 Thieves • Fri 1:00pm", "stat_type": "MAPS 1-2 Kills", "line": 28.5},
+        {"player": "trent", "match": "vs LOUD • Fri 4:00pm", "stat_type": "MAPS 1-2 Kills", "line": 29.5},
+        {"player": "erde", "match": "vs G2 Esports • Fri 4:00pm", "stat_type": "MAPS 1-2 Kills", "line": 27.0},
+        {"player": "Xross", "match": "vs Global Esports • Fri 4:00am", "stat_type": "MAPS 1-2 Kills", "line": 28.0},
+        {"player": "iZu", "match": "vs VARREL • Fri 7:00am", "stat_type": "MAPS 1-2 Kills", "line": 29.5},
+        {"player": "Foxy9", "match": "vs T1 • Fri 7:00am", "stat_type": "MAPS 1-2 Kills", "line": 29.0},
+        {"player": "xavi8k", "match": "vs Nongshim RedForce • Fri 4:00am", "stat_type": "MAPS 1-2 Kills", "line": 26.5},
 
-        # Image 23 Entries
-        {"player": "KEI", "match": "vs OG • Thu 4:00am", "stat_type": "MAPS 1-2 Kills", "line": 30.5},
-        {"player": "Kylar", "match": "vs OG • Thu 4:00am", "stat_type": "MAPS 1-2 Kills", "line": 29.5},
-        {"player": "nicoodoz", "match": "vs OG • Thu 4:00am", "stat_type": "MAPS 1-2 Kills", "line": 32.5},
-        {"player": "cadiaN", "match": "vs Phantom • Thu 4:00am", "stat_type": "MAPS 1-2 Kills", "line": 28.5},
-        {"player": "spooke", "match": "vs Phantom • Thu 4:00am", "stat_type": "MAPS 1-2 Kills", "line": 31.5},
-        {"player": "bodyyy", "match": "vs Phantom • Thu 4:00am", "stat_type": "MAPS 1-2 Kills", "line": 30.5},
-        {"player": "JACKZ", "match": "vs Phantom • Thu 4:00am", "stat_type": "MAPS 1-2 Kills", "line": 29.0},
-        {"player": "khaN", "match": "vs Iberian Soul • Thu 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 32.0},
-        {"player": "KaiRON-", "match": "vs Iberian Soul • Thu 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 31.5},
-        {"player": "syph0", "match": "vs Iberian Soul • Thu 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 28.5},
-        {"player": "Xant3r", "match": "vs Iberian Soul • Thu 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 28.0},
-        {"player": "robo", "match": "vs Iberian Soul • Thu 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 27.0},
-
-        # Image 24 Entries
-        {"player": "CRUCIAL", "match": "vs Nemiga • Thu 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 31.5},
-        {"player": "mopoz", "match": "vs Nemiga • Thu 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 29.0},
-        {"player": "sausol", "match": "vs Nemiga • Thu 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 29.0},
-        {"player": "alex", "match": "vs Nemiga • Thu 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 27.0},
-        {"player": "dav1g", "match": "vs Nemiga • Thu 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 26.5},
-        {"player": "Moseyuh", "match": "vs Rare Atom • Thu 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 28.0},
-        {"player": "Jee", "match": "vs Rare Atom • Thu 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 31.0},
-        {"player": "Zero", "match": "vs Rare Atom • Thu 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 30.0},
-        {"player": "JamYoung", "match": "vs Rare Atom • Thu 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 31.5},
-        {"player": "Mercury", "match": "vs Rare Atom • Thu 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 27.5},
-        {"player": "ChildKing", "match": "vs TYLOO • Thu 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 29.0},
-        {"player": "Summer", "match": "vs TYLOO • Thu 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 25.0}
+        # Image 26 Entries
+        {"player": "Autumn", "match": "vs Nongshim RedForce • Fri 4:00am", "stat_type": "MAPS 1-2 Kills", "line": 29.0},
+        {"player": "Dambi + Francis + Xross", "match": "vs Global Esports • Fri 4:00am", "stat_type": "MAPS 1-2 Kills (Combo)", "line": 92.5},
+        {"player": "lukxo", "match": "vs G2 Esports • Fri 4:00pm", "stat_type": "MAPS 1-2 Kills", "line": 34.5},
+        {"player": "Keiko", "match": "vs 100 Thieves • Fri 1:00pm", "stat_type": "MAPS 1-2 Kills", "line": 32.0},
+        {"player": "PatMen", "match": "vs Nongshim RedForce • Fri 4:00am", "stat_type": "MAPS 1-2 Kills", "line": 30.5},
+        {"player": "Dambi", "match": "vs Global Esports • Fri 4:00am", "stat_type": "MAPS 1-2 Kills", "line": 33.5},
+        {"player": "DaviH", "match": "vs G2 Esports • Fri 4:00pm", "stat_type": "MAPS 1-2 Kills", "line": 25.0},
+        {"player": "BuZz + Meteor + iZu", "match": "vs VARREL • Fri 7:00am", "stat_type": "MAPS 1-2 Kills (Combo)", "line": 96.5},
+        {"player": "tkzin", "match": "vs G2 Esports • Fri 4:00pm", "stat_type": "MAPS 1-2 Kills", "line": 31.0},
+        {"player": "lukxo + DaviH + Darker", "match": "vs G2 Esports • Fri 4:00pm", "stat_type": "MAPS 1-2 Kills (Combo)", "line": 87.0},
+        {"player": "Asuna + bang + Cryocells", "match": "vs NRG • Fri 1:00pm", "stat_type": "MAPS 1-2 Kills (Combo)", "line": 87.0}
     ]
 
     engine = LiveLCSLarryEngine(slate_data=custom_board)
