@@ -26,7 +26,7 @@ st.markdown("""
     }
     .player-name {
         text-align: center;
-        font-size: 28px;
+        font-size: 24px;
         font-weight: 800;
         margin-bottom: 4px;
     }
@@ -146,33 +146,18 @@ class LiveLCSLarryEngine:
 
 if __name__ == "__main__":
     st.title("LCS Larry 2026: Sharp Line Comparison Engine")
-    st.markdown("*Evaluating VALORANT player props from fresh board entries (Images 25 & 26). Older rosters completely purged.*")
+    st.markdown("*Evaluating League of Legends player props from fresh board entries (Image 27). Older rosters completely purged.*")
 
-    # Strictly current board entries extracted from Images 25 and 26
+    # Strictly current board entries extracted from Image 27
     custom_board = [
-        # Image 25 Entries
-        {"player": "BuZz", "match": "vs VARREL • Fri 7:00am", "stat_type": "MAPS 1-2 Kills", "line": 34.5},
-        {"player": "Francis", "match": "vs Global Esports • Fri 4:00am", "stat_type": "MAPS 1-2 Kills", "line": 31.0},
-        {"player": "brawk", "match": "vs 100 Thieves • Fri 1:00pm", "stat_type": "MAPS 1-2 Kills", "line": 28.5},
-        {"player": "trent", "match": "vs LOUD • Fri 4:00pm", "stat_type": "MAPS 1-2 Kills", "line": 29.5},
-        {"player": "erde", "match": "vs G2 Esports • Fri 4:00pm", "stat_type": "MAPS 1-2 Kills", "line": 27.0},
-        {"player": "Xross", "match": "vs Global Esports • Fri 4:00am", "stat_type": "MAPS 1-2 Kills", "line": 28.0},
-        {"player": "iZu", "match": "vs VARREL • Fri 7:00am", "stat_type": "MAPS 1-2 Kills", "line": 29.5},
-        {"player": "Foxy9", "match": "vs T1 • Fri 7:00am", "stat_type": "MAPS 1-2 Kills", "line": 29.0},
-        {"player": "xavi8k", "match": "vs Nongshim RedForce • Fri 4:00am", "stat_type": "MAPS 1-2 Kills", "line": 26.5},
-
-        # Image 26 Entries
-        {"player": "Autumn", "match": "vs Nongshim RedForce • Fri 4:00am", "stat_type": "MAPS 1-2 Kills", "line": 29.0},
-        {"player": "Dambi + Francis + Xross", "match": "vs Global Esports • Fri 4:00am", "stat_type": "MAPS 1-2 Kills (Combo)", "line": 92.5},
-        {"player": "lukxo", "match": "vs G2 Esports • Fri 4:00pm", "stat_type": "MAPS 1-2 Kills", "line": 34.5},
-        {"player": "Keiko", "match": "vs 100 Thieves • Fri 1:00pm", "stat_type": "MAPS 1-2 Kills", "line": 32.0},
-        {"player": "PatMen", "match": "vs Nongshim RedForce • Fri 4:00am", "stat_type": "MAPS 1-2 Kills", "line": 30.5},
-        {"player": "Dambi", "match": "vs Global Esports • Fri 4:00am", "stat_type": "MAPS 1-2 Kills", "line": 33.5},
-        {"player": "DaviH", "match": "vs G2 Esports • Fri 4:00pm", "stat_type": "MAPS 1-2 Kills", "line": 25.0},
-        {"player": "BuZz + Meteor + iZu", "match": "vs VARREL • Fri 7:00am", "stat_type": "MAPS 1-2 Kills (Combo)", "line": 96.5},
-        {"player": "tkzin", "match": "vs G2 Esports • Fri 4:00pm", "stat_type": "MAPS 1-2 Kills", "line": 31.0},
-        {"player": "lukxo + DaviH + Darker", "match": "vs G2 Esports • Fri 4:00pm", "stat_type": "MAPS 1-2 Kills (Combo)", "line": 87.0},
-        {"player": "Asuna + bang + Cryocells", "match": "vs NRG • Fri 1:00pm", "stat_type": "MAPS 1-2 Kills (Combo)", "line": 87.0}
+        {"player": "Siwoo + Lucid + ShowMaker", "match": "vs BFX Thu 4:00am", "stat_type": "MAPS 1-3 Kills (Combo)", "line": 32.0},
+        {"player": "ShowMaker + Smash", "match": "vs BFX Thu 4:00am", "stat_type": "MAPS 1-3 Kills (Combo)", "line": 27.5},
+        {"player": "Clear + Raptor + VicLa", "match": "vs DK Thu 4:00am", "stat_type": "MAPS 1-3 Kills (Combo)", "line": 23.5},
+        {"player": "VicLa + Taeyoon", "match": "vs DK Thu 4:00am", "stat_type": "MAPS 1-3 Kills (Combo)", "line": 20.5},
+        {"player": "Cube + Monki + Karis", "match": "vs BLG Thu 5:00am", "stat_type": "MAPS 1-3 Kills (Combo)", "line": 24.0},
+        {"player": "Karis + About", "match": "vs BLG Thu 5:00am", "stat_type": "MAPS 1-3 Kills (Combo)", "line": 20.5},
+        {"player": "Bin + Xun + knight", "match": "vs WE Thu 5:00am", "stat_type": "MAPS 1-3 Kills (Combo)", "line": 39.5},
+        {"player": "knight + Viper", "match": "vs WE Thu 5:00am", "stat_type": "MAPS 1-3 Kills (Combo)", "line": 33.0}
     ]
 
     engine = LiveLCSLarryEngine(slate_data=custom_board)
@@ -182,7 +167,7 @@ if __name__ == "__main__":
     top_less = board_df[board_df["Action"] == "🔨 LESS"].sort_values(by="_raw_edge", ascending=False).head(3)
     parlay_cards = pd.concat([top_mores, top_less])
 
-    st.subheader("⚡ Automated 6-Leg Parlay Card Preview")
+    st.subheader("⚡ Automated Parlay Card Preview")
     
     cols = st.columns(3)
     for idx, row in enumerate(parlay_cards.to_dict(orient="records")):
