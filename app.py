@@ -4,7 +4,6 @@ import numpy as np
 
 st.set_page_config(page_title="LCS Larry 2026 Engine", layout="wide")
 
-# Custom CSS injected to style the output cards matching your design vision
 st.markdown("""
 <style>
     .card-container {
@@ -131,20 +130,54 @@ class LiveLCSLarryEngine:
         return pd.DataFrame(processed_records)
 
 if __name__ == "__main__":
-    st.title("LCS Larry 2026: Automated Card Builder")
-    st.markdown("*Generating 6-leg slip cards matching your custom layout template.*")
+    st.title("LCS Larry 2026: Live Board Engine")
+    st.markdown("*Cleaned board updated with current CS2 and League of Legends entries from screenshots 19-22.*")
 
+    # Fresh slate populated strictly from the new screenshots (Images 19-22)
     custom_board = [
-        {"player": "tenzy", "match": "vs K27 • Tue 8:00 AM", "stat_type": "Maps 1-2 Headshots", "line": 21.0},
-        {"player": "FL4MUS", "match": "vs Nuclear Tigeres • Tue 9:30 AM", "stat_type": "Maps 1-2 Headshots", "line": 19.0},
-        {"player": "doc", "match": "vs Eyeballers • Tue 11:00 AM", "stat_type": "Maps 1-2 Headshots", "line": 17.5},
-        {"player": "KaiRON-", "match": "vs BIG • Tue 1:00 PM", "stat_type": "Maps 1-2 Headshots", "line": 16.0},
-        {"player": "Kanavi", "match": "vs T1 • Tue 3:00 PM", "stat_type": "Maps 1-3 Kills (Combo)", "line": 11.0},
-        {"player": "Peyz", "match": "vs HLE • Tue 4:30 PM", "stat_type": "Maps 1-3 Kills", "line": 13.5},
-        {"player": "Camana", "match": "vs SU • Tue 6:00 PM", "stat_type": "Maps 1-3 Kills", "line": 11.5},
-        {"player": "Doran", "match": "vs HLE • Tue 7:15 PM", "stat_type": "Maps 1-3 Kills", "line": 7.0},
-        {"player": "Oner", "match": "vs HLE • Tue 8:30 PM", "stat_type": "Maps 1-3 Kills", "line": 9.5},
-        {"player": "Faker", "match": "vs HLE • Tue 10:00 PM", "stat_type": "Maps 1-3 Kills", "line": 9.5}
+        # CS2 Board (Images 19-20)
+        {"player": "kraghen", "match": "vs Iberian Soul • 1:00pm", "stat_type": "Maps 1-2 Headshots", "line": 13.5},
+        {"player": "flayy", "match": "vs Iberian Soul • 1:00pm", "stat_type": "Maps 1-2 Kills", "line": 32.0},
+        {"player": "b1elany", "match": "vs Iberian Soul • 1:00pm", "stat_type": "Maps 1-2 Headshots", "line": 16.5},
+        {"player": "misutaaa", "match": "vs Walczaki • 1:00pm", "stat_type": "Maps 1-2 Headshots", "line": 18.5},
+        {"player": "mopoz", "match": "vs 9INE • 1:00pm", "stat_type": "Maps 1-2 Headshots", "line": 17.5},
+        {"player": "rim3", "match": "vs Iberian Soul • 1:00pm", "stat_type": "Maps 1-2 Headshots", "line": 16.0},
+        {"player": "misutaaa", "match": "vs Walczaki • 1:00pm", "stat_type": "Maps 1-2 Kills", "line": 30.5},
+        {"player": "alex", "match": "vs 9INE • 1:00pm", "stat_type": "Maps 1-2 Headshots", "line": 13.5},
+        {"player": "rim3", "match": "vs Iberian Soul • 1:00pm", "stat_type": "Maps 1-2 Kills", "line": 28.5},
+        {"player": "mopoz", "match": "vs 9INE • 1:00pm", "stat_type": "Maps 1-2 Kills", "line": 30.5},
+        {"player": "raalz", "match": "vs Iberian Soul • 1:00pm", "stat_type": "Maps 1-2 Kills", "line": 25.5},
+        {"player": "Kursy", "match": "vs Walczaki • 1:00pm", "stat_type": "Maps 1-2 Headshots", "line": 18.5},
+        {"player": "sausol", "match": "vs 9INE • 1:00pm", "stat_type": "Maps 1-2 Headshots", "line": 17.0},
+        {"player": "b1elany", "match": "vs Iberian Soul • 1:00pm", "stat_type": "Maps 1-2 Kills", "line": 28.5},
+        {"player": "CRUCIAL", "match": "vs 9INE • 1:00pm", "stat_type": "Maps 1-2 Kills", "line": 31.5},
+        {"player": "lucky", "match": "vs Walczaki • 1:00pm", "stat_type": "Maps 1-2 Kills", "line": 29.5},
+        {"player": "Graviti", "match": "vs Walczaki • 1:00pm", "stat_type": "Maps 1-2 Headshots", "line": 17.5},
+        {"player": "flayy", "match": "vs Iberian Soul • 1:00pm", "stat_type": "Maps 1-2 Headshots", "line": 11.0},
+        {"player": "sausol", "match": "vs 9INE • 1:00pm", "stat_type": "Maps 1-2 Kills", "line": 29.5},
+        {"player": "raalz", "match": "vs Iberian Soul • 1:00pm", "stat_type": "Maps 1-2 Headshots", "line": 15.5},
+
+        # League of Legends Board (Images 21-22)
+        {"player": "Thayger", "match": "vs TLNP • Starts 26:08", "stat_type": "Maps 1-3 Kills", "line": 13.0},
+        {"player": "Axelent", "match": "vs GL • Starts 26:08", "stat_type": "Maps 1-3 Kills", "line": 10.0},
+        {"player": "Stefan", "match": "vs GL • Starts 26:08", "stat_type": "Maps 1-3 Kills", "line": 7.0},
+        {"player": "Karis + About", "match": "vs BLG • Thu 5:00am", "stat_type": "Maps 1-3 Kills (Combo)", "line": 20.0},
+        {"player": "Clear + Raptor + VicLa", "match": "vs DK • Thu 4:00am", "stat_type": "Maps 1-3 Kills (Combo)", "line": 23.5},
+        {"player": "Spooder", "match": "vs GL • Starts 26:08", "stat_type": "Maps 1-3 Kills", "line": 5.5},
+        {"player": "OMON", "match": "vs TLNP • Starts 26:08", "stat_type": "Maps 1-3 Kills", "line": 15.5},
+        {"player": "Raptor", "match": "vs DK • Thu 4:00am", "stat_type": "Maps 1-3 Kills", "line": 8.5},
+        {"player": "Harpoon", "match": "vs TLNP • Starts 26:08", "stat_type": "Maps 1-3 Kills", "line": 17.0},
+        {"player": "About", "match": "vs BLG • Thu 5:00am", "stat_type": "Maps 1-3 Kills", "line": 10.5},
+        {"player": "knight", "match": "vs WE • Thu 5:00am", "stat_type": "Maps 1-3 Kills", "line": 16.5},
+        {"player": "UNFORGIVEN", "match": "vs BIG • Thu 11:00am", "stat_type": "Maps 1-3 Kills", "line": 12.5},
+        {"player": "Toffe", "match": "vs GL • Starts 25:50", "stat_type": "Maps 1-3 Kills", "line": 7.5},
+        {"player": "VicLa", "match": "vs DK • Thu 4:00am", "stat_type": "Maps 1-3 Kills", "line": 8.5},
+        {"player": "Clear", "match": "vs DK • Thu 4:00am", "stat_type": "Maps 1-3 Kills", "line": 6.5},
+        {"player": "Carlsen", "match": "vs TLNP • Starts 25:50", "stat_type": "Maps 1-3 Kills", "line": 11.5},
+        {"player": "Lucid", "match": "vs BFX • Thu 4:00am", "stat_type": "Maps 1-3 Kills", "line": 11.0},
+        {"player": "VicLa + Taeyoon", "match": "vs DK • Thu 4:00am", "stat_type": "Maps 1-3 Kills (Combo)", "line": 20.5},
+        {"player": "Viper", "match": "vs WE • Thu 5:00am", "stat_type": "Maps 1-3 Kills", "line": 16.0},
+        {"player": "Bin + Xun + knight", "match": "vs WE • Thu 5:00am", "stat_type": "Maps 1-3 Kills (Combo)", "line": 38.5}
     ]
 
     engine = LiveLCSLarryEngine(slate_data=custom_board)
@@ -155,9 +188,8 @@ if __name__ == "__main__":
     top_less = board_df[board_df["Action"] == "🔨 LESS"].sort_values(by="_raw_edge", ascending=False).head(3)
     parlay_cards = pd.concat([top_mores, top_less])
 
-    st.subheader("⚡ Automated 6-Leg Parlay Card Preview")
+    st.subheader("⚡ Automated 6-Leg Parlay Card Preview (3 MORE / 3 LESS)")
     
-    # Render cards in columns of 3
     cols = st.columns(3)
     for idx, row in enumerate(parlay_cards.to_dict(orient="records")):
         col_idx = idx % 3
