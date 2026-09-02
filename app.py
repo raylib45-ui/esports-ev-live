@@ -150,38 +150,49 @@ class LiveLCSLarryEngine:
 
 if __name__ == "__main__":
     st.title("LCS Larry 2026: Sharp Line Comparison Engine")
-    st.markdown("*Evaluating updated CS2 player prop lines from Nemiga, HOTU, Rune Eaters, and NOVAQ against sharp market benchmarks.*")
+    st.markdown("*Evaluating freshly uploaded CS2 and League of Legends board entries against Pinnacle & GG.Bet sharp benchmarks (all legacy players purged).*")
 
-    # Cleaned and updated board strictly from images 23, 24, and 25
+    # Strictly current board extracted from the new uploaded images
     custom_board = [
-        # Image 23 & 24 Board (Nemiga, HOTU, Rune Eaters, NOVAQ)
-        {"player": "KaiRON-", "match": "vs HOTU • Starts 11:01", "stat_type": "MAP 3 Headshots", "line": 8.0},
-        {"player": "KaiRON-", "match": "vs HOTU • Starts 11:01", "stat_type": "MAP 3 Kills", "line": 14.5},
-        {"player": "Xant3r", "match": "vs HOTU • Starts 11:01", "stat_type": "MAP 3 Headshots", "line": 7.5},
-        {"player": "Xant3r", "match": "vs HOTU • Starts 11:01", "stat_type": "MAP 3 Kills", "line": 12.5},
-        {"player": "demente", "match": "vs NOVAQ • Thu 10:00am", "stat_type": "MAPS 1-2 Kills", "line": 30.0},
-        {"player": "dukefissura", "match": "vs NOVAQ • Thu 10:00am", "stat_type": "MAPS 1-2 Kills", "line": 27.5},
-        {"player": "forkyz", "match": "vs NOVAQ • Thu 10:00am", "stat_type": "MAPS 1-2 Kills", "line": 28.5},
-        {"player": "her1tage", "match": "vs NOVAQ • Thu 10:00am", "stat_type": "MAPS 1-2 Kills", "line": 27.5},
-        {"player": "khaN", "match": "vs HOTU • Starts 11:01", "stat_type": "MAP 3 Headshots", "line": 5.0},
-        {"player": "khaN", "match": "vs HOTU • Starts 11:01", "stat_type": "MAP 3 Kills", "line": 15.0},
-        {"player": "noni", "match": "vs NOVAQ • Thu 10:00am", "stat_type": "MAPS 1-2 Kills", "line": 28.5},
-        {"player": "robo", "match": "vs HOTU • Starts 11:01", "stat_type": "MAP 3 Headshots", "line": 6.5},
-        {"player": "robo", "match": "vs HOTU • Starts 11:01", "stat_type": "MAP 3 Kills", "line": 13.0},
-        {"player": "syph0", "match": "vs HOTU • Starts 11:01", "stat_type": "MAP 3 Headshots", "line": 7.5},
-        {"player": "syph0", "match": "vs HOTU • Starts 11:01", "stat_type": "MAP 3 Kills", "line": 13.5},
-        
-        # Image 25 Board (HOTU vs Nemiga)
-        {"player": "dwushka", "match": "vs Nemiga • Starts 10:09", "stat_type": "MAP 3 Headshots", "line": 10.0},
-        {"player": "dwushka", "match": "vs Nemiga • Starts 10:09", "stat_type": "MAP 3 Kills", "line": 15.0},
-        {"player": "frontales", "match": "vs Nemiga • Starts 10:09", "stat_type": "MAP 3 Headshots", "line": 4.5},
-        {"player": "frontales", "match": "vs Nemiga • Starts 10:09", "stat_type": "MAP 3 Kills", "line": 15.5},
-        {"player": "kadeO", "match": "vs Nemiga • Starts 10:09", "stat_type": "MAP 3 Headshots", "line": 7.0},
-        {"player": "kadeO", "match": "vs Nemiga • Starts 10:09", "stat_type": "MAP 3 Kills", "line": 13.0},
-        {"player": "mizu", "match": "vs Nemiga • Starts 10:09", "stat_type": "MAP 3 Headshots", "line": 8.0},
-        {"player": "mizu", "match": "vs Nemiga • Starts 10:09", "stat_type": "MAP 3 Kills", "line": 16.0},
-        {"player": "n0rb3r7", "match": "vs Nemiga • Starts 10:09", "stat_type": "MAP 3 Headshots", "line": 8.0},
-        {"player": "n0rb3r7", "match": "vs Nemiga • Starts 10:09", "stat_type": "MAP 3 Kills", "line": 15.0}
+        # CS2 Board Entries (from new screenshots)
+        {"player": "mopoz", "match": "vs 9INE • Starts 1:00pm", "stat_type": "Maps 1-2 Headshots", "line": 17.5},
+        {"player": "rim3", "match": "vs Iberian Soul • Starts 1:00pm", "stat_type": "Maps 1-2 Headshots", "line": 16.0},
+        {"player": "misutaaa", "match": "vs Walczaki • Starts 1:00pm", "stat_type": "Maps 1-2 Kills", "line": 30.5},
+        {"player": "alex", "match": "vs 9INE • Starts 1:00pm", "stat_type": "Maps 1-2 Headshots", "line": 13.5},
+        {"player": "rim3", "match": "vs Iberian Soul • Starts 1:00pm", "stat_type": "Maps 1-2 Kills", "line": 28.5},
+        {"player": "mopoz", "match": "vs 9INE • Starts 1:00pm", "stat_type": "Maps 1-2 Kills", "line": 30.5},
+        {"player": "raalz", "match": "vs Iberian Soul • Starts 1:00pm", "stat_type": "Maps 1-2 Kills", "line": 25.5},
+        {"player": "Kursy", "match": "vs Walczaki • Starts 1:00pm", "stat_type": "Maps 1-2 Headshots", "line": 18.5},
+        {"player": "sausol", "match": "vs 9INE • Starts 1:00pm", "stat_type": "Maps 1-2 Headshots", "line": 17.0},
+        {"player": "b1elany", "match": "vs Iberian Soul • Starts 1:00pm", "stat_type": "Maps 1-2 Kills", "line": 28.5},
+        {"player": "CRUCIAL", "match": "vs 9INE • Starts 1:00pm", "stat_type": "Maps 1-2 Kills", "line": 31.5},
+        {"player": "lucky", "match": "vs Walczaki • Starts 1:00pm", "stat_type": "Maps 1-2 Kills", "line": 29.5},
+        {"player": "Graviti", "match": "vs Walczaki • Starts 1:00pm", "stat_type": "Maps 1-2 Headshots", "line": 17.5},
+        {"player": "flayy", "match": "vs Iberian Soul • Starts 1:00pm", "stat_type": "Maps 1-2 Headshots", "line": 11.0},
+        {"player": "sausol", "match": "vs 9INE • Starts 1:00pm", "stat_type": "Maps 1-2 Kills", "line": 29.5},
+        {"player": "raalz", "match": "vs Iberian Soul • Starts 1:00pm", "stat_type": "Maps 1-2 Headshots", "line": 15.5},
+
+        # League of Legends Board Entries (from new screenshots)
+        {"player": "Thayger", "match": "vs TLNP • Starts 26:08", "stat_type": "Maps 1-3 Kills", "line": 13.0},
+        {"player": "Axelent", "match": "vs GL • Starts 26:08", "stat_type": "Maps 1-3 Kills", "line": 10.0},
+        {"player": "Stefan", "match": "vs GL • Starts 26:08", "stat_type": "Maps 1-3 Kills", "line": 7.0},
+        {"player": "Karis + About", "match": "vs BLG • Thu 5:00am", "stat_type": "Maps 1-3 Kills (Combo)", "line": 20.0},
+        {"player": "Clear + Raptor + VicLa", "match": "vs DK • Thu 4:00am", "stat_type": "Maps 1-3 Kills (Combo)", "line": 23.5},
+        {"player": "Spooder", "match": "vs GL • Starts 26:08", "stat_type": "Maps 1-3 Kills", "line": 5.5},
+        {"player": "OMON", "match": "vs TLNP • Starts 26:08", "stat_type": "Maps 1-3 Kills", "line": 15.5},
+        {"player": "Raptor", "match": "vs DK • Thu 4:00am", "stat_type": "Maps 1-3 Kills", "line": 8.5},
+        {"player": "Harpoon", "match": "vs TLNP • Starts 26:08", "stat_type": "Maps 1-3 Kills", "line": 17.0},
+        {"player": "About", "match": "vs BLG • Thu 5:00am", "stat_type": "Maps 1-3 Kills", "line": 10.5},
+        {"player": "knight", "match": "vs WE • Thu 5:00am", "stat_type": "Maps 1-3 Kills", "line": 16.5},
+        {"player": "UNFORGIVEN", "match": "vs BIG • Thu 11:00am", "stat_type": "Maps 1-3 Kills", "line": 12.5},
+        {"player": "Toffe", "match": "vs GL • Starts 25:50", "stat_type": "Maps 1-3 Kills", "line": 7.5},
+        {"player": "VicLa", "match": "vs DK • Thu 4:00am", "stat_type": "Maps 1-3 Kills", "line": 8.5},
+        {"player": "Clear", "match": "vs DK • Thu 4:00am", "stat_type": "Maps 1-3 Kills", "line": 6.5},
+        {"player": "Carlsen", "match": "vs TLNP • Starts 25:50", "stat_type": "Maps 1-3 Kills", "line": 11.5},
+        {"player": "Lucid", "match": "vs BFX • Thu 4:00am", "stat_type": "Maps 1-3 Kills", "line": 11.0},
+        {"player": "VicLa + Taeyoon", "match": "vs DK • Thu 4:00am", "stat_type": "Maps 1-3 Kills (Combo)", "line": 20.5},
+        {"player": "Viper", "match": "vs WE • Thu 5:00am", "stat_type": "Maps 1-3 Kills", "line": 16.0},
+        {"player": "Bin + Xun + knight", "match": "vs WE • Thu 5:00am", "stat_type": "Maps 1-3 Kills (Combo)", "line": 38.5}
     ]
 
     engine = LiveLCSLarryEngine(slate_data=custom_board)
