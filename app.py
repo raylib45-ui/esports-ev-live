@@ -146,35 +146,30 @@ class LiveLCSLarryEngine:
 
 if __name__ == "__main__":
     st.title("LCS Larry 2026: Sharp Line Comparison Engine")
-    st.markdown("*Evaluating BIG vs. paiN CS2 player props with all old players fully purged.*")
+    st.markdown("*Evaluating current CS2 player props from newly uploaded board entries.*")
 
-    # Cleaned and exact current board entries from Images 26 & 27
+    # Strictly current board extracted from Images 20 and 21 (Old players fully purged)
     custom_board = [
-        # Image 26 Board Entries (BIG vs paiN)
-        {"player": "JDC", "match": "vs paiN • Starts 17:42", "stat_type": "MAP 3 Headshots", "line": 8.0},
-        {"player": "JDC", "match": "vs paiN • Starts 17:42", "stat_type": "MAP 3 Kills", "line": 14.5},
-        {"player": "biguzera", "match": "vs BIG • Starts 17:42", "stat_type": "MAP 3 Headshots", "line": 7.5},
-        {"player": "biguzera", "match": "vs BIG • Starts 17:42", "stat_type": "MAP 3 Kills", "line": 13.0},
-        {"player": "blameF", "match": "vs paiN • Starts 17:42", "stat_type": "MAP 3 Headshots", "line": 7.5},
-        {"player": "blameF", "match": "vs paiN • Starts 17:42", "stat_type": "MAP 3 Kills", "line": 16.5},
-        {"player": "faveN", "match": "vs paiN • Starts 17:42", "stat_type": "MAP 3 Headshots", "line": 8.0},
-        {"player": "faveN", "match": "vs paiN • Starts 17:42", "stat_type": "MAP 3 Kills", "line": 13.0},
-        {"player": "gr1ks", "match": "vs paiN • Starts 17:42", "stat_type": "MAP 3 Headshots", "line": 5.0},
-        {"player": "gr1ks", "match": "vs paiN • Starts 17:42", "stat_type": "MAP 3 Kills", "line": 16.0},
-        {"player": "tabsEN", "match": "vs paiN • Starts 17:42", "stat_type": "MAP 3 Headshots", "line": 6.0},
-        {"player": "tabsEN", "match": "vs paiN • Starts 17:42", "stat_type": "MAP 3 Kills", "line": 13.0},
-        
-        # Image 27 Board Entries (paiN vs BIG)
-        {"player": "biguzera", "match": "vs BIG • Starts 17:14", "stat_type": "MAP 3 Headshots", "line": 7.5},
-        {"player": "biguzera", "match": "vs BIG • Starts 17:14", "stat_type": "MAP 3 Kills", "line": 13.0},
-        {"player": "piriajr", "match": "vs BIG • Starts 17:14", "stat_type": "MAP 3 Headshots", "line": 7.5},
-        {"player": "piriajr", "match": "vs BIG • Starts 17:14", "stat_type": "MAP 3 Kills", "line": 14.0},
-        {"player": "saffee", "match": "vs BIG • Starts 17:14", "stat_type": "MAP 3 Headshots", "line": 4.5},
-        {"player": "saffee", "match": "vs BIG • Starts 17:14", "stat_type": "MAP 3 Kills", "line": 13.5},
-        {"player": "snow", "match": "vs BIG • Starts 17:14", "stat_type": "MAP 3 Headshots", "line": 7.5},
-        {"player": "snow", "match": "vs BIG • Starts 17:14", "stat_type": "MAP 3 Kills", "line": 14.0},
-        {"player": "vsm", "match": "vs BIG • Starts 17:14", "stat_type": "MAP 3 Headshots", "line": 7.5},
-        {"player": "vsm", "match": "vs BIG • Starts 17:14", "stat_type": "MAP 3 Kills", "line": 14.0}
+        {"player": "dukefissura", "match": "vs NOVAQ • Thu 10:00am", "stat_type": "MAPS 1-2 Kills", "line": 28.5},
+        {"player": "nicoodoz", "match": "vs OG • Thu 4:00am", "stat_type": "MAPS 1-2 Kills", "line": 32.5},
+        {"player": "bodyyy", "match": "vs Phantom • Thu 4:00am", "stat_type": "MAPS 1-2 Headshots", "line": 18.5},
+        {"player": "sh1seido", "match": "vs Lynn Vision • Thu 2:00am", "stat_type": "MAPS 1-2 Kills", "line": 23.0},
+        {"player": "Zyphon", "match": "vs ASTRAL • Thu 7:00am", "stat_type": "MAPS 1-2 Kills", "line": 31.5},
+        {"player": "cadiaN", "match": "vs Phantom • Thu 4:00am", "stat_type": "MAPS 1-2 Kills", "line": 28.5},
+        {"player": "spooke", "match": "vs Phantom • Thu 4:00am", "stat_type": "MAPS 1-2 Headshots", "line": 19.0},
+        {"player": "TMB", "match": "vs OG • Thu 4:00am", "stat_type": "MAPS 1-2 Kills", "line": 25.5},
+        {"player": "wetfy", "match": "vs Lynn Vision • Thu 2:00am", "stat_type": "MAPS 1-2 Kills", "line": 27.0},
+        {"player": "shoxs", "match": "vs Lynn Vision • Thu 2:00am", "stat_type": "MAPS 1-2 Kills", "line": 24.5},
+        {"player": "Summer", "match": "vs TYLOO • Thu 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 25.0},
+        {"player": "Mercury", "match": "vs Rare Atom • Thu 5:00am", "stat_type": "MAPS 1-2 Headshots", "line": 15.5},
+        {"player": "Cabbi", "match": "vs ASTRAL • Thu 7:00am", "stat_type": "MAPS 1-2 Kills", "line": 27.5},
+        {"player": "Trash", "match": "vs TYLOO • Thu 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 26.5},
+        {"player": "demente", "match": "vs NOVAQ • Thu 10:00am", "stat_type": "MAPS 1-2 Kills", "line": 30.0},
+        {"player": "ChildKing", "match": "vs TYLOO • Thu 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 29.0},
+        {"player": "bodyyy", "match": "vs Phantom • Thu 4:00am", "stat_type": "MAPS 1-2 Kills", "line": 30.5},
+        {"player": "L1haNg", "match": "vs TYLOO • Thu 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 26.5},
+        {"player": "her1tage", "match": "vs NOVAQ • Thu 10:00am", "stat_type": "MAPS 1-2 Kills", "line": 27.5},
+        {"player": "Krad", "match": "vs Lynn Vision • Thu 2:00am", "stat_type": "MAPS 1-2 Kills", "line": 26.5}
     ]
 
     engine = LiveLCSLarryEngine(slate_data=custom_board)
