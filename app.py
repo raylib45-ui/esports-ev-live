@@ -26,7 +26,7 @@ st.markdown("""
     }
     .player-name {
         text-align: center;
-        font-size: 28px;
+        font-size: 22px;
         font-weight: 800;
         margin-bottom: 4px;
     }
@@ -97,8 +97,6 @@ class LiveLCSLarryEngine:
             prize_line = item["line"]
             sharp_line = item["sharp_line"]
             
-            line_diff = sharp_line - prize_line
-            
             if sharp_line < prize_line:
                 action = "🔨 LESS"
                 raw_edge = prize_line - sharp_line
@@ -110,7 +108,7 @@ class LiveLCSLarryEngine:
             model_line = sharp_line
 
             processed_records.append({
-                "Player": item["player"],
+                "Player / Combo": item["player"],
                 "Match": item["match"],
                 "Stat Type": item["stat_type"],
                 "PrizePicks Line": prize_line,
@@ -128,30 +126,26 @@ class LiveLCSLarryEngine:
 
 if __name__ == "__main__":
     st.title("LCS Larry 2026: Sharp Line Comparison Engine")
-    st.markdown("*Deterministic 24/7 Mode: Updated with Virtus.pro vs. fnatic slate. Old data completely cleared.*")
+    st.markdown("*Deterministic 24/7 Mode: Updated with new combo slates. Older CS2 individual slates completely erased.*")
 
-    # Cleaned slate containing only the current Virtus.pro vs fnatic players & stats from screenshots
+    # Clean slate with newly provided combo/player entries from screenshots (AL, LGD, KT, DK, T1, GenG, 100T, NRG, G2, LOUD, etc.)
     custom_board = [
-        {"player": "mir", "match": "vs fnatic • Starts in 8:53", "stat_type": "MAPS 1-2 Headshots", "line": 14.5, "sharp_line": 13.5},
-        {"player": "mir", "match": "vs fnatic • Starts in 8:53", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 30.0},
-        {"player": "t00RO", "match": "vs fnatic • Starts in 8:53", "stat_type": "MAPS 1-2 Headshots", "line": 16.5, "sharp_line": 15.5},
-        {"player": "t00RO", "match": "vs fnatic • Starts in 8:53", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 29.0},
-        {"player": "b1T", "match": "vs fnatic • Starts in 9:09", "stat_type": "MAPS 1-2 Headshots", "line": 9.5, "sharp_line": 10.5},
-        {"player": "b1T", "match": "vs fnatic • Starts in 9:09", "stat_type": "MAPS 1-2 Kills", "line": 32.0, "sharp_line": 30.5},
-        {"player": "AquaRS", "match": "vs fnatic • Starts in 9:27", "stat_type": "MAPS 1-2 Headshots", "line": 18.5, "sharp_line": 17.0},
-        {"player": "AquaRS", "match": "vs fnatic • Starts in 9:27", "stat_type": "MAPS 1-2 Kills", "line": 28.0, "sharp_line": 29.5},
-        {"player": "FOR3VER", "match": "vs fnatic • Starts in 9:27", "stat_type": "MAPS 1-2 Headshots", "line": 17.0, "sharp_line": 18.5},
-        {"player": "FOR3VER", "match": "vs fnatic • Starts in 9:27", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 26.0},
-        {"player": "jambo", "match": "vs Virtus.pro • Starts in 9:41", "stat_type": "MAPS 1-2 Headshots", "line": 11.0, "sharp_line": 12.0},
-        {"player": "jambo", "match": "vs Virtus.pro • Starts in 9:41", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 29.0},
-        {"player": "mazay", "match": "vs Virtus.pro • Starts in 9:41", "stat_type": "MAPS 1-2 Headshots", "line": 18.5, "sharp_line": 17.5},
-        {"player": "mazay", "match": "vs Virtus.pro • Starts in 9:41", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 32.0},
-        {"player": "jackasmo", "match": "vs Virtus.pro • Starts in 9:57", "stat_type": "MAPS 1-2 Headshots", "line": 19.5, "sharp_line": 18.0},
-        {"player": "jackasmo", "match": "vs Virtus.pro • Starts in 9:57", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 32.0},
-        {"player": "cairne", "match": "vs Virtus.pro • Starts in 10:12", "stat_type": "MAPS 1-2 Headshots", "line": 16.5, "sharp_line": 17.5},
-        {"player": "cairne", "match": "vs Virtus.pro • Starts in 10:12", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 29.0},
-        {"player": "fear", "match": "vs Virtus.pro • Starts in 10:12", "stat_type": "MAPS 1-2 Headshots", "line": 13.0, "sharp_line": 14.5},
-        {"player": "fear", "match": "vs Virtus.pro • Starts in 10:12", "stat_type": "MAPS 1-2 Kills", "line": 24.5, "sharp_line": 23.0}
+        {"player": "Breathe + Tarzan + Shan...", "match": "vs LGD • Fri 5:00am", "stat_type": "MAPS 1-3 Kills (Combo)", "line": 34.0, "sharp_line": 32.5},
+        {"player": "Shanks + Hope", "match": "vs LGD • Fri 5:00am", "stat_type": "MAPS 1-3 Kills (Combo)", "line": 27.5, "sharp_line": 29.0},
+        {"player": "Burdol + Heng + Tangyu...", "match": "vs AL • Fri 5:00am", "stat_type": "MAPS 1-3 Kills (Combo)", "line": 26.0, "sharp_line": 24.5},
+        {"player": "Tangyuan + Shaoye", "match": "vs AL • Fri 5:00am", "stat_type": "MAPS 1-3 Kills (Combo)", "line": 20.5, "sharp_line": 21.5},
+        {"player": "PerfecT + Cuzz + Bdd", "match": "vs DK • Fri 4:00am", "stat_type": "MAPS 1-3 Kills (Combo)", "line": 24.0, "sharp_line": 25.5},
+        {"player": "Bdd + Jiwoo", "match": "vs DK • Fri 4:00am", "stat_type": "MAPS 1-3 Kills (Combo)", "line": 20.5, "sharp_line": 19.5},
+        {"player": "Siwoo + Lucid + ShowM...", "match": "vs KT • Fri 4:00am", "stat_type": "MAPS 1-3 Kills (Combo)", "line": 29.5, "sharp_line": 28.0},
+        {"player": "ShowMaker + Smash", "match": "vs KT • Fri 4:00am", "stat_type": "MAPS 1-3 Kills (Combo)", "line": 26.0, "sharp_line": 27.5},
+        {"player": "Dambi + Francis + Xross", "match": "vs Global Esp... • Fri 4:00am", "stat_type": "MAPS 1-2 Kills (Combo)", "line": 92.5, "sharp_line": 90.0},
+        {"player": "UdoTan + xavi8k + PatM...", "match": "vs Nongshim... • Fri 4:00am", "stat_type": "MAPS 1-2 Kills (Combo)", "line": 89.5, "sharp_line": 91.5},
+        {"player": "BuZz + Meteor + iZu", "match": "vs VARREL • Fri 7:00am", "stat_type": "MAPS 1-2 Kills (Combo)", "line": 96.5, "sharp_line": 94.0},
+        {"player": "Zexy + oonzmlp", "match": "vs T1 • Fri 7:00am", "stat_type": "MAPS 1-2 Kills (Combo)", "line": 56.0, "sharp_line": 58.5},
+        {"player": "Asuna + bang + Cryocells", "match": "vs NRG • Fri 1:00pm", "stat_type": "MAPS 1-2 Kills (Combo)", "line": 87.0, "sharp_line": 85.0},
+        {"player": "mada + Keiko + skuba", "match": "vs 100 Thieves • Fri 1:00pm", "stat_type": "MAPS 1-2 Kills (Combo)", "line": 92.5, "sharp_line": 95.0},
+        {"player": "jawgemo + valyn + trent", "match": "vs LOUD • Fri 4:00pm", "stat_type": "MAPS 1-2 Kills (Combo)", "line": 90.5, "sharp_line": 88.0},
+        {"player": "lukxo + DaviH + Darker", "match": "vs G2 Esports • Fri 4:00pm", "stat_type": "MAPS 1-2 Kills (Combo)", "line": 87.0, "sharp_line": 89.5}
     ]
 
     engine = LiveLCSLarryEngine(slate_data=custom_board)
@@ -169,7 +163,7 @@ if __name__ == "__main__":
             st.markdown(f"""
                 <div class="card-container">
                     <div class="card-header">{row['Match']}</div>
-                    <div class="player-name">{row['Player']}</div>
+                    <div class="player-name">{row['Player / Combo']}</div>
                     <div class="stat-type">{row['Stat Type']} • Sharp Ref: {row['Sharp Line (Pinnacle/GG.Bet)']}</div>
                     <div class="line-display">{row['PrizePicks Line']}</div>
                     <div class="metric-grid">
