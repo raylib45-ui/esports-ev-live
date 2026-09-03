@@ -146,45 +146,27 @@ class LiveLCSLarryEngine:
 
 if __name__ == "__main__":
     st.title("LCS Larry 2026: Sharp Line Comparison Engine")
-    st.markdown("*Evaluating CS2 player props (BIG, Heroic, and Magic matchups) from fresh board entries (Images 28–36). Older rosters completely purged.*")
+    st.markdown("*Evaluating fresh board entries from Images 29–32 (KHK LoL vs BIG and Nuclear TigerES CS2 matchups). Older rosters completely wiped.*")
 
-    # Strictly current board entries extracted from Images 28 through 36
+    # Strictly current board entries extracted from Images 29 through 32
     custom_board = [
-        # BIG vs magic
-        {"player": "gr1ks", "match": "vs magic • Starts in 24:43", "stat_type": "MAPS 1-2 Headshots", "line": 9.0},
-        {"player": "gr1ks", "match": "vs magic • Starts in 24:43", "stat_type": "MAPS 1-2 Kills", "line": 32.5},
-        {"player": "tabseN", "match": "vs magic • Starts in 24:43", "stat_type": "MAPS 1-2 Headshots", "line": 13.0},
-        {"player": "tabseN", "match": "vs magic • Starts in 24:43", "stat_type": "MAPS 1-2 Kills", "line": 26.5},
-        {"player": "faveN", "match": "vs magic • Starts in 24:47", "stat_type": "MAPS 1-2 Headshots", "line": 16.5},
-        {"player": "faveN", "match": "vs magic • Starts in 24:47", "stat_type": "MAPS 1-2 Kills", "line": 27.5},
-        {"player": "JDC", "match": "vs magic • Starts in 24:50", "stat_type": "MAPS 1-2 Headshots", "line": 16.0},
-        {"player": "JDC", "match": "vs magic • Starts in 24:50", "stat_type": "MAPS 1-2 Kills", "line": 30.0},
-        {"player": "blameF", "match": "vs magic • Starts in 24:50", "stat_type": "MAPS 1-2 Headshots", "line": 15.0},
-        {"player": "blameF", "match": "vs magic • Starts in 24:50", "stat_type": "MAPS 1-2 Kills", "line": 33.0},
+        # KHK vs BIG (LoL)
+        {"player": "Abbedagge", "match": "vs BIG • Starts in 28:08", "stat_type": "MAPS 1-3 Kills", "line": 10.5},
+        {"player": "BODA", "match": "vs BIG • Starts in 28:08", "stat_type": "MAPS 1-3 Kills", "line": 11.0},
+        {"player": "Densi", "match": "vs BIG • Starts in 28:08", "stat_type": "MAPS 1-3 Kills", "line": 8.5},
+        {"player": "UNFORGIVEN", "match": "vs BIG • Starts in 28:08", "stat_type": "MAPS 1-3 Kills", "line": 12.5},
 
-        # Heroic vs Color
-        {"player": "nilo", "match": "vs Color • Starts in 25:08", "stat_type": "MAPS 1-2 Headshots", "line": 20.5},
-        {"player": "nilo", "match": "vs Color • Starts in 25:08", "stat_type": "MAPS 1-2 Kills", "line": 32.5},
-        {"player": "susp", "match": "vs Color • Starts in 25:08", "stat_type": "MAPS 1-2 Headshots", "line": 15.0},
-        {"player": "susp", "match": "vs Color • Starts in 25:08", "stat_type": "MAPS 1-2 Kills", "line": 26.5},
-        {"player": "MartinezSa", "match": "vs Color • Starts in 25:11", "stat_type": "MAPS 1-2 Headshots", "line": 11.5},
-        {"player": "MartinezSa", "match": "vs Color • Starts in 25:11", "stat_type": "MAPS 1-2 Kills", "line": 31.5},
-        {"player": "Brollan", "match": "vs Color • Starts in 25:15", "stat_type": "MAPS 1-2 Headshots", "line": 16.5},
-        {"player": "Brollan", "match": "vs Color • Starts in 25:15", "stat_type": "MAPS 1-2 Kills", "line": 27.5},
-        {"player": "Chr1zN", "match": "vs Color • Starts in 25:15", "stat_type": "MAPS 1-2 Headshots", "line": 15.5},
-        {"player": "Chr1zN", "match": "vs Color • Starts in 25:15", "stat_type": "MAPS 1-2 Kills", "line": 27.5},
-
-        # magic vs BIG
-        {"player": "sFade8", "match": "vs BIG • Starts in 25:38", "stat_type": "MAPS 1-2 Headshots", "line": 14.0},
-        {"player": "sFade8", "match": "vs BIG • Starts in 25:38", "stat_type": "MAPS 1-2 Kills", "line": 26.0},
-        {"player": "tenzy", "match": "vs BIG • Starts in 25:38", "stat_type": "MAPS 1-2 Headshots", "line": 21.5},
-        {"player": "tenzy", "match": "vs BIG • Starts in 25:38", "stat_type": "MAPS 1-2 Kills", "line": 32.5},
-        {"player": "moON", "match": "vs BIG • Starts in 25:41", "stat_type": "MAPS 1-2 Headshots", "line": 10.5},
-        {"player": "moON", "match": "vs BIG • Starts in 25:41", "stat_type": "MAPS 1-2 Kills", "line": 28.5},
-        {"player": "AW", "match": "vs BIG • Starts in 25:48", "stat_type": "MAPS 1-2 Headshots", "line": 16.0},
-        {"player": "AW", "match": "vs BIG • Starts in 25:48", "stat_type": "MAPS 1-2 Kills", "line": 28.5},
-        {"player": "MaSvAl", "match": "vs BIG • Starts in 25:48", "stat_type": "MAPS 1-2 Headshots", "line": 17.0},
-        {"player": "MaSvAl", "match": "vs BIG • Starts in 25:48", "stat_type": "MAPS 1-2 Kills", "line": 27.5}
+        # Nuclear TigerES vs Eternal Fire / Team (CS2)
+        {"player": "senka", "match": "vs Eternal... • Starts in 28:34", "stat_type": "MAPS 1-2 Headshots", "line": 12.0},
+        {"player": "senka", "match": "vs Eternal... • Starts in 28:34", "stat_type": "MAPS 1-2 Kills", "line": 24.5},
+        {"player": "z1k4", "match": "vs Eternal... • Starts in 28:34", "stat_type": "MAPS 1-2 Headshots", "line": 10.0},
+        {"player": "z1k4", "match": "vs Eternal... • Starts in 28:34", "stat_type": "MAPS 1-2 Kills", "line": 30.5},
+        {"player": "m1QUSE", "match": "vs Eternal... • Starts in 28:36", "stat_type": "MAPS 1-2 Headshots", "line": 13.5},
+        {"player": "m1QUSE", "match": "vs Eternal... • Starts in 28:36", "stat_type": "MAPS 1-2 Kills", "line": 28.5},
+        {"player": "ayuki", "match": "vs Eternal... • Starts in 28:42", "stat_type": "MAPS 1-2 Headshots", "line": 16.5},
+        {"player": "ayuki", "match": "vs Eternal... • Starts in 28:42", "stat_type": "MAPS 1-2 Kills", "line": 29.0},
+        {"player": "flouzer", "match": "vs Eternal... • Starts in 28:42", "stat_type": "MAPS 1-2 Headshots", "line": 16.5},
+        {"player": "flouzer", "match": "vs Eternal... • Starts in 28:42", "stat_type": "MAPS 1-2 Kills", "line": 29.5}
     ]
 
     engine = LiveLCSLarryEngine(slate_data=custom_board)
@@ -194,7 +176,7 @@ if __name__ == "__main__":
     top_less = board_df[board_df["Action"] == "🔨 LESS"].sort_values(by="_raw_edge", ascending=False).head(3)
     parlay_cards = pd.concat([top_mores, top_less])
 
-    st.subheader("⚡ Automated 6-Leg Parlay Card Preview")
+    st.subheader("⚡ Automated Parlay Card Preview")
     
     cols = st.columns(3)
     for idx, row in enumerate(parlay_cards.to_dict(orient="records")):
