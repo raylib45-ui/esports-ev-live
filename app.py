@@ -142,21 +142,19 @@ class LiveLCSLarryEngine:
                 "Action": eval_result['action'],
                 "_raw_edge": eval_result['raw_edge']
             })
-        return pd.DataFrame(processed_records)
+        df = pd.DataFrame(processed_records)
+        df["abs_edge"] = df["_raw_edge"].abs()
+        return df
 
 if __name__ == "__main__":
     st.title("LCS Larry 2026: Sharp Line Comparison Engine")
-    st.markdown("*Evaluating fresh board entries from Images 29–32 (KHK LoL vs BIG and Nuclear TigerES CS2 matchups). Older rosters completely wiped.*")
+    st.markdown("*Mandatory Enforcement: Exactly 1 single batch of the top 6 highest-edge plays generated 24/7.*")
 
-    # Strictly current board entries extracted from Images 29 through 32
     custom_board = [
-        # KHK vs BIG (LoL)
         {"player": "Abbedagge", "match": "vs BIG • Starts in 28:08", "stat_type": "MAPS 1-3 Kills", "line": 10.5},
         {"player": "BODA", "match": "vs BIG • Starts in 28:08", "stat_type": "MAPS 1-3 Kills", "line": 11.0},
         {"player": "Densi", "match": "vs BIG • Starts in 28:08", "stat_type": "MAPS 1-3 Kills", "line": 8.5},
         {"player": "UNFORGIVEN", "match": "vs BIG • Starts in 28:08", "stat_type": "MAPS 1-3 Kills", "line": 12.5},
-
-        # Nuclear TigerES vs Eternal Fire / Team (CS2)
         {"player": "senka", "match": "vs Eternal... • Starts in 28:34", "stat_type": "MAPS 1-2 Headshots", "line": 12.0},
         {"player": "senka", "match": "vs Eternal... • Starts in 28:34", "stat_type": "MAPS 1-2 Kills", "line": 24.5},
         {"player": "z1k4", "match": "vs Eternal... • Starts in 28:34", "stat_type": "MAPS 1-2 Headshots", "line": 10.0},
@@ -172,14 +170,13 @@ if __name__ == "__main__":
     engine = LiveLCSLarryEngine(slate_data=custom_board)
     board_df = engine.process_board()
 
-    top_mores = board_df[board_df["Action"] == "🔨 MORE"].sort_values(by="_raw_edge", ascending=False).head(3)
-    top_less = board_df[board_df["Action"] == "🔨 LESS"].sort_values(by="_raw_edge", ascending=False).head(3)
-    parlay_cards = pd.concat([top_mores, top_less])
+    # Mandatory Rule: Exactly 1 batch of top 6 plays total
+    top_6_batch = board_df.sort_values(by="abs_edge", ascending=False).head(6)
 
-    st.subheader("⚡ Automated Parlay Card Preview")
+    st.subheader("⚡ Mandatory 1 Batch: Top 6 Plays")
     
     cols = st.columns(3)
-    for idx, row in enumerate(parlay_cards.to_dict(orient="records")):
+    for idx, row in enumerate(top_6_batch.to_dict(orient="records")):
         col_idx = idx % 3
         with cols[col_idx]:
             action_badge = "▲ OVER" if "MORE" in row["Action"] else "▼ LESS"
@@ -215,7 +212,7 @@ if __name__ == "__main__":
 
     st.markdown("---")
     st.subheader("Full Board Sharp Comparison Matrix")
-    st.dataframe(board_df.drop(columns=["_raw_edge"]), use_container_width=True)
+    st.dataframe(board_df.drop(columns=["_raw_edge", "abs_edge"]), use_container_width=True)
 
     if st.button("🔄 Re-Scan Book Lines"):
         st.rerun()
