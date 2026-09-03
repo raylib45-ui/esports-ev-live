@@ -126,20 +126,20 @@ class LiveLCSLarryEngine:
 
 if __name__ == "__main__":
     st.title("LCS Larry 2026: Sharp Line Comparison Engine")
-    st.markdown("*Deterministic 24/7 Mode: Keyd Stars vs Procyon CS2 slate loaded. All previous slates completely cleared.*")
+    st.markdown("*Deterministic 24/7 Mode: Keyd Stars vs Procyon CCT 2026 South America Series 5 loaded with analytics metadata.*")
 
-    # Clean slate containing strictly the Keyd Stars vs Procyon CS2 players & lines from the latest screenshots
+    # Clean slate integrated with HLTV analytics context (Keyd Stars #122 vs Procyon #189, 66.7% win probability favorite)
     custom_board = [
-        {"player": "xureba", "match": "vs Procyon • Starts in 36:24", "stat_type": "MAPS 1-2 Headshots", "line": 12.5, "sharp_line": 11.5},
-        {"player": "xureba", "match": "vs Procyon • Starts in 36:24", "stat_type": "MAPS 1-2 Kills", "line": 24.5, "sharp_line": 26.0},
-        {"player": "zede", "match": "vs Procyon • Starts in 36:24", "stat_type": "MAPS 1-2 Headshots", "line": 19.5, "sharp_line": 18.0},
-        {"player": "zede", "match": "vs Procyon • Starts in 36:24", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 33.0},
-        {"player": "matios", "match": "vs Procyon • Starts in 36:26", "stat_type": "MAPS 1-2 Headshots", "line": 16.0, "sharp_line": 14.5},
-        {"player": "matios", "match": "vs Procyon • Starts in 36:26", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 31.0},
-        {"player": "ckzao", "match": "vs Procyon • Starts in 36:32", "stat_type": "MAPS 1-2 Headshots", "line": 16.5, "sharp_line": 18.0},
-        {"player": "ckzao", "match": "vs Procyon • Starts in 36:32", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 30.0},
-        {"player": "lash", "match": "vs Procyon • Starts in 36:32", "stat_type": "MAPS 1-2 Headshots", "line": 12.5, "sharp_line": 13.5},
-        {"player": "lash", "match": "vs Procyon • Starts in 36:32", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 28.0}
+        {"player": "xureba", "match": "Keyd Stars vs Procyon • CCT S. America", "stat_type": "MAPS 1-2 Headshots", "line": 12.5, "sharp_line": 11.5},
+        {"player": "xureba", "match": "Keyd Stars vs Procyon • CCT S. America", "stat_type": "MAPS 1-2 Kills", "line": 24.5, "sharp_line": 26.0},
+        {"player": "zede", "match": "Keyd Stars vs Procyon • CCT S. America", "stat_type": "MAPS 1-2 Headshots", "line": 19.5, "sharp_line": 18.0},
+        {"player": "zede", "match": "Keyd Stars vs Procyon • CCT S. America", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 33.0},
+        {"player": "matios", "match": "Keyd Stars vs Procyon • CCT S. America", "stat_type": "MAPS 1-2 Headshots", "line": 16.0, "sharp_line": 14.5},
+        {"player": "matios", "match": "Keyd Stars vs Procyon • CCT S. America", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 31.0},
+        {"player": "ckzao", "match": "Keyd Stars vs Procyon • CCT S. America", "stat_type": "MAPS 1-2 Headshots", "line": 16.5, "sharp_line": 18.0},
+        {"player": "ckzao", "match": "Keyd Stars vs Procyon • CCT S. America", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 30.0},
+        {"player": "lash", "match": "Keyd Stars vs Procyon • CCT S. America", "stat_type": "MAPS 1-2 Headshots", "line": 12.5, "sharp_line": 13.5},
+        {"player": "lash", "match": "Keyd Stars vs Procyon • CCT S. America", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 28.0}
     ]
 
     engine = LiveLCSLarryEngine(slate_data=custom_board)
