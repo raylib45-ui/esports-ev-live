@@ -97,7 +97,6 @@ class LiveLCSLarryEngine:
             prize_line = item["line"]
             sharp_line = item["sharp_line"]
             
-            # Deterministic evaluation: strictly based on sharp vs prize line comparison
             line_diff = sharp_line - prize_line
             
             if sharp_line < prize_line:
@@ -129,24 +128,30 @@ class LiveLCSLarryEngine:
 
 if __name__ == "__main__":
     st.title("LCS Larry 2026: Sharp Line Comparison Engine")
-    st.markdown("*Deterministic 24/7 Mode: Fixed pricing logic ensuring picks never flip-flop on refresh.*")
+    st.markdown("*Deterministic 24/7 Mode: Updated with Virtus.pro vs. fnatic slate. Old data completely cleared.*")
 
-    # Hardcoded deterministic sharp references so BODA 11.0 with sharp 10.0 consistently locks to LESS
+    # Cleaned slate containing only the current Virtus.pro vs fnatic players & stats from screenshots
     custom_board = [
-        {"player": "Abbedagge", "match": "vs BIG • Starts in 28:08", "stat_type": "MAPS 1-3 Kills", "line": 10.5, "sharp_line": 11.5},
-        {"player": "BODA", "match": "vs BIG • Starts in 28:08", "stat_type": "MAPS 1-3 Kills", "line": 11.0, "sharp_line": 10.0},
-        {"player": "Densi", "match": "vs BIG • Starts in 28:08", "stat_type": "MAPS 1-3 Kills", "line": 8.5, "sharp_line": 9.5},
-        {"player": "UNFORGIVEN", "match": "vs BIG • Starts in 28:08", "stat_type": "MAPS 1-3 Kills", "line": 12.5, "sharp_line": 11.5},
-        {"player": "senka", "match": "vs Eternal... • Starts in 28:34", "stat_type": "MAPS 1-2 Headshots", "line": 12.0, "sharp_line": 13.0},
-        {"player": "senka", "match": "vs Eternal... • Starts in 28:34", "stat_type": "MAPS 1-2 Kills", "line": 24.5, "sharp_line": 23.5},
-        {"player": "z1k4", "match": "vs Eternal... • Starts in 28:34", "stat_type": "MAPS 1-2 Headshots", "line": 10.0, "sharp_line": 11.0},
-        {"player": "z1k4", "match": "vs Eternal... • Starts in 28:34", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 29.0},
-        {"player": "m1QUSE", "match": "vs Eternal... • Starts in 28:36", "stat_type": "MAPS 1-2 Headshots", "line": 13.5, "sharp_line": 14.5},
-        {"player": "m1QUSE", "match": "vs Eternal... • Starts in 28:36", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 27.0},
-        {"player": "ayuki", "match": "vs Eternal... • Starts in 28:42", "stat_type": "MAPS 1-2 Headshots", "line": 16.5, "sharp_line": 17.5},
-        {"player": "ayuki", "match": "vs Eternal... • Starts in 28:42", "stat_type": "MAPS 1-2 Kills", "line": 29.0, "sharp_line": 30.5},
-        {"player": "flouzer", "match": "vs Eternal... • Starts in 28:42", "stat_type": "MAPS 1-2 Headshots", "line": 16.5, "sharp_line": 15.5},
-        {"player": "flouzer", "match": "vs Eternal... • Starts in 28:42", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 31.0}
+        {"player": "mir", "match": "vs fnatic • Starts in 8:53", "stat_type": "MAPS 1-2 Headshots", "line": 14.5, "sharp_line": 13.5},
+        {"player": "mir", "match": "vs fnatic • Starts in 8:53", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 30.0},
+        {"player": "t00RO", "match": "vs fnatic • Starts in 8:53", "stat_type": "MAPS 1-2 Headshots", "line": 16.5, "sharp_line": 15.5},
+        {"player": "t00RO", "match": "vs fnatic • Starts in 8:53", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 29.0},
+        {"player": "b1T", "match": "vs fnatic • Starts in 9:09", "stat_type": "MAPS 1-2 Headshots", "line": 9.5, "sharp_line": 10.5},
+        {"player": "b1T", "match": "vs fnatic • Starts in 9:09", "stat_type": "MAPS 1-2 Kills", "line": 32.0, "sharp_line": 30.5},
+        {"player": "AquaRS", "match": "vs fnatic • Starts in 9:27", "stat_type": "MAPS 1-2 Headshots", "line": 18.5, "sharp_line": 17.0},
+        {"player": "AquaRS", "match": "vs fnatic • Starts in 9:27", "stat_type": "MAPS 1-2 Kills", "line": 28.0, "sharp_line": 29.5},
+        {"player": "FOR3VER", "match": "vs fnatic • Starts in 9:27", "stat_type": "MAPS 1-2 Headshots", "line": 17.0, "sharp_line": 18.5},
+        {"player": "FOR3VER", "match": "vs fnatic • Starts in 9:27", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 26.0},
+        {"player": "jambo", "match": "vs Virtus.pro • Starts in 9:41", "stat_type": "MAPS 1-2 Headshots", "line": 11.0, "sharp_line": 12.0},
+        {"player": "jambo", "match": "vs Virtus.pro • Starts in 9:41", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 29.0},
+        {"player": "mazay", "match": "vs Virtus.pro • Starts in 9:41", "stat_type": "MAPS 1-2 Headshots", "line": 18.5, "sharp_line": 17.5},
+        {"player": "mazay", "match": "vs Virtus.pro • Starts in 9:41", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 32.0},
+        {"player": "jackasmo", "match": "vs Virtus.pro • Starts in 9:57", "stat_type": "MAPS 1-2 Headshots", "line": 19.5, "sharp_line": 18.0},
+        {"player": "jackasmo", "match": "vs Virtus.pro • Starts in 9:57", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 32.0},
+        {"player": "cairne", "match": "vs Virtus.pro • Starts in 10:12", "stat_type": "MAPS 1-2 Headshots", "line": 16.5, "sharp_line": 17.5},
+        {"player": "cairne", "match": "vs Virtus.pro • Starts in 10:12", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 29.0},
+        {"player": "fear", "match": "vs Virtus.pro • Starts in 10:12", "stat_type": "MAPS 1-2 Headshots", "line": 13.0, "sharp_line": 14.5},
+        {"player": "fear", "match": "vs Virtus.pro • Starts in 10:12", "stat_type": "MAPS 1-2 Kills", "line": 24.5, "sharp_line": 23.0}
     ]
 
     engine = LiveLCSLarryEngine(slate_data=custom_board)
