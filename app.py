@@ -126,49 +126,49 @@ class LiveLCSLarryEngine:
 
 if __name__ == "__main__":
     st.title("LCS Larry 2026: Sharp Line Comparison Engine")
-    st.markdown("*Deterministic 24/7 Mode: FlyQuest vs TYLOO Matchup Loaded from PrizePicks Board.*")
+    st.markdown("*Deterministic 24/7 Mode: TYLOO vs FlyQuest — IEM Beijing 2026 Asia Closed Qualifier Grand Final (Bo3).*")
 
-    # Clean slate integrated strictly with FlyQuest vs TYLOO lines extracted from screenshots
+    # Updated clean slate integrating exact HLTV event match context and PrizePicks player prop lines
     custom_board = [
         # FlyQuest: jks
-        {"player": "jks", "match": "FlyQuest vs TYLOO", "stat_type": "MAPS 1-2 Headshots", "line": 19.5, "sharp_line": 18.0},
-        {"player": "jks", "match": "FlyQuest vs TYLOO", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 28.0},
+        {"player": "jks", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Headshots", "line": 19.5, "sharp_line": 18.0},
+        {"player": "jks", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 28.0},
         
         # FlyQuest: nettik
-        {"player": "nettik", "match": "FlyQuest vs TYLOO", "stat_type": "MAPS 1-2 Headshots", "line": 15.5, "sharp_line": 14.5},
-        {"player": "nettik", "match": "FlyQuest vs TYLOO", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "sharp_line": 28.0},
+        {"player": "nettik", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Headshots", "line": 15.5, "sharp_line": 14.5},
+        {"player": "nettik", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "sharp_line": 28.0},
         
         # FlyQuest: aliStair
-        {"player": "aliStair", "match": "FlyQuest vs TYLOO", "stat_type": "MAPS 1-2 Headshots", "line": 9.5, "sharp_line": 8.5},
-        {"player": "aliStair", "match": "FlyQuest vs TYLOO", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 27.0},
+        {"player": "aliStair", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Headshots", "line": 9.5, "sharp_line": 8.5},
+        {"player": "aliStair", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 27.0},
         
         # FlyQuest: INS
-        {"player": "INS", "match": "FlyQuest vs TYLOO", "stat_type": "MAPS 1-2 Headshots", "line": 13.5, "sharp_line": 12.5},
-        {"player": "INS", "match": "FlyQuest vs TYLOO", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 26.0},
+        {"player": "INS", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Headshots", "line": 13.5, "sharp_line": 12.5},
+        {"player": "INS", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 26.0},
         
         # FlyQuest: Vexite
-        {"player": "Vexite", "match": "FlyQuest vs TYLOO", "stat_type": "MAPS 1-2 Headshots", "line": 17.5, "sharp_line": 16.0},
-        {"player": "Vexite", "match": "FlyQuest vs TYLOO", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 31.0},
+        {"player": "Vexite", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Headshots", "line": 17.5, "sharp_line": 16.0},
+        {"player": "Vexite", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 31.0},
         
         # TYLOO: Moseyuh
-        {"player": "Moseyuh", "match": "TYLOO vs FlyQuest", "stat_type": "MAPS 1-2 Headshots", "line": 16.0, "sharp_line": 14.5},
-        {"player": "Moseyuh", "match": "TYLOO vs FlyQuest", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 29.0},
+        {"player": "Moseyuh", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Headshots", "line": 16.0, "sharp_line": 14.5},
+        {"player": "Moseyuh", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 29.0},
         
         # TYLOO: Zero
-        {"player": "Zero", "match": "TYLOO vs FlyQuest", "stat_type": "MAPS 1-2 Headshots", "line": 15.5, "sharp_line": 14.0},
-        {"player": "Zero", "match": "TYLOO vs FlyQuest", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 26.0},
+        {"player": "Zero", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Headshots", "line": 15.5, "sharp_line": 14.0},
+        {"player": "Zero", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 26.0},
         
         # TYLOO: Mercury
-        {"player": "Mercury", "match": "TYLOO vs FlyQuest", "stat_type": "MAPS 1-2 Headshots", "line": 15.5, "sharp_line": 14.5},
-        {"player": "Mercury", "match": "TYLOO vs FlyQuest", "stat_type": "MAPS 1-2 Kills", "line": 28.0, "sharp_line": 26.5},
+        {"player": "Mercury", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Headshots", "line": 15.5, "sharp_line": 14.5},
+        {"player": "Mercury", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Kills", "line": 28.0, "sharp_line": 26.5},
         
         # TYLOO: JamYoung
-        {"player": "JamYoung", "match": "TYLOO vs FlyQuest", "stat_type": "MAPS 1-2 Headshots", "line": 19.0, "sharp_line": 17.5},
-        {"player": "JamYoung", "match": "TYLOO vs FlyQuest", "stat_type": "MAPS 1-2 Kills", "line": 31.0, "sharp_line": 29.5},
+        {"player": "JamYoung", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Headshots", "line": 19.0, "sharp_line": 17.5},
+        {"player": "JamYoung", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Kills", "line": 31.0, "sharp_line": 29.5},
         
         # TYLOO: Jee
-        {"player": "Jee", "match": "TYLOO vs FlyQuest", "stat_type": "MAPS 1-2 Headshots", "line": 10.0, "sharp_line": 9.0},
-        {"player": "Jee", "match": "TYLOO vs FlyQuest", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 29.0}
+        {"player": "Jee", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Headshots", "line": 10.0, "sharp_line": 9.0},
+        {"player": "Jee", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 29.0}
     ]
 
     engine = LiveLCSLarryEngine(slate_data=custom_board)
@@ -176,7 +176,7 @@ if __name__ == "__main__":
 
     top_6_batch = board_df.sort_values(by="abs_edge", ascending=False).head(6)
 
-    st.subheader("⚡ 100% Confirmed 24/7 Top Lock Batch (FlyQuest vs TYLOO)")
+    st.subheader("⚡ 100% Confirmed 24/7 Top Lock Batch (IEM Beijing Qualifier Grand Final)")
     
     cols = st.columns(3)
     for idx, row in enumerate(top_6_batch.to_dict(orient="records")):
