@@ -87,11 +87,9 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-class HitboxDisalignmentEngine:
-    def __init__(self, slate_data: list, disalignment_factor: float, jiggle_penalty: float, stand_in_variance: float):
+class CS2ProjectionEngine:
+    def __init__(self, slate_data: list, stand_in_variance: float):
         self.slate_data = slate_data
-        self.disalignment_factor = disalignment_factor
-        self.jiggle_penalty = jiggle_penalty
         self.stand_in_variance = stand_in_variance
 
     def process_board(self) -> pd.DataFrame:
@@ -100,13 +98,8 @@ class HitboxDisalignmentEngine:
             prize_line = item["line"]
             base_sharp = item["sharp_line"]
             
-            # Apply CS2 Hitbox-Model Disalignment, Jiggle Peek & Vitality Stand-in (jL for mezii) Correction
             stand_in_multiplier = 1.0 - (self.stand_in_variance * 0.01) if item["team"] == "Team Vitality" else 1.0
-
-            if "Headshots" in item["stat_type"]:
-                sharp_line = round(base_sharp * (1.0 - (self.disalignment_factor * 0.01)) * stand_in_multiplier, 1)
-            else:
-                sharp_line = round(base_sharp * (1.0 - (self.jiggle_penalty * 0.005)) * stand_in_multiplier, 1)
+            sharp_line = round(base_sharp * stand_in_multiplier, 1)
 
             if sharp_line < prize_line:
                 action = "🔨 LESS"
@@ -137,15 +130,12 @@ class HitboxDisalignmentEngine:
         return df
 
 if __name__ == "__main__":
-    st.title("LCS Larry 2026: BLAST Open Porto - CS2 Model")
+    st.title("LCS Larry 2026: BLAST Open Porto - CS2 Projection Engine")
     st.markdown("*HLTV Match Analytics Active: FURIA (#3) vs Team Vitality (#4) | Stand-in jL active for Vitality (replacing mezii).*")
 
-    st.sidebar.header("⚙️ Model & HLTV Adjustments")
-    disalignment_factor = st.sidebar.slider("Hitbox Lead/Lag Factor (%)", 0.0, 10.0, 3.5, 0.5)
-    jiggle_penalty = st.sidebar.slider("Jiggle-Peek Registration Penalty (%)", 0.0, 10.0, 2.0, 0.5)
+    st.sidebar.header("⚙️ Model Settings")
     stand_in_variance = st.sidebar.slider("Vitality Stand-in (jL) Volatility Penalty (%)", 0.0, 10.0, 4.0, 0.5)
 
-    # Cleaned master slate featuring synchronized lines for FURIA and Vitality (BLAST Open Porto Quarter-final)
     master_slate = [
         # Vitality (with stand-in jL)
         {"player": "ropz", "team": "Team Vitality", "match": "FURIA vs Team Vitality", "stat_type": "MAP 1 Kills", "line": 15.5, "sharp_line": 14.0},
@@ -165,17 +155,12 @@ if __name__ == "__main__":
         {"player": "yuurih", "team": "FURIA", "match": "FURIA vs Team Vitality", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 28.0}
     ]
 
-    engine = HitboxDisalignmentEngine(
-        slate_data=master_slate, 
-        disalignment_factor=disalignment_factor, 
-        jiggle_penalty=jiggle_penalty, 
-        stand_in_variance=stand_in_variance
-    )
+    engine = CS2ProjectionEngine(slate_data=master_slate, stand_in_variance=stand_in_variance)
     board_df = engine.process_board()
 
     top_6_batch = board_df.sort_values(by="abs_edge", ascending=False).head(6)
 
-    st.subheader("⚡ 100% Confirmed 24/7 Top Lock Batch (HLTV & Stand-in Adjusted)")
+    st.subheader("⚡ Top Lock Batch (HLTV & Stand-in Adjusted)")
     
     cols = st.columns(3)
     for idx, row in enumerate(top_6_batch.to_dict(orient="records")):
@@ -186,7 +171,7 @@ if __name__ == "__main__":
                 <div class="card-container">
                     <div class="card-header">{row['Match']} ({row['Team']})</div>
                     <div class="player-name">{row['Player']}</div>
-                    <div class="stat-type">{row['Stat Type']} • Adjusted Ref: {row['Adjusted Sharp Line']}</div>
+                    <div class="stat-type">{row['Stat Type']} • Sharp Ref: {row['Adjusted Sharp Line']}</div>
                     <div class="line-display">{row['PrizePicks Line']}</div>
                     <div class="metric-grid">
                         <div class="metric-box">
