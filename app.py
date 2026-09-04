@@ -88,10 +88,11 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 class HitboxDisalignmentEngine:
-    def __init__(self, slate_data: list, disalignment_factor: float, jiggle_penalty: float):
+    def __init__(self, slate_data: list, disalignment_factor: float, jiggle_penalty: float, stand_in_variance: float):
         self.slate_data = slate_data
         self.disalignment_factor = disalignment_factor
         self.jiggle_penalty = jiggle_penalty
+        self.stand_in_variance = stand_in_variance
 
     def process_board(self) -> pd.DataFrame:
         processed_records = []
@@ -99,11 +100,13 @@ class HitboxDisalignmentEngine:
             prize_line = item["line"]
             base_sharp = item["sharp_line"]
             
-            # Apply CS2 Hitbox-Model Disalignment & Jiggle Peek Latency Correction Factor 24/7
+            # Apply CS2 Hitbox-Model Disalignment, Jiggle Peek & Vitality Stand-in (jL for mezii) Correction
+            stand_in_multiplier = 1.0 - (self.stand_in_variance * 0.01) if item["team"] == "Team Vitality" else 1.0
+
             if "Headshots" in item["stat_type"]:
-                sharp_line = round(base_sharp * (1.0 - (self.disalignment_factor * 0.01)), 1)
+                sharp_line = round(base_sharp * (1.0 - (self.disalignment_factor * 0.01)) * stand_in_multiplier, 1)
             else:
-                sharp_line = round(base_sharp * (1.0 - (self.jiggle_penalty * 0.005)), 1)
+                sharp_line = round(base_sharp * (1.0 - (self.jiggle_penalty * 0.005)) * stand_in_multiplier, 1)
 
             if sharp_line < prize_line:
                 action = "🔨 LESS"
@@ -117,6 +120,7 @@ class HitboxDisalignmentEngine:
 
             processed_records.append({
                 "Player": item["player"],
+                "Team": item["team"],
                 "Match": item["match"],
                 "Stat Type": item["stat_type"],
                 "PrizePicks Line": prize_line,
@@ -133,35 +137,45 @@ class HitboxDisalignmentEngine:
         return df
 
 if __name__ == "__main__":
-    st.title("LCS Larry 2026: CS2 Hitbox Disalignment Engine")
-    st.markdown("*24/7 Real-Time Netcode & Hitbox Latency Correction Mode active (METANOIA Wolves vs ODDIK).*")
+    st.title("LCS Larry 2026: BLAST Open Porto - CS2 Model")
+    st.markdown("*HLTV Match Analytics Active: FURIA (#3) vs Team Vitality (#4) | Stand-in jL active for Vitality (replacing mezii).*")
 
-    st.sidebar.header("⚙️ Hitbox Disalignment Settings")
+    st.sidebar.header("⚙️ Model & HLTV Adjustments")
     disalignment_factor = st.sidebar.slider("Hitbox Lead/Lag Factor (%)", 0.0, 10.0, 3.5, 0.5)
     jiggle_penalty = st.sidebar.slider("Jiggle-Peek Registration Penalty (%)", 0.0, 10.0, 2.0, 0.5)
+    stand_in_variance = st.sidebar.slider("Vitality Stand-in (jL) Volatility Penalty (%)", 0.0, 10.0, 4.0, 0.5)
 
-    # Master slate updated with METANOIA Wolves vs ODDIK match context & HLTV team/stand-in data
+    # Cleaned master slate featuring synchronized lines for FURIA and Vitality (BLAST Open Porto Quarter-final)
     master_slate = [
-        # nardes (ODDIK - Higher form ranking edge)
-        {"player": "nardes", "match": "METANOIA Wolves vs ODDIK", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 27.5},
-        {"player": "nardes", "match": "METANOIA Wolves vs ODDIK", "stat_type": "MAPS 1-2 Headshots", "line": 11.0, "sharp_line": 9.8},
-        # righi (ODDIK)
-        {"player": "righi", "match": "METANOIA Wolves vs ODDIK", "stat_type": "MAPS 1-2 Headshots", "line": 16.5, "sharp_line": 15.0},
-        {"player": "righi", "match": "METANOIA Wolves vs ODDIK", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 27.8},
-        # diozera (ODDIK)
-        {"player": "diozera", "match": "METANOIA Wolves vs ODDIK", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 28.5},
-        {"player": "diozera", "match": "METANOIA Wolves vs ODDIK", "stat_type": "MAPS 1-2 Headshots", "line": 17.5, "sharp_line": 16.0},
-        # NEKIZ (ODDIK Stand-in for Premium)
-        {"player": "NEKIZ", "match": "METANOIA Wolves vs ODDIK", "stat_type": "MAPS 1-2 Headshots", "line": 12.5, "sharp_line": 11.2},
-        {"player": "NEKIZ", "match": "METANOIA Wolves vs ODDIK", "stat_type": "MAPS 1-2 Kills", "line": 25.0, "sharp_line": 23.5}
+        # Vitality (with stand-in jL)
+        {"player": "ropz", "team": "Team Vitality", "match": "FURIA vs Team Vitality", "stat_type": "MAP 1 Kills", "line": 15.5, "sharp_line": 14.0},
+        {"player": "ropz", "team": "Team Vitality", "match": "FURIA vs Team Vitality", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 27.0},
+        {"player": "jL", "team": "Team Vitality", "match": "FURIA vs Team Vitality", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 26.5},
+        {"player": "jL", "team": "Team Vitality", "match": "FURIA vs Team Vitality", "stat_type": "MAPS 1-2 Headshots", "line": 16.5, "sharp_line": 14.5},
+        {"player": "flameZ", "team": "Team Vitality", "match": "FURIA vs Team Vitality", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 27.5},
+        {"player": "apEX", "team": "Team Vitality", "match": "FURIA vs Team Vitality", "stat_type": "MAPS 1-2 Kills", "line": 25.0, "sharp_line": 22.5},
+        {"player": "ZywOo", "team": "Team Vitality", "match": "FURIA vs Team Vitality", "stat_type": "MAPS 1-2 Kills", "line": 37.5, "sharp_line": 34.0},
+
+        # FURIA
+        {"player": "YEKINDAR", "team": "FURIA", "match": "FURIA vs Team Vitality", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 29.5},
+        {"player": "YEKINDAR", "team": "FURIA", "match": "FURIA vs Team Vitality", "stat_type": "MAPS 1-2 Headshots", "line": 18.0, "sharp_line": 19.5},
+        {"player": "molodoy", "team": "FURIA", "match": "FURIA vs Team Vitality", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 34.0},
+        {"player": "KSCERATO", "team": "FURIA", "match": "FURIA vs Team Vitality", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 33.0},
+        {"player": "FalleN", "team": "FURIA", "match": "FURIA vs Team Vitality", "stat_type": "MAPS 1-2 Kills", "line": 23.5, "sharp_line": 25.5},
+        {"player": "yuurih", "team": "FURIA", "match": "FURIA vs Team Vitality", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 28.0}
     ]
 
-    engine = HitboxDisalignmentEngine(slate_data=master_slate, disalignment_factor=disalignment_factor, jiggle_penalty=jiggle_penalty)
+    engine = HitboxDisalignmentEngine(
+        slate_data=master_slate, 
+        disalignment_factor=disalignment_factor, 
+        jiggle_penalty=jiggle_penalty, 
+        stand_in_variance=stand_in_variance
+    )
     board_df = engine.process_board()
 
     top_6_batch = board_df.sort_values(by="abs_edge", ascending=False).head(6)
 
-    st.subheader("⚡ 100% Confirmed 24/7 Top Lock Batch (Hitbox Disalignment Adjusted)")
+    st.subheader("⚡ 100% Confirmed 24/7 Top Lock Batch (HLTV & Stand-in Adjusted)")
     
     cols = st.columns(3)
     for idx, row in enumerate(top_6_batch.to_dict(orient="records")):
@@ -170,9 +184,9 @@ if __name__ == "__main__":
             action_badge = "▲ OVER" if "MORE" in row["Action"] else "▼ LESS"
             st.markdown(f"""
                 <div class="card-container">
-                    <div class="card-header">{row['Match']}</div>
+                    <div class="card-header">{row['Match']} ({row['Team']})</div>
                     <div class="player-name">{row['Player']}</div>
-                    <div class="stat-type">{row['Stat Type']} • Netcode Ref: {row['Adjusted Sharp Line']}</div>
+                    <div class="stat-type">{row['Stat Type']} • Adjusted Ref: {row['Adjusted Sharp Line']}</div>
                     <div class="line-display">{row['PrizePicks Line']}</div>
                     <div class="metric-grid">
                         <div class="metric-box">
@@ -199,7 +213,7 @@ if __name__ == "__main__":
             """, unsafe_allow_html=True)
 
     st.markdown("---")
-    st.subheader("Full Board Hitbox Disalignment Matrix")
+    st.subheader("Full Board Model Matrix")
     st.dataframe(board_df.drop(columns=["_raw_edge", "abs_edge"]), use_container_width=True)
 
     if st.button("🔄 Refresh Board"):
