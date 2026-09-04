@@ -126,48 +126,48 @@ class LiveLCSLarryEngine:
 
 if __name__ == "__main__":
     st.title("LCS Larry 2026: Sharp Line Comparison Engine")
-    st.markdown("*Deterministic 24/7 Mode: G2 Esports vs Falcons Matchup Loaded from PrizePicks Board.*")
+    st.markdown("*Deterministic 24/7 Mode: Falcons (#2) vs G2 Esports (#9) — BLAST Open Porto 2026 Quarter-Final Loaded.*")
 
-    # Clean slate integrated strictly with G2 Esports vs Falcons lines extracted from screenshots
+    # Match context integration from BLAST Open Porto 2026 (Falcons vs G2 Quarter-final)
     custom_board = [
         # HeavyGod
-        {"player": "HeavyGod", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 1 Headshots", "line": 8.5, "sharp_line": 7.5},
-        {"player": "HeavyGod", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 1 Kills", "line": 14.5, "sharp_line": 13.0},
-        {"player": "HeavyGod", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 2 Headshots", "line": 8.5, "sharp_line": 7.5},
-        {"player": "HeavyGod", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 2 Kills", "line": 14.5, "sharp_line": 13.0},
-        {"player": "HeavyGod", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAPS 1-2 Headshots", "line": 17.5, "sharp_line": 16.0},
-        {"player": "HeavyGod", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 32.0},
+        {"player": "HeavyGod", "match": "Falcons vs G2 (BLAST Open Porto QF)", "stat_type": "MAP 1 Headshots", "line": 8.5, "sharp_line": 7.5},
+        {"player": "HeavyGod", "match": "Falcons vs G2 (BLAST Open Porto QF)", "stat_type": "MAP 1 Kills", "line": 14.5, "sharp_line": 13.0},
+        {"player": "HeavyGod", "match": "Falcons vs G2 (BLAST Open Porto QF)", "stat_type": "MAP 2 Headshots", "line": 8.5, "sharp_line": 7.5},
+        {"player": "HeavyGod", "match": "Falcons vs G2 (BLAST Open Porto QF)", "stat_type": "MAP 2 Kills", "line": 14.5, "sharp_line": 13.0},
+        {"player": "HeavyGod", "match": "Falcons vs G2 (BLAST Open Porto QF)", "stat_type": "MAPS 1-2 Headshots", "line": 17.5, "sharp_line": 16.0},
+        {"player": "HeavyGod", "match": "Falcons vs G2 (BLAST Open Porto QF)", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 32.0},
         
         # NertZ
-        {"player": "NertZ", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 1 Headshots", "line": 7.5, "sharp_line": 6.5},
-        {"player": "NertZ", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 1 Kills", "line": 14.5, "sharp_line": 13.0},
-        {"player": "NertZ", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 2 Headshots", "line": 7.5, "sharp_line": 6.5},
-        {"player": "NertZ", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 2 Kills", "line": 13.5, "sharp_line": 12.0},
-        {"player": "NertZ", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAPS 1-2 Headshots", "line": 15.0, "sharp_line": 13.5},
-        {"player": "NertZ", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 31.5},
+        {"player": "NertZ", "match": "Falcons vs G2 (BLAST Open Porto QF)", "stat_type": "MAP 1 Headshots", "line": 7.5, "sharp_line": 6.5},
+        {"player": "NertZ", "match": "Falcons vs G2 (BLAST Open Porto QF)", "stat_type": "MAP 1 Kills", "line": 14.5, "sharp_line": 13.0},
+        {"player": "NertZ", "match": "Falcons vs G2 (BLAST Open Porto QF)", "stat_type": "MAP 2 Headshots", "line": 7.5, "sharp_line": 6.5},
+        {"player": "NertZ", "match": "Falcons vs G2 (BLAST Open Porto QF)", "stat_type": "MAP 2 Kills", "line": 13.5, "sharp_line": 12.0},
+        {"player": "NertZ", "match": "Falcons vs G2 (BLAST Open Porto QF)", "stat_type": "MAPS 1-2 Headshots", "line": 15.0, "sharp_line": 13.5},
+        {"player": "NertZ", "match": "Falcons vs G2 (BLAST Open Porto QF)", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 31.5},
         
         # r1nkle
-        {"player": "r1nkle", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 2 Headshots", "line": 5.5, "sharp_line": 4.5},
-        {"player": "r1nkle", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAPS 1-2 Headshots", "line": 10.0, "sharp_line": 11.5},
-        {"player": "r1nkle", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 28.0},
-        {"player": "r1nkle", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 1 Headshots", "line": 5.5, "sharp_line": 4.5},
-        {"player": "r1nkle", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 1 Kills", "line": 14.5, "sharp_line": 13.0},
+        {"player": "r1nkle", "match": "Falcons vs G2 (BLAST Open Porto QF)", "stat_type": "MAP 2 Headshots", "line": 5.5, "sharp_line": 4.5},
+        {"player": "r1nkle", "match": "Falcons vs G2 (BLAST Open Porto QF)", "stat_type": "MAPS 1-2 Headshots", "line": 10.0, "sharp_line": 11.5},
+        {"player": "r1nkle", "match": "Falcons vs G2 (BLAST Open Porto QF)", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 28.0},
+        {"player": "r1nkle", "match": "Falcons vs G2 (BLAST Open Porto QF)", "stat_type": "MAP 1 Headshots", "line": 5.5, "sharp_line": 4.5},
+        {"player": "r1nkle", "match": "Falcons vs G2 (BLAST Open Porto QF)", "stat_type": "MAP 1 Kills", "line": 14.5, "sharp_line": 13.0},
         
         # huNter-
-        {"player": "huNter-", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 1 Headshots", "line": 7.5, "sharp_line": 6.5},
-        {"player": "huNter-", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 1 Kills", "line": 13.5, "sharp_line": 12.0},
-        {"player": "huNter-", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 2 Headshots", "line": 7.5, "sharp_line": 6.5},
-        {"player": "huNter-", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 2 Kills", "line": 13.5, "sharp_line": 12.0},
-        {"player": "huNter-", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAPS 1-2 Headshots", "line": 15.0, "sharp_line": 13.5},
-        {"player": "huNter-", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "sharp_line": 29.0},
+        {"player": "huNter-", "match": "Falcons vs G2 (BLAST Open Porto QF)", "stat_type": "MAP 1 Headshots", "line": 7.5, "sharp_line": 6.5},
+        {"player": "huNter-", "match": "Falcons vs G2 (BLAST Open Porto QF)", "stat_type": "MAP 1 Kills", "line": 13.5, "sharp_line": 12.0},
+        {"player": "huNter-", "match": "Falcons vs G2 (BLAST Open Porto QF)", "stat_type": "MAP 2 Headshots", "line": 7.5, "sharp_line": 6.5},
+        {"player": "huNter-", "match": "Falcons vs G2 (BLAST Open Porto QF)", "stat_type": "MAP 2 Kills", "line": 13.5, "sharp_line": 12.0},
+        {"player": "huNter-", "match": "Falcons vs G2 (BLAST Open Porto QF)", "stat_type": "MAPS 1-2 Headshots", "line": 15.0, "sharp_line": 13.5},
+        {"player": "huNter-", "match": "Falcons vs G2 (BLAST Open Porto QF)", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "sharp_line": 29.0},
         
         # MATYS
-        {"player": "MATYS", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 2 Headshots", "line": 8.5, "sharp_line": 7.5},
-        {"player": "MATYS", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 2 Kills", "line": 12.5, "sharp_line": 14.0},
-        {"player": "MATYS", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAPS 1-2 Headshots", "line": 17.0, "sharp_line": 15.5},
-        {"player": "MATYS", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "sharp_line": 28.5},
-        {"player": "MATYS", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 1 Headshots", "line": 8.5, "sharp_line": 7.5},
-        {"player": "MATYS", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 1 Kills", "line": 12.5, "sharp_line": 14.0}
+        {"player": "MATYS", "match": "Falcons vs G2 (BLAST Open Porto QF)", "stat_type": "MAP 2 Headshots", "line": 8.5, "sharp_line": 7.5},
+        {"player": "MATYS", "match": "Falcons vs G2 (BLAST Open Porto QF)", "stat_type": "MAP 2 Kills", "line": 12.5, "sharp_line": 14.0},
+        {"player": "MATYS", "match": "Falcons vs G2 (BLAST Open Porto QF)", "stat_type": "MAPS 1-2 Headshots", "line": 17.0, "sharp_line": 15.5},
+        {"player": "MATYS", "match": "Falcons vs G2 (BLAST Open Porto QF)", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "sharp_line": 28.5},
+        {"player": "MATYS", "match": "Falcons vs G2 (BLAST Open Porto QF)", "stat_type": "MAP 1 Headshots", "line": 8.5, "sharp_line": 7.5},
+        {"player": "MATYS", "match": "Falcons vs G2 (BLAST Open Porto QF)", "stat_type": "MAP 1 Kills", "line": 12.5, "sharp_line": 14.0}
     ]
 
     engine = LiveLCSLarryEngine(slate_data=custom_board)
@@ -175,7 +175,7 @@ if __name__ == "__main__":
 
     top_6_batch = board_df.sort_values(by="abs_edge", ascending=False).head(6)
 
-    st.subheader("⚡ 100% Confirmed 24/7 Top Lock Batch (G2 vs Falcons)")
+    st.subheader("⚡ 100% Confirmed 24/7 Top Lock Batch (BLAST Open Porto QF)")
     
     cols = st.columns(3)
     for idx, row in enumerate(top_6_batch.to_dict(orient="records")):
