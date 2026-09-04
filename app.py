@@ -100,7 +100,6 @@ class HitboxDisalignmentEngine:
             base_sharp = item["sharp_line"]
             
             # Apply CS2 Hitbox-Model Disalignment & Jiggle Peek Latency Correction Factor 24/7
-            # Hitbox moves faster than model, creating registration shifts on headshots/kills
             if "Headshots" in item["stat_type"]:
                 sharp_line = round(base_sharp * (1.0 - (self.disalignment_factor * 0.01)), 1)
             else:
@@ -141,20 +140,22 @@ if __name__ == "__main__":
     disalignment_factor = st.sidebar.slider("Hitbox Lead/Lag Factor (%)", 0.0, 10.0, 3.5, 0.5)
     jiggle_penalty = st.sidebar.slider("Jiggle-Peek Registration Penalty (%)", 0.0, 10.0, 2.0, 0.5)
 
-    # Combined master slate covering B8 and Nuclear TigeRES players
+    # Master slate populated strictly from current ODDIK vs METAN board screenshots
     master_slate = [
-        # B8: npl
-        {"player": "npl", "match": "B8 vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Headshots", "line": 18.5, "sharp_line": 17.0},
-        {"player": "npl", "match": "B8 vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Kills", "line": 32.5, "sharp_line": 30.5},
-        # B8: s1zzi
-        {"player": "s1zzi", "match": "B8 vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Headshots", "line": 10.5, "sharp_line": 9.5},
-        {"player": "s1zzi", "match": "B8 vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Kills", "line": 32.0, "sharp_line": 30.0},
-        # Nuclear TigeRES: senka
-        {"player": "senka", "match": "Nuclear TigeRES vs B8", "stat_type": "MAPS 1-2 Headshots", "line": 12.0, "sharp_line": 10.5},
-        {"player": "senka", "match": "Nuclear TigeRES vs B8", "stat_type": "MAPS 1-2 Kills", "line": 24.5, "sharp_line": 23.0},
-        # Nuclear TigeRES: z1k4
-        {"player": "z1k4", "match": "Nuclear TigeRES vs B8", "stat_type": "MAPS 1-2 Headshots", "line": 10.0, "sharp_line": 8.5},
-        {"player": "z1k4", "match": "Nuclear TigeRES vs B8", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 28.5},
+        # nardes
+        {"player": "nardes", "match": "ODDIK vs METAN", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 27.5},
+        {"player": "nardes", "match": "ODDIK vs METAN", "stat_type": "MAPS 1-2 Headshots", "line": 11.0, "sharp_line": 9.8},
+        # righi
+        {"player": "righi", "match": "ODDIK vs METAN", "stat_type": "MAPS 1-2 Headshots", "line": 16.5, "sharp_line": 15.0},
+        {"player": "righi", "match": "ODDIK vs METAN", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 27.8},
+        # diozera
+        {"player": "diozera", "match": "ODDIK vs METAN", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 28.5},
+        {"player": "diozera", "match": "ODDIK vs METAN", "stat_type": "MAPS 1-2 Headshots", "line": 17.5, "sharp_line": 16.0},
+        # Ceruttera
+        {"player": "Ceruttera", "match": "ODDIK vs METAN", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 25.8},
+        # NEKIZ
+        {"player": "NEKIZ", "match": "ODDIK vs METAN", "stat_type": "MAPS 1-2 Headshots", "line": 12.5, "sharp_line": 11.2},
+        {"player": "NEKIZ", "match": "ODDIK vs METAN", "stat_type": "MAPS 1-2 Kills", "line": 25.0, "sharp_line": 23.5}
     ]
 
     engine = HitboxDisalignmentEngine(slate_data=master_slate, disalignment_factor=disalignment_factor, jiggle_penalty=jiggle_penalty)
