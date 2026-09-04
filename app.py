@@ -134,28 +134,26 @@ class HitboxDisalignmentEngine:
 
 if __name__ == "__main__":
     st.title("LCS Larry 2026: CS2 Hitbox Disalignment Engine")
-    st.markdown("*24/7 Real-Time Netcode & Hitbox Latency Correction Mode active.*")
+    st.markdown("*24/7 Real-Time Netcode & Hitbox Latency Correction Mode active (METANOIA Wolves vs ODDIK).*")
 
     st.sidebar.header("⚙️ Hitbox Disalignment Settings")
     disalignment_factor = st.sidebar.slider("Hitbox Lead/Lag Factor (%)", 0.0, 10.0, 3.5, 0.5)
     jiggle_penalty = st.sidebar.slider("Jiggle-Peek Registration Penalty (%)", 0.0, 10.0, 2.0, 0.5)
 
-    # Master slate populated strictly from current ODDIK vs METAN board screenshots
+    # Master slate updated with METANOIA Wolves vs ODDIK match context & HLTV team/stand-in data
     master_slate = [
-        # nardes
-        {"player": "nardes", "match": "ODDIK vs METAN", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 27.5},
-        {"player": "nardes", "match": "ODDIK vs METAN", "stat_type": "MAPS 1-2 Headshots", "line": 11.0, "sharp_line": 9.8},
-        # righi
-        {"player": "righi", "match": "ODDIK vs METAN", "stat_type": "MAPS 1-2 Headshots", "line": 16.5, "sharp_line": 15.0},
-        {"player": "righi", "match": "ODDIK vs METAN", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 27.8},
-        # diozera
-        {"player": "diozera", "match": "ODDIK vs METAN", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 28.5},
-        {"player": "diozera", "match": "ODDIK vs METAN", "stat_type": "MAPS 1-2 Headshots", "line": 17.5, "sharp_line": 16.0},
-        # Ceruttera
-        {"player": "Ceruttera", "match": "ODDIK vs METAN", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 25.8},
-        # NEKIZ
-        {"player": "NEKIZ", "match": "ODDIK vs METAN", "stat_type": "MAPS 1-2 Headshots", "line": 12.5, "sharp_line": 11.2},
-        {"player": "NEKIZ", "match": "ODDIK vs METAN", "stat_type": "MAPS 1-2 Kills", "line": 25.0, "sharp_line": 23.5}
+        # nardes (ODDIK - Higher form ranking edge)
+        {"player": "nardes", "match": "METANOIA Wolves vs ODDIK", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 27.5},
+        {"player": "nardes", "match": "METANOIA Wolves vs ODDIK", "stat_type": "MAPS 1-2 Headshots", "line": 11.0, "sharp_line": 9.8},
+        # righi (ODDIK)
+        {"player": "righi", "match": "METANOIA Wolves vs ODDIK", "stat_type": "MAPS 1-2 Headshots", "line": 16.5, "sharp_line": 15.0},
+        {"player": "righi", "match": "METANOIA Wolves vs ODDIK", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 27.8},
+        # diozera (ODDIK)
+        {"player": "diozera", "match": "METANOIA Wolves vs ODDIK", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 28.5},
+        {"player": "diozera", "match": "METANOIA Wolves vs ODDIK", "stat_type": "MAPS 1-2 Headshots", "line": 17.5, "sharp_line": 16.0},
+        # NEKIZ (ODDIK Stand-in for Premium)
+        {"player": "NEKIZ", "match": "METANOIA Wolves vs ODDIK", "stat_type": "MAPS 1-2 Headshots", "line": 12.5, "sharp_line": 11.2},
+        {"player": "NEKIZ", "match": "METANOIA Wolves vs ODDIK", "stat_type": "MAPS 1-2 Kills", "line": 25.0, "sharp_line": 23.5}
     ]
 
     engine = HitboxDisalignmentEngine(slate_data=master_slate, disalignment_factor=disalignment_factor, jiggle_penalty=jiggle_penalty)
