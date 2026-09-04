@@ -126,49 +126,29 @@ class LiveLCSLarryEngine:
 
 if __name__ == "__main__":
     st.title("LCS Larry 2026: Sharp Line Comparison Engine")
-    st.markdown("*Deterministic 24/7 Mode: TYLOO vs FlyQuest — IEM Beijing 2026 Asia Closed Qualifier Grand Final (Bo3).*")
+    st.markdown("*Deterministic 24/7 Mode: B8 vs Nuclear TigeRES — IEM Beijing 2026 Closed Qualifier.*")
 
-    # Updated clean slate integrating exact HLTV event match context and PrizePicks player prop lines
+    # Updated clean slate integrating B8 vs Nuclear TigeRES match context from HLTV screenshots
     custom_board = [
-        # FlyQuest: jks
-        {"player": "jks", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Headshots", "line": 19.5, "sharp_line": 18.0},
-        {"player": "jks", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 28.0},
+        # B8: npl
+        {"player": "npl", "match": "B8 vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Headshots", "line": 18.5, "sharp_line": 17.0},
+        {"player": "npl", "match": "B8 vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Kills", "line": 32.5, "sharp_line": 30.5},
         
-        # FlyQuest: nettik
-        {"player": "nettik", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Headshots", "line": 15.5, "sharp_line": 14.5},
-        {"player": "nettik", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "sharp_line": 28.0},
+        # B8: s1zzi
+        {"player": "s1zzi", "match": "B8 vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Headshots", "line": 10.5, "sharp_line": 9.5},
+        {"player": "s1zzi", "match": "B8 vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Kills", "line": 32.0, "sharp_line": 30.0},
         
-        # FlyQuest: aliStair
-        {"player": "aliStair", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Headshots", "line": 9.5, "sharp_line": 8.5},
-        {"player": "aliStair", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 27.0},
+        # B8: kensizor
+        {"player": "kensizor", "match": "B8 vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Headshots", "line": 17.0, "sharp_line": 15.5},
+        {"player": "kensizor", "match": "B8 vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 28.0},
         
-        # FlyQuest: INS
-        {"player": "INS", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Headshots", "line": 13.5, "sharp_line": 12.5},
-        {"player": "INS", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 26.0},
+        # B8: alex666
+        {"player": "alex666", "match": "B8 vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Headshots", "line": 13.0, "sharp_line": 11.5},
+        {"player": "alex666", "match": "B8 vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "sharp_line": 25.0},
         
-        # FlyQuest: Vexite
-        {"player": "Vexite", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Headshots", "line": 17.5, "sharp_line": 16.0},
-        {"player": "Vexite", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 31.0},
-        
-        # TYLOO: Moseyuh
-        {"player": "Moseyuh", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Headshots", "line": 16.0, "sharp_line": 14.5},
-        {"player": "Moseyuh", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 29.0},
-        
-        # TYLOO: Zero
-        {"player": "Zero", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Headshots", "line": 15.5, "sharp_line": 14.0},
-        {"player": "Zero", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 26.0},
-        
-        # TYLOO: Mercury
-        {"player": "Mercury", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Headshots", "line": 15.5, "sharp_line": 14.5},
-        {"player": "Mercury", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Kills", "line": 28.0, "sharp_line": 26.5},
-        
-        # TYLOO: JamYoung
-        {"player": "JamYoung", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Headshots", "line": 19.0, "sharp_line": 17.5},
-        {"player": "JamYoung", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Kills", "line": 31.0, "sharp_line": 29.5},
-        
-        # TYLOO: Jee
-        {"player": "Jee", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Headshots", "line": 10.0, "sharp_line": 9.0},
-        {"player": "Jee", "match": "TYLOO vs FlyQuest (Grand Final)", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 29.0}
+        # B8: esenthial
+        {"player": "esenthial", "match": "B8 vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Headshots", "line": 17.5, "sharp_line": 16.0},
+        {"player": "esenthial", "match": "B8 vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 26.0}
     ]
 
     engine = LiveLCSLarryEngine(slate_data=custom_board)
@@ -176,7 +156,7 @@ if __name__ == "__main__":
 
     top_6_batch = board_df.sort_values(by="abs_edge", ascending=False).head(6)
 
-    st.subheader("⚡ 100% Confirmed 24/7 Top Lock Batch (IEM Beijing Qualifier Grand Final)")
+    st.subheader("⚡ 100% Confirmed 24/7 Top Lock Batch (B8 vs Nuclear TigeRES)")
     
     cols = st.columns(3)
     for idx, row in enumerate(top_6_batch.to_dict(orient="records")):
