@@ -126,20 +126,38 @@ class LiveLCSLarryEngine:
 
 if __name__ == "__main__":
     st.title("LCS Larry 2026: Sharp Line Comparison Engine")
-    st.markdown("*Deterministic 24/7 Mode: Keyd Stars vs Procyon CCT 2026 South America Series 5 loaded with analytics metadata.*")
+    st.markdown("*Deterministic 24/7 Mode: INFINITE vs Nuclear TigerES slate loaded. All prior slates completely erased.*")
 
-    # Clean slate integrated with HLTV analytics context (Keyd Stars #122 vs Procyon #189, 66.7% win probability favorite)
+    # Clean slate containing strictly INFINITE vs Nuclear TigerES players & lines from the current screenshot batch
     custom_board = [
-        {"player": "xureba", "match": "Keyd Stars vs Procyon • CCT S. America", "stat_type": "MAPS 1-2 Headshots", "line": 12.5, "sharp_line": 11.5},
-        {"player": "xureba", "match": "Keyd Stars vs Procyon • CCT S. America", "stat_type": "MAPS 1-2 Kills", "line": 24.5, "sharp_line": 26.0},
-        {"player": "zede", "match": "Keyd Stars vs Procyon • CCT S. America", "stat_type": "MAPS 1-2 Headshots", "line": 19.5, "sharp_line": 18.0},
-        {"player": "zede", "match": "Keyd Stars vs Procyon • CCT S. America", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 33.0},
-        {"player": "matios", "match": "Keyd Stars vs Procyon • CCT S. America", "stat_type": "MAPS 1-2 Headshots", "line": 16.0, "sharp_line": 14.5},
-        {"player": "matios", "match": "Keyd Stars vs Procyon • CCT S. America", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 31.0},
-        {"player": "ckzao", "match": "Keyd Stars vs Procyon • CCT S. America", "stat_type": "MAPS 1-2 Headshots", "line": 16.5, "sharp_line": 18.0},
-        {"player": "ckzao", "match": "Keyd Stars vs Procyon • CCT S. America", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 30.0},
-        {"player": "lash", "match": "Keyd Stars vs Procyon • CCT S. America", "stat_type": "MAPS 1-2 Headshots", "line": 12.5, "sharp_line": 13.5},
-        {"player": "lash", "match": "Keyd Stars vs Procyon • CCT S. America", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 28.0}
+        {"player": "sl3nd", "match": "vs Nuclear TigerES • Fri 5:00am", "stat_type": "MAPS 1-2 Headshots", "line": 10.5, "sharp_line": 9.5},
+        {"player": "sl3nd", "match": "vs Nuclear TigerES • Fri 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 29.5},
+        {"player": "volt", "match": "vs Nuclear TigerES • Fri 5:00am", "stat_type": "MAPS 1-2 Headshots", "line": 12.5, "sharp_line": 13.5},
+        {"player": "volt", "match": "vs Nuclear TigerES • Fri 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 23.5, "sharp_line": 25.0},
+        {"player": "Dytor", "match": "vs Nuclear TigerES • Fri 5:00am", "stat_type": "MAPS 1-2 Headshots", "line": 13.5, "sharp_line": 12.5},
+        {"player": "Dytor", "match": "vs Nuclear TigerES • Fri 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 27.0},
+        {"player": "kreaz", "match": "vs Nuclear TigerES • Fri 5:00am", "stat_type": "MAPS 1-2 Headshots", "line": 14.5, "sharp_line": 13.5},
+        {"player": "kreaz", "match": "vs Nuclear TigerES • Fri 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "sharp_line": 28.0},
+        {"player": "z1k4", "match": "vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Headshots", "line": 10.5, "sharp_line": 11.5},
+        {"player": "z1k4", "match": "vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 29.5},
+        {"player": "z1k4", "match": "vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Headshots", "line": 10.0, "sharp_line": 9.0},
+        {"player": "z1k4", "match": "vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 32.0},
+        {"player": "senka", "match": "vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Headshots", "line": 12.5, "sharp_line": 13.5},
+        {"player": "senka", "match": "vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 24.5, "sharp_line": 26.0},
+        {"player": "senka", "match": "vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Headshots", "line": 12.0, "sharp_line": 11.0},
+        {"player": "senka", "match": "vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Kills", "line": 24.5, "sharp_line": 23.5},
+        {"player": "m1QUSE", "match": "vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Headshots", "line": 13.5, "sharp_line": 12.5},
+        {"player": "m1QUSE", "match": "vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 30.0},
+        {"player": "m1QUSE", "match": "vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Headshots", "line": 13.0, "sharp_line": 12.0},
+        {"player": "m1QUSE", "match": "vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 29.0},
+        {"player": "flouzer", "match": "vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Headshots", "line": 16.5, "sharp_line": 15.5},
+        {"player": "flouzer", "match": "vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 32.0},
+        {"player": "flouzer", "match": "vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Headshots", "line": 15.5, "sharp_line": 16.5},
+        {"player": "flouzer", "match": "vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 27.0},
+        {"player": "ayuki", "match": "vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Headshots", "line": 17.0, "sharp_line": 15.5},
+        {"player": "ayuki", "match": "vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 32.0},
+        {"player": "ayuki", "match": "vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Headshots", "line": 16.5, "sharp_line": 17.5},
+        {"player": "ayuki", "match": "vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 28.0}
     ]
 
     engine = LiveLCSLarryEngine(slate_data=custom_board)
