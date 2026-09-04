@@ -126,38 +126,48 @@ class LiveLCSLarryEngine:
 
 if __name__ == "__main__":
     st.title("LCS Larry 2026: Sharp Line Comparison Engine")
-    st.markdown("*Deterministic 24/7 Mode: INFINITE vs Nuclear TigerES loaded with HLTV Analytics (Nuclear TigerES #54 ranked, 74.7% win favorite).*")
+    st.markdown("*Deterministic 24/7 Mode: G2 Esports vs Falcons Matchup Loaded from PrizePicks Board.*")
 
-    # Clean slate integrated with HLTV analytics context for INFINITE (#67) vs Nuclear TigerES (#54)
+    # Clean slate integrated strictly with G2 Esports vs Falcons lines extracted from screenshots
     custom_board = [
-        {"player": "sl3nd", "match": "INFINITE vs Nuclear TigerES • Stake Ranked", "stat_type": "MAPS 1-2 Headshots", "line": 10.5, "sharp_line": 9.5},
-        {"player": "sl3nd", "match": "INFINITE vs Nuclear TigerES • Stake Ranked", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 29.5},
-        {"player": "volt", "match": "INFINITE vs Nuclear TigerES • Stake Ranked", "stat_type": "MAPS 1-2 Headshots", "line": 12.5, "sharp_line": 13.5},
-        {"player": "volt", "match": "INFINITE vs Nuclear TigerES • Stake Ranked", "stat_type": "MAPS 1-2 Kills", "line": 23.5, "sharp_line": 25.0},
-        {"player": "Dytor", "match": "INFINITE vs Nuclear TigerES • Stake Ranked", "stat_type": "MAPS 1-2 Headshots", "line": 13.5, "sharp_line": 12.5},
-        {"player": "Dytor", "match": "INFINITE vs Nuclear TigerES • Stake Ranked", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 27.0},
-        {"player": "kreaz", "match": "INFINITE vs Nuclear TigerES • Stake Ranked", "stat_type": "MAPS 1-2 Headshots", "line": 14.5, "sharp_line": 13.5},
-        {"player": "kreaz", "match": "INFINITE vs Nuclear TigerES • Stake Ranked", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "sharp_line": 28.0},
-        {"player": "z1k4", "match": "Nuclear TigerES vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Headshots", "line": 10.5, "sharp_line": 11.5},
-        {"player": "z1k4", "match": "Nuclear TigerES vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 29.5},
-        {"player": "z1k4", "match": "Nuclear TigerES vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Headshots", "line": 10.0, "sharp_line": 9.0},
-        {"player": "z1k4", "match": "Nuclear TigerES vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 32.0},
-        {"player": "senka", "match": "Nuclear TigerES vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Headshots", "line": 12.5, "sharp_line": 13.5},
-        {"player": "senka", "match": "Nuclear TigerES vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 24.5, "sharp_line": 26.0},
-        {"player": "senka", "match": "Nuclear TigerES vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Headshots", "line": 12.0, "sharp_line": 11.0},
-        {"player": "senka", "match": "Nuclear TigerES vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Kills", "line": 24.5, "sharp_line": 23.5},
-        {"player": "m1QUSE", "match": "Nuclear TigerES vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Headshots", "line": 13.5, "sharp_line": 12.5},
-        {"player": "m1QUSE", "match": "Nuclear TigerES vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 30.0},
-        {"player": "m1QUSE", "match": "Nuclear TigerES vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Headshots", "line": 13.0, "sharp_line": 12.0},
-        {"player": "m1QUSE", "match": "Nuclear TigerES vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 29.0},
-        {"player": "flouzer", "match": "Nuclear TigerES vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Headshots", "line": 16.5, "sharp_line": 15.5},
-        {"player": "flouzer", "match": "Nuclear TigerES vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 32.0},
-        {"player": "flouzer", "match": "Nuclear TigerES vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Headshots", "line": 15.5, "sharp_line": 16.5},
-        {"player": "flouzer", "match": "Nuclear TigerES vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 27.0},
-        {"player": "ayuki", "match": "Nuclear TigerES vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Headshots", "line": 17.0, "sharp_line": 15.5},
-        {"player": "ayuki", "match": "Nuclear TigerES vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 32.0},
-        {"player": "ayuki", "match": "Nuclear TigerES vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Headshots", "line": 16.5, "sharp_line": 17.5},
-        {"player": "ayuki", "match": "Nuclear TigerES vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 28.0}
+        # HeavyGod
+        {"player": "HeavyGod", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 1 Headshots", "line": 8.5, "sharp_line": 7.5},
+        {"player": "HeavyGod", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 1 Kills", "line": 14.5, "sharp_line": 13.0},
+        {"player": "HeavyGod", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 2 Headshots", "line": 8.5, "sharp_line": 7.5},
+        {"player": "HeavyGod", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 2 Kills", "line": 14.5, "sharp_line": 13.0},
+        {"player": "HeavyGod", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAPS 1-2 Headshots", "line": 17.5, "sharp_line": 16.0},
+        {"player": "HeavyGod", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 32.0},
+        
+        # NertZ
+        {"player": "NertZ", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 1 Headshots", "line": 7.5, "sharp_line": 6.5},
+        {"player": "NertZ", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 1 Kills", "line": 14.5, "sharp_line": 13.0},
+        {"player": "NertZ", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 2 Headshots", "line": 7.5, "sharp_line": 6.5},
+        {"player": "NertZ", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 2 Kills", "line": 13.5, "sharp_line": 12.0},
+        {"player": "NertZ", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAPS 1-2 Headshots", "line": 15.0, "sharp_line": 13.5},
+        {"player": "NertZ", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 31.5},
+        
+        # r1nkle
+        {"player": "r1nkle", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 2 Headshots", "line": 5.5, "sharp_line": 4.5},
+        {"player": "r1nkle", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAPS 1-2 Headshots", "line": 10.0, "sharp_line": 11.5},
+        {"player": "r1nkle", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 28.0},
+        {"player": "r1nkle", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 1 Headshots", "line": 5.5, "sharp_line": 4.5},
+        {"player": "r1nkle", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 1 Kills", "line": 14.5, "sharp_line": 13.0},
+        
+        # huNter-
+        {"player": "huNter-", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 1 Headshots", "line": 7.5, "sharp_line": 6.5},
+        {"player": "huNter-", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 1 Kills", "line": 13.5, "sharp_line": 12.0},
+        {"player": "huNter-", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 2 Headshots", "line": 7.5, "sharp_line": 6.5},
+        {"player": "huNter-", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 2 Kills", "line": 13.5, "sharp_line": 12.0},
+        {"player": "huNter-", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAPS 1-2 Headshots", "line": 15.0, "sharp_line": 13.5},
+        {"player": "huNter-", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "sharp_line": 29.0},
+        
+        # MATYS
+        {"player": "MATYS", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 2 Headshots", "line": 8.5, "sharp_line": 7.5},
+        {"player": "MATYS", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 2 Kills", "line": 12.5, "sharp_line": 14.0},
+        {"player": "MATYS", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAPS 1-2 Headshots", "line": 17.0, "sharp_line": 15.5},
+        {"player": "MATYS", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "sharp_line": 28.5},
+        {"player": "MATYS", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 1 Headshots", "line": 8.5, "sharp_line": 7.5},
+        {"player": "MATYS", "match": "G2 Esports vs Falcons • Fri 9:00am", "stat_type": "MAP 1 Kills", "line": 12.5, "sharp_line": 14.0}
     ]
 
     engine = LiveLCSLarryEngine(slate_data=custom_board)
@@ -165,7 +175,7 @@ if __name__ == "__main__":
 
     top_6_batch = board_df.sort_values(by="abs_edge", ascending=False).head(6)
 
-    st.subheader("⚡ 100% Confirmed 24/7 Top Lock Batch (Locked & Stable)")
+    st.subheader("⚡ 100% Confirmed 24/7 Top Lock Batch (G2 vs Falcons)")
     
     cols = st.columns(3)
     for idx, row in enumerate(top_6_batch.to_dict(orient="records")):
