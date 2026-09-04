@@ -126,38 +126,38 @@ class LiveLCSLarryEngine:
 
 if __name__ == "__main__":
     st.title("LCS Larry 2026: Sharp Line Comparison Engine")
-    st.markdown("*Deterministic 24/7 Mode: INFINITE vs Nuclear TigerES slate loaded. All prior slates completely erased.*")
+    st.markdown("*Deterministic 24/7 Mode: INFINITE vs Nuclear TigerES loaded with HLTV Analytics (Nuclear TigerES #54 ranked, 74.7% win favorite).*")
 
-    # Clean slate containing strictly INFINITE vs Nuclear TigerES players & lines from the current screenshot batch
+    # Clean slate integrated with HLTV analytics context for INFINITE (#67) vs Nuclear TigerES (#54)
     custom_board = [
-        {"player": "sl3nd", "match": "vs Nuclear TigerES • Fri 5:00am", "stat_type": "MAPS 1-2 Headshots", "line": 10.5, "sharp_line": 9.5},
-        {"player": "sl3nd", "match": "vs Nuclear TigerES • Fri 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 29.5},
-        {"player": "volt", "match": "vs Nuclear TigerES • Fri 5:00am", "stat_type": "MAPS 1-2 Headshots", "line": 12.5, "sharp_line": 13.5},
-        {"player": "volt", "match": "vs Nuclear TigerES • Fri 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 23.5, "sharp_line": 25.0},
-        {"player": "Dytor", "match": "vs Nuclear TigerES • Fri 5:00am", "stat_type": "MAPS 1-2 Headshots", "line": 13.5, "sharp_line": 12.5},
-        {"player": "Dytor", "match": "vs Nuclear TigerES • Fri 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 27.0},
-        {"player": "kreaz", "match": "vs Nuclear TigerES • Fri 5:00am", "stat_type": "MAPS 1-2 Headshots", "line": 14.5, "sharp_line": 13.5},
-        {"player": "kreaz", "match": "vs Nuclear TigerES • Fri 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "sharp_line": 28.0},
-        {"player": "z1k4", "match": "vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Headshots", "line": 10.5, "sharp_line": 11.5},
-        {"player": "z1k4", "match": "vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 29.5},
-        {"player": "z1k4", "match": "vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Headshots", "line": 10.0, "sharp_line": 9.0},
-        {"player": "z1k4", "match": "vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 32.0},
-        {"player": "senka", "match": "vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Headshots", "line": 12.5, "sharp_line": 13.5},
-        {"player": "senka", "match": "vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 24.5, "sharp_line": 26.0},
-        {"player": "senka", "match": "vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Headshots", "line": 12.0, "sharp_line": 11.0},
-        {"player": "senka", "match": "vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Kills", "line": 24.5, "sharp_line": 23.5},
-        {"player": "m1QUSE", "match": "vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Headshots", "line": 13.5, "sharp_line": 12.5},
-        {"player": "m1QUSE", "match": "vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 30.0},
-        {"player": "m1QUSE", "match": "vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Headshots", "line": 13.0, "sharp_line": 12.0},
-        {"player": "m1QUSE", "match": "vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 29.0},
-        {"player": "flouzer", "match": "vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Headshots", "line": 16.5, "sharp_line": 15.5},
-        {"player": "flouzer", "match": "vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 32.0},
-        {"player": "flouzer", "match": "vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Headshots", "line": 15.5, "sharp_line": 16.5},
-        {"player": "flouzer", "match": "vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 27.0},
-        {"player": "ayuki", "match": "vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Headshots", "line": 17.0, "sharp_line": 15.5},
-        {"player": "ayuki", "match": "vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 32.0},
-        {"player": "ayuki", "match": "vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Headshots", "line": 16.5, "sharp_line": 17.5},
-        {"player": "ayuki", "match": "vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 28.0}
+        {"player": "sl3nd", "match": "INFINITE vs Nuclear TigerES • Stake Ranked", "stat_type": "MAPS 1-2 Headshots", "line": 10.5, "sharp_line": 9.5},
+        {"player": "sl3nd", "match": "INFINITE vs Nuclear TigerES • Stake Ranked", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 29.5},
+        {"player": "volt", "match": "INFINITE vs Nuclear TigerES • Stake Ranked", "stat_type": "MAPS 1-2 Headshots", "line": 12.5, "sharp_line": 13.5},
+        {"player": "volt", "match": "INFINITE vs Nuclear TigerES • Stake Ranked", "stat_type": "MAPS 1-2 Kills", "line": 23.5, "sharp_line": 25.0},
+        {"player": "Dytor", "match": "INFINITE vs Nuclear TigerES • Stake Ranked", "stat_type": "MAPS 1-2 Headshots", "line": 13.5, "sharp_line": 12.5},
+        {"player": "Dytor", "match": "INFINITE vs Nuclear TigerES • Stake Ranked", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 27.0},
+        {"player": "kreaz", "match": "INFINITE vs Nuclear TigerES • Stake Ranked", "stat_type": "MAPS 1-2 Headshots", "line": 14.5, "sharp_line": 13.5},
+        {"player": "kreaz", "match": "INFINITE vs Nuclear TigerES • Stake Ranked", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "sharp_line": 28.0},
+        {"player": "z1k4", "match": "Nuclear TigerES vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Headshots", "line": 10.5, "sharp_line": 11.5},
+        {"player": "z1k4", "match": "Nuclear TigerES vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 29.5},
+        {"player": "z1k4", "match": "Nuclear TigerES vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Headshots", "line": 10.0, "sharp_line": 9.0},
+        {"player": "z1k4", "match": "Nuclear TigerES vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 32.0},
+        {"player": "senka", "match": "Nuclear TigerES vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Headshots", "line": 12.5, "sharp_line": 13.5},
+        {"player": "senka", "match": "Nuclear TigerES vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 24.5, "sharp_line": 26.0},
+        {"player": "senka", "match": "Nuclear TigerES vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Headshots", "line": 12.0, "sharp_line": 11.0},
+        {"player": "senka", "match": "Nuclear TigerES vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Kills", "line": 24.5, "sharp_line": 23.5},
+        {"player": "m1QUSE", "match": "Nuclear TigerES vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Headshots", "line": 13.5, "sharp_line": 12.5},
+        {"player": "m1QUSE", "match": "Nuclear TigerES vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 30.0},
+        {"player": "m1QUSE", "match": "Nuclear TigerES vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Headshots", "line": 13.0, "sharp_line": 12.0},
+        {"player": "m1QUSE", "match": "Nuclear TigerES vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 29.0},
+        {"player": "flouzer", "match": "Nuclear TigerES vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Headshots", "line": 16.5, "sharp_line": 15.5},
+        {"player": "flouzer", "match": "Nuclear TigerES vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 32.0},
+        {"player": "flouzer", "match": "Nuclear TigerES vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Headshots", "line": 15.5, "sharp_line": 16.5},
+        {"player": "flouzer", "match": "Nuclear TigerES vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 27.0},
+        {"player": "ayuki", "match": "Nuclear TigerES vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Headshots", "line": 17.0, "sharp_line": 15.5},
+        {"player": "ayuki", "match": "Nuclear TigerES vs INFINITE • Fri 5:00am", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 32.0},
+        {"player": "ayuki", "match": "Nuclear TigerES vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Headshots", "line": 16.5, "sharp_line": 17.5},
+        {"player": "ayuki", "match": "Nuclear TigerES vs B8 • Fri 11:00am", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 28.0}
     ]
 
     engine = LiveLCSLarryEngine(slate_data=custom_board)
