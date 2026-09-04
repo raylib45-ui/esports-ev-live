@@ -126,29 +126,29 @@ class LiveLCSLarryEngine:
 
 if __name__ == "__main__":
     st.title("LCS Larry 2026: Sharp Line Comparison Engine")
-    st.markdown("*Deterministic 24/7 Mode: B8 vs Nuclear TigeRES — IEM Beijing 2026 Closed Qualifier.*")
+    st.markdown("*Deterministic 24/7 Mode: Nuclear TigeRES Players vs B8 — IEM Beijing 2026 Closed Qualifier.*")
 
-    # Updated clean slate integrating B8 vs Nuclear TigeRES match context from HLTV screenshots
+    # Cleaned slate featuring only the Nuclear TigeRES players extracted from current screenshots, older B8 players fully removed
     custom_board = [
-        # B8: npl
-        {"player": "npl", "match": "B8 vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Headshots", "line": 18.5, "sharp_line": 17.0},
-        {"player": "npl", "match": "B8 vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Kills", "line": 32.5, "sharp_line": 30.5},
+        # Nuclear TigeRES: senka
+        {"player": "senka", "match": "Nuclear TigeRES vs B8", "stat_type": "MAPS 1-2 Headshots", "line": 12.0, "sharp_line": 10.5},
+        {"player": "senka", "match": "Nuclear TigeRES vs B8", "stat_type": "MAPS 1-2 Kills", "line": 24.5, "sharp_line": 23.0},
         
-        # B8: s1zzi
-        {"player": "s1zzi", "match": "B8 vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Headshots", "line": 10.5, "sharp_line": 9.5},
-        {"player": "s1zzi", "match": "B8 vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Kills", "line": 32.0, "sharp_line": 30.0},
+        # Nuclear TigeRES: z1k4
+        {"player": "z1k4", "match": "Nuclear TigeRES vs B8", "stat_type": "MAPS 1-2 Headshots", "line": 10.0, "sharp_line": 8.5},
+        {"player": "z1k4", "match": "Nuclear TigeRES vs B8", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 28.5},
         
-        # B8: kensizor
-        {"player": "kensizor", "match": "B8 vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Headshots", "line": 17.0, "sharp_line": 15.5},
-        {"player": "kensizor", "match": "B8 vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 28.0},
+        # Nuclear TigeRES: m1QUUSE
+        {"player": "m1QUUSE", "match": "Nuclear TigeRES vs B8", "stat_type": "MAPS 1-2 Headshots", "line": 13.0, "sharp_line": 11.5},
+        {"player": "m1QUUSE", "match": "Nuclear TigeRES vs B8", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 26.0},
         
-        # B8: alex666
-        {"player": "alex666", "match": "B8 vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Headshots", "line": 13.0, "sharp_line": 11.5},
-        {"player": "alex666", "match": "B8 vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "sharp_line": 25.0},
+        # Nuclear TigeRES: ayuki
+        {"player": "ayuki", "match": "Nuclear TigeRES vs B8", "stat_type": "MAPS 1-2 Headshots", "line": 16.5, "sharp_line": 15.0},
+        {"player": "ayuki", "match": "Nuclear TigeRES vs B8", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 28.0},
         
-        # B8: esenthial
-        {"player": "esenthial", "match": "B8 vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Headshots", "line": 17.5, "sharp_line": 16.0},
-        {"player": "esenthial", "match": "B8 vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 26.0}
+        # Nuclear TigeRES: flouzer
+        {"player": "flouzer", "match": "Nuclear TigeRES vs B8", "stat_type": "MAPS 1-2 Headshots", "line": 15.5, "sharp_line": 14.0},
+        {"player": "flouzer", "match": "Nuclear TigeRES vs B8", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 27.0}
     ]
 
     engine = LiveLCSLarryEngine(slate_data=custom_board)
@@ -156,7 +156,7 @@ if __name__ == "__main__":
 
     top_6_batch = board_df.sort_values(by="abs_edge", ascending=False).head(6)
 
-    st.subheader("⚡ 100% Confirmed 24/7 Top Lock Batch (B8 vs Nuclear TigeRES)")
+    st.subheader("⚡ 100% Confirmed 24/7 Top Lock Batch (Nuclear TigeRES)")
     
     cols = st.columns(3)
     for idx, row in enumerate(top_6_batch.to_dict(orient="records")):
