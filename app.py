@@ -100,7 +100,6 @@ class CS2ProjectionEngine:
             prize_line = item["line"]
             sharp_line = item["sharp_line"]
 
-            # Adjust sharp reference slightly if overtime scoring mode is enabled
             if self.overtime_mode:
                 sharp_line = round(sharp_line * 1.02, 1)
 
@@ -118,6 +117,7 @@ class CS2ProjectionEngine:
                 "Player": item["player"],
                 "Team": item["team"],
                 "Match": item["match"],
+                "Map Pool": item["map_pool"],
                 "Stat Type": item["stat_type"],
                 "PrizePicks Line": prize_line,
                 "Adjusted Sharp Line": sharp_line,
@@ -134,12 +134,13 @@ class CS2ProjectionEngine:
 
 if __name__ == "__main__":
     st.title("LCS Larry 2026: CS2 24/7 Projection Engine")
-    st.markdown("*Active 24/7 Slate: Ninjas in Pyjamas vs Nuclear TigeRES, 9INE vs Metizport, Procyon vs ALKA*")
+    st.markdown("**BLAST Open Porto 2026 - Semi-Final: MOUZ vs. Team Vitality**")
+    st.markdown("*Match Context: Vitality (71.3% Win Prob, #4 Rank) vs. MOUZ (28.7% Win Prob, #5 Rank) | Stand-in: jL for mezii*")
 
-    st.sidebar.header("⚙️ Model Settings & Rules")
-    volatility_factor = st.sidebar.slider("Roster Volatility Penalty (%)", 0.0, 10.0, 4.0, 0.5)
+    st.sidebar.header("⚙️ Model Settings & Vetoes")
+    volatility_factor = st.sidebar.slider("Roster Volatility Penalty (%) [jL Stand-in Applied]", 0.0, 10.0, 4.5, 0.5)
     overtime_mode = st.sidebar.checkbox("Include Overtime Projections (Official PP Rule)", value=True)
-    team_kill_immunity = st.sidebar.checkbox("Team Kill Stat Immunity Filter", value=True)
+    strict_filter = st.sidebar.checkbox("Strict Trend Filter (Only Consistent Over/Under Locks)", value=True)
     
     data_provider = st.sidebar.selectbox(
         "Official Feed Provider",
@@ -147,47 +148,36 @@ if __name__ == "__main__":
     )
     st.sidebar.caption(f"Connected to official scoring source: **{data_provider}**")
 
-    with st.sidebar.expander("📖 Official CS2 Rules Compliance"):
+    with st.sidebar.expander("🗺️ Veto & Map Pool Context (BLAST Porto)"):
         st.markdown("""
-        * **Overtime Stats:** Included for all designated maps in a projection.
-        * **Team Kills:** In-game team kills **do not** deduct from a player's official PrizePicks kill total.
-        * **DNP Policy:** Athletes must play in all designated maps; forfeiture or server drops without reset trigger DNP rules.
-        * **Postponements:** Matches rescheduled past 11:59 PM ET are marked DNP unless resumed within 24 hours.
+        1. **Vitality removed:** Ancient
+        2. **MOUZ removed:** Anubis
+        3. **Vitality picked:** Dust2 (Map 1)
+        4. **MOUZ picked:** Mirage (Map 2)
+        5. **Vitality removed:** Nuke
+        6. **MOUZ removed:** Cache
+        7. **Decider:** Inferno (Map 3)
         """)
 
     master_slate = [
-        # Ninjas in Pyjamas vs Nuclear TigeRES
-        {"player": "sjuush", "team": "Ninjas in Pyjamas", "match": "Ninjas in Pyjamas vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 26.5},
-        {"player": "stavn", "team": "Ninjas in Pyjamas", "match": "Ninjas in Pyjamas vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Kills", "line": 31.0, "sharp_line": 33.5},
-        {"player": "xKacpersky", "team": "Ninjas in Pyjamas", "match": "Ninjas in Pyjamas vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Kills", "line": 32.5, "sharp_line": 30.0},
-        {"player": "n0te", "team": "Ninjas in Pyjamas", "match": "Ninjas in Pyjamas vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 27.0},
-        {"player": "Krimbo", "team": "Ninjas in Pyjamas", "match": "Ninjas in Pyjamas vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 31.0},
-        {"player": "m1QUSE", "team": "Nuclear TigeRES", "match": "Ninjas in Pyjamas vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 31.0},
-        {"player": "senka", "team": "Nuclear TigeRES", "match": "Ninjas in Pyjamas vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Kills", "line": 24.5, "sharp_line": 22.5},
-        {"player": "flouzer", "team": "Nuclear TigeRES", "match": "Ninjas in Pyjamas vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 32.0},
-        {"player": "z1k4", "team": "Nuclear TigeRES", "match": "Ninjas in Pyjamas vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 29.0},
-        {"player": "ayuki", "team": "Nuclear TigeRES", "match": "Ninjas in Pyjamas vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 27.0},
+        # Vitality (Playing with stand-in jL for mezii)
+        {"player": "apEX", "team": "Vitality", "match": "MOUZ vs Vitality", "map_pool": "Dust2 / Mirage / Inferno", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 28.0},
+        {"player": "apEX", "team": "Vitality", "match": "MOUZ vs Vitality", "map_pool": "Dust2 / Mirage / Inferno", "stat_type": "MAP 1 (Dust2) Kills", "line": 12.5, "sharp_line": 14.0},
+        {"player": "flameZ", "team": "Vitality", "match": "MOUZ vs Vitality", "map_pool": "Dust2 / Mirage / Inferno", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 32.0},
+        {"player": "flameZ", "team": "Vitality", "match": "MOUZ vs Vitality", "map_pool": "Dust2 / Mirage / Inferno", "stat_type": "MAPS 1-2 Headshots", "line": 16.5, "sharp_line": 18.5},
+        {"player": "jL (Stand-in)", "team": "Vitality", "match": "MOUZ vs Vitality", "map_pool": "Dust2 / Mirage / Inferno", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 25.0},
+        {"player": "jL (Stand-in)", "team": "Vitality", "match": "MOUZ vs Vitality", "map_pool": "Dust2 / Mirage / Inferno", "stat_type": "MAP 1 (Dust2) Kills", "line": 14.5, "sharp_line": 12.5},
+        {"player": "ropz", "team": "Vitality", "match": "MOUZ vs Vitality", "map_pool": "Dust2 / Mirage / Inferno", "stat_type": "MAPS 1-2 Kills", "line": 30.0, "sharp_line": 33.5},
+        {"player": "ropz", "team": "Vitality", "match": "MOUZ vs Vitality", "map_pool": "Dust2 / Mirage / Inferno", "stat_type": "MAPS 1-2 Headshots", "line": 15.5, "sharp_line": 17.5},
+        {"player": "ZywOo", "team": "Vitality", "match": "MOUZ vs Vitality", "map_pool": "Dust2 / Mirage / Inferno", "stat_type": "MAPS 1-2 Kills", "line": 35.5, "sharp_line": 39.5},
+        {"player": "ZywOo", "team": "Vitality", "match": "MOUZ vs Vitality", "map_pool": "Dust2 / Mirage / Inferno", "stat_type": "MAP 1 (Dust2) Kills", "line": 16.5, "sharp_line": 19.0},
 
-        # 9INE vs Metizport
-        {"player": "raalz", "team": "9INE", "match": "9INE vs Metizport", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 23.5},
-        {"player": "kraghen", "team": "9INE", "match": "9INE vs Metizport", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "sharp_line": 29.0},
-        {"player": "rim3", "team": "9INE", "match": "9INE vs Metizport", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 29.0},
-        {"player": "flayy", "team": "9INE", "match": "9INE vs Metizport", "stat_type": "MAPS 1-2 Kills", "line": 33.5, "sharp_line": 36.0},
-        {"player": "blelany", "team": "9INE", "match": "9INE vs Metizport", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 27.0},
-        {"player": "stanislaw", "team": "Metizport", "match": "9INE vs Metizport", "stat_type": "MAPS 1-2 Kills", "line": 24.5, "sharp_line": 26.5},
-        {"player": "Plopski", "team": "Metizport", "match": "9INE vs Metizport", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 32.0},
-        {"player": "FIKU", "team": "Metizport", "match": "9INE vs Metizport", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 27.0},
-        {"player": "forsyy", "team": "Metizport", "match": "9INE vs Metizport", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 34.0},
-        {"player": "Mail09", "team": "Metizport", "match": "9INE vs Metizport", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 28.0},
-
-        # Procyon vs ALKA
-        {"player": "laser", "team": "Procyon", "match": "Procyon vs ALKA", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "sharp_line": 24.5},
-        {"player": "lenci", "team": "Procyon", "match": "Procyon vs ALKA", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 31.0},
-        {"player": "pavv", "team": "Procyon", "match": "Procyon vs ALKA", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 23.5},
-        {"player": "MaxOff", "team": "Procyon", "match": "Procyon vs ALKA", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 26.5},
-        {"player": "next", "team": "Procyon", "match": "Procyon vs ALKA", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "sharp_line": 29.0},
-        {"player": "bnc", "team": "ALKA", "match": "Procyon vs ALKA", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 32.0},
-        {"player": "puni", "team": "ALKA", "match": "Procyon vs ALKA", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 23.5}
+        # MOUZ (Underdog side, lower round volume expected)
+        {"player": "xertioN", "team": "MOUZ", "match": "MOUZ vs Vitality", "map_pool": "Dust2 / Mirage / Inferno", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 28.0},
+        {"player": "xertioN", "team": "MOUZ", "match": "MOUZ vs Vitality", "map_pool": "Dust2 / Mirage / Inferno", "stat_type": "MAP 2 (Mirage) Kills", "line": 15.5, "sharp_line": 13.5},
+        {"player": "torzsi", "team": "MOUZ", "match": "MOUZ vs Vitality", "map_pool": "Dust2 / Mirage / Inferno", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 26.5},
+        {"player": "Spinx", "team": "MOUZ", "match": "MOUZ vs Vitality", "map_pool": "Dust2 / Mirage / Inferno", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 27.0},
+        {"player": "Spinx", "team": "MOUZ", "match": "MOUZ vs Vitality", "map_pool": "Dust2 / Mirage / Inferno", "stat_type": "MAPS 1-2 Headshots", "line": 16.5, "sharp_line": 14.0}
     ]
 
     engine = CS2ProjectionEngine(
@@ -198,9 +188,13 @@ if __name__ == "__main__":
     )
     board_df = engine.process_board()
 
+    if strict_filter:
+        # Filter for top consistency locks meeting high absolute edge
+        board_df = board_df[board_df["abs_edge"] >= 2.0]
+
     top_6_batch = board_df.sort_values(by="abs_edge", ascending=False).head(6)
 
-    st.subheader(f"⚡ Top 24/7 Lock Batch (Sourced via {data_provider})")
+    st.subheader(f"⚡ Top Strict Trend Locks (BLAST Porto Semi-Final)")
     
     cols = st.columns(3)
     for idx, row in enumerate(top_6_batch.to_dict(orient="records")):
@@ -238,7 +232,7 @@ if __name__ == "__main__":
             """, unsafe_allow_html=True)
 
     st.markdown("---")
-    st.subheader("Full 24/7 Board Model Matrix")
+    st.subheader("Full Filtered Board Model Matrix")
     st.dataframe(board_df.drop(columns=["_raw_edge", "abs_edge"]), use_container_width=True)
 
     if st.button("🔄 Refresh 24/7 Board"):
