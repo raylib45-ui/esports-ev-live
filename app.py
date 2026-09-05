@@ -88,18 +88,15 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 class CS2ProjectionEngine:
-    def __init__(self, slate_data: list, stand_in_variance: float):
+    def __init__(self, slate_data: list, volatility_factor: float):
         self.slate_data = slate_data
-        self.stand_in_variance = stand_in_variance
+        self.volatility_factor = volatility_factor
 
     def process_board(self) -> pd.DataFrame:
         processed_records = []
         for item in self.slate_data:
             prize_line = item["line"]
-            base_sharp = item["sharp_line"]
-            
-            stand_in_multiplier = 1.0 - (self.stand_in_variance * 0.01) if item["team"] == "Team Vitality" else 1.0
-            sharp_line = round(base_sharp * stand_in_multiplier, 1)
+            sharp_line = item["sharp_line"]
 
             if sharp_line < prize_line:
                 action = "🔨 LESS"
@@ -130,37 +127,64 @@ class CS2ProjectionEngine:
         return df
 
 if __name__ == "__main__":
-    st.title("LCS Larry 2026: BLAST Open Porto - CS2 Projection Engine")
-    st.markdown("*HLTV Match Analytics Active: FURIA (#3) vs Team Vitality (#4) | Stand-in jL active for Vitality (replacing mezii).*")
+    st.title("LCS Larry 2026: CS2 Projection Engine")
+    st.markdown("*Active Slate: Team Spirit vs Falcons, HOTU vs FOKUS, Quazar vs Infinite, BBL vs Fnatic*")
 
     st.sidebar.header("⚙️ Model Settings")
-    stand_in_variance = st.sidebar.slider("Vitality Stand-in (jL) Volatility Penalty (%)", 0.0, 10.0, 4.0, 0.5)
+    volatility_factor = st.sidebar.slider("Roster Volatility Penalty (%)", 0.0, 10.0, 4.0, 0.5)
 
     master_slate = [
-        # Vitality (with stand-in jL)
-        {"player": "ropz", "team": "Team Vitality", "match": "FURIA vs Team Vitality", "stat_type": "MAP 1 Kills", "line": 15.5, "sharp_line": 14.0},
-        {"player": "ropz", "team": "Team Vitality", "match": "FURIA vs Team Vitality", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 27.0},
-        {"player": "jL", "team": "Team Vitality", "match": "FURIA vs Team Vitality", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 26.5},
-        {"player": "jL", "team": "Team Vitality", "match": "FURIA vs Team Vitality", "stat_type": "MAPS 1-2 Headshots", "line": 16.5, "sharp_line": 14.5},
-        {"player": "flameZ", "team": "Team Vitality", "match": "FURIA vs Team Vitality", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 27.5},
-        {"player": "apEX", "team": "Team Vitality", "match": "FURIA vs Team Vitality", "stat_type": "MAPS 1-2 Kills", "line": 25.0, "sharp_line": 22.5},
-        {"player": "ZywOo", "team": "Team Vitality", "match": "FURIA vs Team Vitality", "stat_type": "MAPS 1-2 Kills", "line": 37.5, "sharp_line": 34.0},
+        # Team Spirit vs Falcons
+        {"player": "dontk", "team": "Team Spirit", "match": "Team Spirit vs Falcons", "stat_type": "MAPS 1-2 Kills", "line": 39.5, "sharp_line": 42.0},
+        {"player": "sh1ro", "team": "Team Spirit", "match": "Team Spirit vs Falcons", "stat_type": "MAPS 1-2 Kills", "line": 32.0, "sharp_line": 30.0},
+        {"player": "tN1R", "team": "Team Spirit", "match": "Team Spirit vs Falcons", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 26.5},
+        {"player": "magixx", "team": "Team Spirit", "match": "Team Spirit vs Falcons", "stat_type": "MAPS 1-2 Kills", "line": 23.5, "sharp_line": 21.5},
+        {"player": "zont1x", "team": "Team Spirit", "match": "Team Spirit vs Falcons", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 23.5},
+        {"player": "mONESY", "team": "Falcons", "match": "Team Spirit vs Falcons", "stat_type": "MAPS 1-2 Kills", "line": 35.5, "sharp_line": 33.0},
+        {"player": "NiKo", "team": "Falcons", "match": "Team Spirit vs Falcons", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 31.0},
+        {"player": "karrigan", "team": "Falcons", "match": "Team Spirit vs Falcons", "stat_type": "MAPS 1-2 Kills", "line": 21.5, "sharp_line": 19.5},
 
-        # FURIA
-        {"player": "YEKINDAR", "team": "FURIA", "match": "FURIA vs Team Vitality", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 29.5},
-        {"player": "YEKINDAR", "team": "FURIA", "match": "FURIA vs Team Vitality", "stat_type": "MAPS 1-2 Headshots", "line": 18.0, "sharp_line": 19.5},
-        {"player": "molodoy", "team": "FURIA", "match": "FURIA vs Team Vitality", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 34.0},
-        {"player": "KSCERATO", "team": "FURIA", "match": "FURIA vs Team Vitality", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 33.0},
-        {"player": "FalleN", "team": "FURIA", "match": "FURIA vs Team Vitality", "stat_type": "MAPS 1-2 Kills", "line": 23.5, "sharp_line": 25.5},
-        {"player": "yuurih", "team": "FURIA", "match": "FURIA vs Team Vitality", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 28.0}
+        # HOTU vs FOKUS
+        {"player": "mizu", "team": "HOTU", "match": "HOTU vs FOKUS", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 29.0},
+        {"player": "frontales", "team": "HOTU", "match": "HOTU vs FOKUS", "stat_type": "MAPS 1-2 Kills", "line": 31.0, "sharp_line": 28.5},
+        {"player": "dwushka", "team": "HOTU", "match": "HOTU vs FOKUS", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 33.0},
+        {"player": "n0rb3r7", "team": "HOTU", "match": "HOTU vs FOKUS", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 31.0},
+        {"player": "kade0", "team": "HOTU", "match": "HOTU vs FOKUS", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 25.0},
+        {"player": "jocab", "team": "FOKUS", "match": "HOTU vs FOKUS", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 28.0},
+        {"player": "Matheos", "team": "FOKUS", "match": "HOTU vs FOKUS", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 32.0},
+        {"player": "podi", "team": "FOKUS", "match": "HOTU vs FOKUS", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 31.0},
+        {"player": "Banjo", "team": "FOKUS", "match": "HOTU vs FOKUS", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 25.0},
+        {"player": "ztr", "team": "FOKUS", "match": "HOTU vs FOKUS", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 23.5},
+
+        # Quazar vs Infinite
+        {"player": "sl3nd", "team": "Infinite", "match": "Quazar vs Infinite", "stat_type": "MAPS 1-2 Kills", "line": 33.5, "sharp_line": 31.0},
+        {"player": "kreaz", "team": "Infinite", "match": "Quazar vs Infinite", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 34.0},
+        {"player": "Dytor", "team": "Infinite", "match": "Quazar vs Infinite", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 27.0},
+        {"player": "volt", "team": "Infinite", "match": "Quazar vs Infinite", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 23.5},
+        {"player": "Ne1XXX", "team": "Quazar", "match": "Quazar vs Infinite", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 32.0},
+        {"player": "gehji", "team": "Quazar", "match": "Quazar vs Infinite", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 26.0},
+        {"player": "kaiori", "team": "Quazar", "match": "Quazar vs Infinite", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 25.0},
+        {"player": "newt", "team": "Quazar", "match": "Quazar vs Infinite", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 27.5},
+        {"player": "Porya", "team": "Quazar", "match": "Quazar vs Infinite", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 23.5},
+
+        # BBL vs Fnatic
+        {"player": "jackasmo", "team": "Fnatic", "match": "BBL vs Fnatic", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 34.0},
+        {"player": "leakz", "team": "BBL", "match": "BBL vs Fnatic", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 29.0},
+        {"player": "mazay", "team": "Fnatic", "match": "BBL vs Fnatic", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 33.0},
+        {"player": "cairne", "team": "Fnatic", "match": "BBL vs Fnatic", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 27.0},
+        {"player": "NickyB", "team": "BBL", "match": "BBL vs Fnatic", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "sharp_line": 24.5},
+        {"player": "salazar", "team": "BBL", "match": "BBL vs Fnatic", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 23.5},
+        {"player": "Boye", "team": "BBL", "match": "BBL vs Fnatic", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 27.5},
+        {"player": "jambo", "team": "Fnatic", "match": "BBL vs Fnatic", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 29.0},
+        {"player": "fear", "team": "Fnatic", "match": "BBL vs Fnatic", "stat_type": "MAPS 1-2 Kills", "line": 24.5, "sharp_line": 26.5}
     ]
 
-    engine = CS2ProjectionEngine(slate_data=master_slate, stand_in_variance=stand_in_variance)
+    engine = CS2ProjectionEngine(slate_data=master_slate, volatility_factor=volatility_factor)
     board_df = engine.process_board()
 
     top_6_batch = board_df.sort_values(by="abs_edge", ascending=False).head(6)
 
-    st.subheader("⚡ Top Lock Batch (HLTV & Stand-in Adjusted)")
+    st.subheader("⚡ Top Lock Batch")
     
     cols = st.columns(3)
     for idx, row in enumerate(top_6_batch.to_dict(orient="records")):
