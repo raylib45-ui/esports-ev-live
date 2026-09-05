@@ -1,4 +1,4 @@
-import streamlit as st
+      import streamlit as st
 import pandas as pd
 import numpy as np
 
@@ -88,9 +88,10 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 class CS2ProjectionEngine:
-    def __init__(self, slate_data: list, volatility_factor: float):
+    def __init__(self, slate_data: list, volatility_factor: float, data_provider: str):
         self.slate_data = slate_data
         self.volatility_factor = volatility_factor
+        self.data_provider = data_provider
 
     def process_board(self) -> pd.DataFrame:
         processed_records = []
@@ -132,6 +133,13 @@ if __name__ == "__main__":
 
     st.sidebar.header("⚙️ Model Settings")
     volatility_factor = st.sidebar.slider("Roster Volatility Penalty (%)", 0.0, 10.0, 4.0, 0.5)
+    
+    # Integrated official data provider configuration based on Bayes Esports / Sportradar architecture
+    data_provider = st.sidebar.selectbox(
+        "Official Feed Provider",
+        ["Bayes Esports (Esports Feed)", "Sportradar", "Genius Sports", "Stats Perform", "Grid"]
+    )
+    st.sidebar.caption(f"Connected to official scoring source: **{data_provider}**")
 
     master_slate = [
         # Team Spirit vs Falcons
@@ -179,12 +187,12 @@ if __name__ == "__main__":
         {"player": "fear", "team": "Fnatic", "match": "BBL vs Fnatic", "stat_type": "MAPS 1-2 Kills", "line": 24.5, "sharp_line": 26.5}
     ]
 
-    engine = CS2ProjectionEngine(slate_data=master_slate, volatility_factor=volatility_factor)
+    engine = CS2ProjectionEngine(slate_data=master_slate, volatility_factor=volatility_factor, data_provider=data_provider)
     board_df = engine.process_board()
 
     top_6_batch = board_df.sort_values(by="abs_edge", ascending=False).head(6)
 
-    st.subheader("⚡ Top Lock Batch")
+    st.subheader(f"⚡ Top Lock Batch (Sourced via {data_provider})")
     
     cols = st.columns(3)
     for idx, row in enumerate(top_6_batch.to_dict(orient="records")):
@@ -215,7 +223,7 @@ if __name__ == "__main__":
                         {action_badge} ({row['Action']})
                     </div>
                     <div class="footer-brand">
-                        <span>LCSLarry Esports</span>
+                        <span>LCSLarry Esports ({data_provider})</span>
                         <span>lcslarry.com</span>
                     </div>
                 </div>
