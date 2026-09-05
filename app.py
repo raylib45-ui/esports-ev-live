@@ -117,7 +117,6 @@ class CS2ProjectionEngine:
                 "Player": item["player"],
                 "Team": item["team"],
                 "Match": item["match"],
-                "Map Pool": item["map_pool"],
                 "Stat Type": item["stat_type"],
                 "PrizePicks Line": prize_line,
                 "Adjusted Sharp Line": sharp_line,
@@ -134,11 +133,11 @@ class CS2ProjectionEngine:
 
 if __name__ == "__main__":
     st.title("LCS Larry 2026: CS2 24/7 Projection Engine")
-    st.markdown("**BLAST Open Porto 2026 - Semi-Final: MOUZ vs. Team Vitality**")
-    st.markdown("*Match Context: Vitality (71.3% Win Prob, #4 Rank) vs. MOUZ (28.7% Win Prob, #5 Rank) | Stand-in: jL for mezii*")
+    st.markdown("**CCT 2026 South America Series 5 - Quarter-final: Galorys vs. ODDIK (18:00 ET)**")
+    st.markdown("*Match Context: ODDIK (83.3% Win Prob, #111 Rank) vs. Galorys (16.7% Win Prob, #96 Rank) | Stand-in: NEKIZ for PremuM for ODDIK*")
 
-    st.sidebar.header("⚙️ Model Settings & Vetoes")
-    volatility_factor = st.sidebar.slider("Roster Volatility Penalty (%) [jL Stand-in Applied]", 0.0, 10.0, 4.5, 0.5)
+    st.sidebar.header("⚙️ Model Settings & Rules")
+    volatility_factor = st.sidebar.slider("Roster Volatility Penalty (%) [ODDIK NEKIZ Stand-in Applied]", 0.0, 10.0, 4.5, 0.5)
     overtime_mode = st.sidebar.checkbox("Include Overtime Projections (Official PP Rule)", value=True)
     strict_filter = st.sidebar.checkbox("Strict Trend Filter (Only Consistent Over/Under Locks)", value=True)
     
@@ -148,36 +147,37 @@ if __name__ == "__main__":
     )
     st.sidebar.caption(f"Connected to official scoring source: **{data_provider}**")
 
-    with st.sidebar.expander("🗺️ Veto & Map Pool Context (BLAST Porto)"):
+    with st.sidebar.expander("📖 Match & Tournament Details"):
         st.markdown("""
-        1. **Vitality removed:** Ancient
-        2. **MOUZ removed:** Anubis
-        3. **Vitality picked:** Dust2 (Map 1)
-        4. **MOUZ picked:** Mirage (Map 2)
-        5. **Vitality removed:** Nuke
-        6. **MOUZ removed:** Cache
-        7. **Decider:** Inferno (Map 3)
+        * **Tournament:** CCT 2026 South America Series 5 ($15,000 Prize Pool)
+        * **Stage:** Quarter-final (Online, Best of 3)
+        * **ODDIK Pros:** Higher win prob (83.3%), strong recent form (won 4 of last 5).
+        * **ODDIK Cons:** Playing with stand-in NEKIZ instead of PremuM.
+        * **Galorys Pros:** Better ranked (#96 vs #111), bookmaker favorite with best odds support in certain markets, won 4 of last 5.
         """)
 
     master_slate = [
-        # Vitality (Playing with stand-in jL for mezii)
-        {"player": "apEX", "team": "Vitality", "match": "MOUZ vs Vitality", "map_pool": "Dust2 / Mirage / Inferno", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 28.0},
-        {"player": "apEX", "team": "Vitality", "match": "MOUZ vs Vitality", "map_pool": "Dust2 / Mirage / Inferno", "stat_type": "MAP 1 (Dust2) Kills", "line": 12.5, "sharp_line": 14.0},
-        {"player": "flameZ", "team": "Vitality", "match": "MOUZ vs Vitality", "map_pool": "Dust2 / Mirage / Inferno", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 32.0},
-        {"player": "flameZ", "team": "Vitality", "match": "MOUZ vs Vitality", "map_pool": "Dust2 / Mirage / Inferno", "stat_type": "MAPS 1-2 Headshots", "line": 16.5, "sharp_line": 18.5},
-        {"player": "jL (Stand-in)", "team": "Vitality", "match": "MOUZ vs Vitality", "map_pool": "Dust2 / Mirage / Inferno", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 25.0},
-        {"player": "jL (Stand-in)", "team": "Vitality", "match": "MOUZ vs Vitality", "map_pool": "Dust2 / Mirage / Inferno", "stat_type": "MAP 1 (Dust2) Kills", "line": 14.5, "sharp_line": 12.5},
-        {"player": "ropz", "team": "Vitality", "match": "MOUZ vs Vitality", "map_pool": "Dust2 / Mirage / Inferno", "stat_type": "MAPS 1-2 Kills", "line": 30.0, "sharp_line": 33.5},
-        {"player": "ropz", "team": "Vitality", "match": "MOUZ vs Vitality", "map_pool": "Dust2 / Mirage / Inferno", "stat_type": "MAPS 1-2 Headshots", "line": 15.5, "sharp_line": 17.5},
-        {"player": "ZywOo", "team": "Vitality", "match": "MOUZ vs Vitality", "map_pool": "Dust2 / Mirage / Inferno", "stat_type": "MAPS 1-2 Kills", "line": 35.5, "sharp_line": 39.5},
-        {"player": "ZywOo", "team": "Vitality", "match": "MOUZ vs Vitality", "map_pool": "Dust2 / Mirage / Inferno", "stat_type": "MAP 1 (Dust2) Kills", "line": 16.5, "sharp_line": 19.0},
+        # Galorys Players (Underdog side in market win probability)
+        {"player": "detroitiT", "team": "Galorys", "match": "Galorys vs ODDIK", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 25.5},
+        {"player": "detroitiT", "team": "Galorys", "match": "Galorys vs ODDIK", "stat_type": "MAPS 1-2 Headshots", "line": 9.5, "sharp_line": 11.5},
+        {"player": "gbb", "team": "Galorys", "match": "Galorys vs ODDIK", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 32.5},
+        {"player": "gbb", "team": "Galorys", "match": "Galorys vs ODDIK", "stat_type": "MAPS 1-2 Headshots", "line": 15.5, "sharp_line": 13.5},
+        {"player": "PKL", "team": "Galorys", "match": "Galorys vs ODDIK", "stat_type": "MAPS 1-2 Kills", "line": 24.5, "sharp_line": 27.0},
+        {"player": "PKL", "team": "Galorys", "match": "Galorys vs ODDIK", "stat_type": "MAPS 1-2 Headshots", "line": 12.5, "sharp_line": 14.5},
+        {"player": "tomate", "team": "Galorys", "match": "Galorys vs ODDIK", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 31.5},
+        {"player": "tomate", "team": "Galorys", "match": "Galorys vs ODDIK", "stat_type": "MAPS 1-2 Headshots", "line": 16.5, "sharp_line": 14.0},
 
-        # MOUZ (Underdog side, lower round volume expected)
-        {"player": "xertioN", "team": "MOUZ", "match": "MOUZ vs Vitality", "map_pool": "Dust2 / Mirage / Inferno", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 28.0},
-        {"player": "xertioN", "team": "MOUZ", "match": "MOUZ vs Vitality", "map_pool": "Dust2 / Mirage / Inferno", "stat_type": "MAP 2 (Mirage) Kills", "line": 15.5, "sharp_line": 13.5},
-        {"player": "torzsi", "team": "MOUZ", "match": "MOUZ vs Vitality", "map_pool": "Dust2 / Mirage / Inferno", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 26.5},
-        {"player": "Spinx", "team": "MOUZ", "match": "MOUZ vs Vitality", "map_pool": "Dust2 / Mirage / Inferno", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 27.0},
-        {"player": "Spinx", "team": "MOUZ", "match": "MOUZ vs Vitality", "map_pool": "Dust2 / Mirage / Inferno", "stat_type": "MAPS 1-2 Headshots", "line": 16.5, "sharp_line": 14.0}
+        # ODDIK Players (Heavy favorites, adjusted for NEKIZ stand-in volatility)
+        {"player": "Ceruttera", "team": "ODDIK", "match": "Galorys vs ODDIK", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 30.5},
+        {"player": "Ceruttera", "team": "ODDIK", "match": "Galorys vs ODDIK", "stat_type": "MAPS 1-2 Headshots", "line": 15.5, "sharp_line": 13.5},
+        {"player": "diozera", "team": "ODDIK", "match": "Galorys vs ODDIK", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 27.5},
+        {"player": "diozera", "team": "ODDIK", "match": "Galorys vs ODDIK", "stat_type": "MAPS 1-2 Headshots", "line": 17.5, "sharp_line": 15.0},
+        {"player": "nardes", "team": "ODDIK", "match": "Galorys vs ODDIK", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 27.0},
+        {"player": "nardes", "team": "ODDIK", "match": "Galorys vs ODDIK", "stat_type": "MAPS 1-2 Headshots", "line": 10.5, "sharp_line": 12.5},
+        {"player": "NEKIZ (Stand-in)", "team": "ODDIK", "match": "Galorys vs ODDIK", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 22.5},
+        {"player": "NEKIZ (Stand-in)", "team": "ODDIK", "match": "Galorys vs ODDIK", "stat_type": "MAPS 1-2 Headshots", "line": 12.5, "sharp_line": 10.5},
+        {"player": "righi", "team": "ODDIK", "match": "Galorys vs ODDIK", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 26.0},
+        {"player": "righi", "team": "ODDIK", "match": "Galorys vs ODDIK", "stat_type": "MAPS 1-2 Headshots", "line": 17.5, "sharp_line": 15.0}
     ]
 
     engine = CS2ProjectionEngine(
@@ -189,12 +189,11 @@ if __name__ == "__main__":
     board_df = engine.process_board()
 
     if strict_filter:
-        # Filter for top consistency locks meeting high absolute edge
         board_df = board_df[board_df["abs_edge"] >= 2.0]
 
     top_6_batch = board_df.sort_values(by="abs_edge", ascending=False).head(6)
 
-    st.subheader(f"⚡ Top Strict Trend Locks (BLAST Porto Semi-Final)")
+    st.subheader("⚡ Top Strict Trend Locks (Galorys vs ODDIK - CCT QF)")
     
     cols = st.columns(3)
     for idx, row in enumerate(top_6_batch.to_dict(orient="records")):
