@@ -129,12 +129,11 @@ class CS2ProjectionEngine:
 
 if __name__ == "__main__":
     st.title("LCS Larry 2026: CS2 Projection Engine")
-    st.markdown("*Active Slate: Team Spirit vs Falcons, HOTU vs FOKUS, Quazar vs Infinite, BBL vs Fnatic*")
+    st.markdown("*Active Slate: Ninjas in Pyjamas vs Nuclear TigeRES, 9INE vs Metizport, Procyon vs ALKA*")
 
     st.sidebar.header("⚙️ Model Settings")
     volatility_factor = st.sidebar.slider("Roster Volatility Penalty (%)", 0.0, 10.0, 4.0, 0.5)
     
-    # Integrated official data provider configuration based on Bayes Esports / Sportradar architecture
     data_provider = st.sidebar.selectbox(
         "Official Feed Provider",
         ["Bayes Esports (Esports Feed)", "Sportradar", "Genius Sports", "Stats Perform", "Grid"]
@@ -142,49 +141,38 @@ if __name__ == "__main__":
     st.sidebar.caption(f"Connected to official scoring source: **{data_provider}**")
 
     master_slate = [
-        # Team Spirit vs Falcons
-        {"player": "dontk", "team": "Team Spirit", "match": "Team Spirit vs Falcons", "stat_type": "MAPS 1-2 Kills", "line": 39.5, "sharp_line": 42.0},
-        {"player": "sh1ro", "team": "Team Spirit", "match": "Team Spirit vs Falcons", "stat_type": "MAPS 1-2 Kills", "line": 32.0, "sharp_line": 30.0},
-        {"player": "tN1R", "team": "Team Spirit", "match": "Team Spirit vs Falcons", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 26.5},
-        {"player": "magixx", "team": "Team Spirit", "match": "Team Spirit vs Falcons", "stat_type": "MAPS 1-2 Kills", "line": 23.5, "sharp_line": 21.5},
-        {"player": "zont1x", "team": "Team Spirit", "match": "Team Spirit vs Falcons", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 23.5},
-        {"player": "mONESY", "team": "Falcons", "match": "Team Spirit vs Falcons", "stat_type": "MAPS 1-2 Kills", "line": 35.5, "sharp_line": 33.0},
-        {"player": "NiKo", "team": "Falcons", "match": "Team Spirit vs Falcons", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 31.0},
-        {"player": "karrigan", "team": "Falcons", "match": "Team Spirit vs Falcons", "stat_type": "MAPS 1-2 Kills", "line": 21.5, "sharp_line": 19.5},
+        # Ninjas in Pyjamas vs Nuclear TigeRES
+        {"player": "sjuush", "team": "Ninjas in Pyjamas", "match": "Ninjas in Pyjamas vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 26.5},
+        {"player": "stavn", "team": "Ninjas in Pyjamas", "match": "Ninjas in Pyjamas vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Kills", "line": 31.0, "sharp_line": 33.5},
+        {"player": "xKacpersky", "team": "Ninjas in Pyjamas", "match": "Ninjas in Pyjamas vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Kills", "line": 32.5, "sharp_line": 30.0},
+        {"player": "n0te", "team": "Ninjas in Pyjamas", "match": "Ninjas in Pyjamas vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 27.0},
+        {"player": "Krimbo", "team": "Ninjas in Pyjamas", "match": "Ninjas in Pyjamas vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 31.0},
+        {"player": "m1QUSE", "team": "Nuclear TigeRES", "match": "Ninjas in Pyjamas vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 31.0},
+        {"player": "senka", "team": "Nuclear TigeRES", "match": "Ninjas in Pyjamas vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Kills", "line": 24.5, "sharp_line": 22.5},
+        {"player": "flouzer", "team": "Nuclear TigeRES", "match": "Ninjas in Pyjamas vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 32.0},
+        {"player": "z1k4", "team": "Nuclear TigeRES", "match": "Ninjas in Pyjamas vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 29.0},
+        {"player": "ayuki", "team": "Nuclear TigeRES", "match": "Ninjas in Pyjamas vs Nuclear TigeRES", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 27.0},
 
-        # HOTU vs FOKUS
-        {"player": "mizu", "team": "HOTU", "match": "HOTU vs FOKUS", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 29.0},
-        {"player": "frontales", "team": "HOTU", "match": "HOTU vs FOKUS", "stat_type": "MAPS 1-2 Kills", "line": 31.0, "sharp_line": 28.5},
-        {"player": "dwushka", "team": "HOTU", "match": "HOTU vs FOKUS", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 33.0},
-        {"player": "n0rb3r7", "team": "HOTU", "match": "HOTU vs FOKUS", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 31.0},
-        {"player": "kade0", "team": "HOTU", "match": "HOTU vs FOKUS", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 25.0},
-        {"player": "jocab", "team": "FOKUS", "match": "HOTU vs FOKUS", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 28.0},
-        {"player": "Matheos", "team": "FOKUS", "match": "HOTU vs FOKUS", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 32.0},
-        {"player": "podi", "team": "FOKUS", "match": "HOTU vs FOKUS", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 31.0},
-        {"player": "Banjo", "team": "FOKUS", "match": "HOTU vs FOKUS", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 25.0},
-        {"player": "ztr", "team": "FOKUS", "match": "HOTU vs FOKUS", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 23.5},
+        # 9INE vs Metizport
+        {"player": "raalz", "team": "9INE", "match": "9INE vs Metizport", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 23.5},
+        {"player": "kraghen", "team": "9INE", "match": "9INE vs Metizport", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "sharp_line": 29.0},
+        {"player": "rim3", "team": "9INE", "match": "9INE vs Metizport", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 29.0},
+        {"player": "flayy", "team": "9INE", "match": "9INE vs Metizport", "stat_type": "MAPS 1-2 Kills", "line": 33.5, "sharp_line": 36.0},
+        {"player": "blelany", "team": "9INE", "match": "9INE vs Metizport", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 27.0},
+        {"player": "stanislaw", "team": "Metizport", "match": "9INE vs Metizport", "stat_type": "MAPS 1-2 Kills", "line": 24.5, "sharp_line": 26.5},
+        {"player": "Plopski", "team": "Metizport", "match": "9INE vs Metizport", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 32.0},
+        {"player": "FIKU", "team": "Metizport", "match": "9INE vs Metizport", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 27.0},
+        {"player": "forsyy", "team": "Metizport", "match": "9INE vs Metizport", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 34.0},
+        {"player": "Mail09", "team": "Metizport", "match": "9INE vs Metizport", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 28.0},
 
-        # Quazar vs Infinite
-        {"player": "sl3nd", "team": "Infinite", "match": "Quazar vs Infinite", "stat_type": "MAPS 1-2 Kills", "line": 33.5, "sharp_line": 31.0},
-        {"player": "kreaz", "team": "Infinite", "match": "Quazar vs Infinite", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 34.0},
-        {"player": "Dytor", "team": "Infinite", "match": "Quazar vs Infinite", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 27.0},
-        {"player": "volt", "team": "Infinite", "match": "Quazar vs Infinite", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 23.5},
-        {"player": "Ne1XXX", "team": "Quazar", "match": "Quazar vs Infinite", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 32.0},
-        {"player": "gehji", "team": "Quazar", "match": "Quazar vs Infinite", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 26.0},
-        {"player": "kaiori", "team": "Quazar", "match": "Quazar vs Infinite", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 25.0},
-        {"player": "newt", "team": "Quazar", "match": "Quazar vs Infinite", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 27.5},
-        {"player": "Porya", "team": "Quazar", "match": "Quazar vs Infinite", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 23.5},
-
-        # BBL vs Fnatic
-        {"player": "jackasmo", "team": "Fnatic", "match": "BBL vs Fnatic", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 34.0},
-        {"player": "leakz", "team": "BBL", "match": "BBL vs Fnatic", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 29.0},
-        {"player": "mazay", "team": "Fnatic", "match": "BBL vs Fnatic", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 33.0},
-        {"player": "cairne", "team": "Fnatic", "match": "BBL vs Fnatic", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 27.0},
-        {"player": "NickyB", "team": "BBL", "match": "BBL vs Fnatic", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "sharp_line": 24.5},
-        {"player": "salazar", "team": "BBL", "match": "BBL vs Fnatic", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 23.5},
-        {"player": "Boye", "team": "BBL", "match": "BBL vs Fnatic", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 27.5},
-        {"player": "jambo", "team": "Fnatic", "match": "BBL vs Fnatic", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 29.0},
-        {"player": "fear", "team": "Fnatic", "match": "BBL vs Fnatic", "stat_type": "MAPS 1-2 Kills", "line": 24.5, "sharp_line": 26.5}
+        # Procyon vs ALKA
+        {"player": "laser", "team": "Procyon", "match": "Procyon vs ALKA", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "sharp_line": 24.5},
+        {"player": "lenci", "team": "Procyon", "match": "Procyon vs ALKA", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 31.0},
+        {"player": "pavv", "team": "Procyon", "match": "Procyon vs ALKA", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 23.5},
+        {"player": "MaxOff", "team": "Procyon", "match": "Procyon vs ALKA", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 26.5},
+        {"player": "next", "team": "Procyon", "match": "Procyon vs ALKA", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "sharp_line": 29.0},
+        {"player": "bnc", "team": "ALKA", "match": "Procyon vs ALKA", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 32.0},
+        {"player": "puni", "team": "ALKA", "match": "Procyon vs ALKA", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 23.5}
     ]
 
     engine = CS2ProjectionEngine(slate_data=master_slate, volatility_factor=volatility_factor, data_provider=data_provider)
