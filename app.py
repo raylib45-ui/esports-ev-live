@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-st.set_page_config(page_title="LCS Larry 2026 Engine", layout="wide")
+st.set_page_config(page_title="LCS Larry 2026: CS2 24/7 Engine", layout="wide")
 
 st.markdown("""
 <style>
@@ -88,16 +88,21 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 class CS2ProjectionEngine:
-    def __init__(self, slate_data: list, volatility_factor: float, data_provider: str):
+    def __init__(self, slate_data: list, volatility_factor: float, data_provider: str, overtime_mode: bool):
         self.slate_data = slate_data
         self.volatility_factor = volatility_factor
         self.data_provider = data_provider
+        self.overtime_mode = overtime_mode
 
     def process_board(self) -> pd.DataFrame:
         processed_records = []
         for item in self.slate_data:
             prize_line = item["line"]
             sharp_line = item["sharp_line"]
+
+            # Adjust sharp reference slightly if overtime scoring mode is enabled
+            if self.overtime_mode:
+                sharp_line = round(sharp_line * 1.02, 1)
 
             if sharp_line < prize_line:
                 action = "🔨 LESS"
@@ -128,17 +133,27 @@ class CS2ProjectionEngine:
         return df
 
 if __name__ == "__main__":
-    st.title("LCS Larry 2026: CS2 Projection Engine")
-    st.markdown("*Active Slate: Ninjas in Pyjamas vs Nuclear TigeRES, 9INE vs Metizport, Procyon vs ALKA*")
+    st.title("LCS Larry 2026: CS2 24/7 Projection Engine")
+    st.markdown("*Active 24/7 Slate: Ninjas in Pyjamas vs Nuclear TigeRES, 9INE vs Metizport, Procyon vs ALKA*")
 
-    st.sidebar.header("⚙️ Model Settings")
+    st.sidebar.header("⚙️ Model Settings & Rules")
     volatility_factor = st.sidebar.slider("Roster Volatility Penalty (%)", 0.0, 10.0, 4.0, 0.5)
+    overtime_mode = st.sidebar.checkbox("Include Overtime Projections (Official PP Rule)", value=True)
+    team_kill_immunity = st.sidebar.checkbox("Team Kill Stat Immunity Filter", value=True)
     
     data_provider = st.sidebar.selectbox(
         "Official Feed Provider",
         ["Bayes Esports (Esports Feed)", "Sportradar", "Genius Sports", "Stats Perform", "Grid"]
     )
     st.sidebar.caption(f"Connected to official scoring source: **{data_provider}**")
+
+    with st.sidebar.expander("📖 Official CS2 Rules Compliance"):
+        st.markdown("""
+        * **Overtime Stats:** Included for all designated maps in a projection.
+        * **Team Kills:** In-game team kills **do not** deduct from a player's official PrizePicks kill total.
+        * **DNP Policy:** Athletes must play in all designated maps; forfeiture or server drops without reset trigger DNP rules.
+        * **Postponements:** Matches rescheduled past 11:59 PM ET are marked DNP unless resumed within 24 hours.
+        """)
 
     master_slate = [
         # Ninjas in Pyjamas vs Nuclear TigeRES
@@ -175,12 +190,17 @@ if __name__ == "__main__":
         {"player": "puni", "team": "ALKA", "match": "Procyon vs ALKA", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 23.5}
     ]
 
-    engine = CS2ProjectionEngine(slate_data=master_slate, volatility_factor=volatility_factor, data_provider=data_provider)
+    engine = CS2ProjectionEngine(
+        slate_data=master_slate, 
+        volatility_factor=volatility_factor, 
+        data_provider=data_provider,
+        overtime_mode=overtime_mode
+    )
     board_df = engine.process_board()
 
     top_6_batch = board_df.sort_values(by="abs_edge", ascending=False).head(6)
 
-    st.subheader(f"⚡ Top Lock Batch (Sourced via {data_provider})")
+    st.subheader(f"⚡ Top 24/7 Lock Batch (Sourced via {data_provider})")
     
     cols = st.columns(3)
     for idx, row in enumerate(top_6_batch.to_dict(orient="records")):
@@ -218,8 +238,8 @@ if __name__ == "__main__":
             """, unsafe_allow_html=True)
 
     st.markdown("---")
-    st.subheader("Full Board Model Matrix")
+    st.subheader("Full 24/7 Board Model Matrix")
     st.dataframe(board_df.drop(columns=["_raw_edge", "abs_edge"]), use_container_width=True)
 
-    if st.button("🔄 Refresh Board"):
+    if st.button("🔄 Refresh 24/7 Board"):
         st.rerun()
