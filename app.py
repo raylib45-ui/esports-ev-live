@@ -133,7 +133,7 @@ class CS2ProjectionEngine:
 
 if __name__ == "__main__":
     st.title("LCS Larry 2026: CS2 24/7 Projection Engine")
-    st.markdown("**Active 24/7 Slate: MOUZ NXT vs Misa, HAVU vs Privateer, PCIFIC vs KUUSAMO, Bounty Hunters vs Imperial**")
+    st.markdown("**Active 24/7 Slate: Team Spirit vs MOUZ, Cybershoke vs Sinners, 1win vs GenOne, and more**")
 
     st.sidebar.header("⚙️ Model Settings & Rules")
     volatility_factor = st.sidebar.slider("Roster Volatility Penalty (%)", 0.0, 10.0, 3.0, 0.5)
@@ -146,33 +146,30 @@ if __name__ == "__main__":
     )
     st.sidebar.caption(f"Connected to official scoring source: **{data_provider}**")
 
-    # Clean wipe of previous slate, populated completely with new players and lines from images 50 and 51
+    # Clean wipe of previous slate, populated completely with new players and lines from images 52 and 53
     master_slate = [
-        # MOUZ NXT vs Misa
-        {"player": "Nikodeon", "team": "MOUZ NXT", "match": "MOUZ NXT vs Misa", "stat_type": "MAPS 1-2 Kills", "line": 33.5, "sharp_line": 36.0},
-        {"player": "eSx", "team": "MOUZ NXT", "match": "MOUZ NXT vs Misa", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 28.0},
-        {"player": "ayOk", "team": "MOUZ NXT", "match": "MOUZ NXT vs Misa", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 31.0},
-        {"player": "mixer", "team": "MOUZ NXT", "match": "MOUZ NXT vs Misa", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 25.0},
-        {"player": "AiyvaN", "team": "MOUZ NXT", "match": "MOUZ NXT vs Misa", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 30.0},
+        # Team Spirit vs MOUZ & related match props
+        {"player": "donk", "team": "Team Spirit", "match": "Team Spirit vs MOUZ", "stat_type": "MAPS 1-3 Kills", "line": 61.5, "sharp_line": 64.5},
+        {"player": "Spinx", "team": "MOUZ", "match": "Team Spirit vs MOUZ", "stat_type": "MAPS 1-3 Kills", "line": 43.5, "sharp_line": 41.0},
+        {"player": "donk", "team": "Team Spirit", "match": "Team Spirit vs MOUZ", "stat_type": "MAPS 1-3 Headshots", "line": 39.5, "sharp_line": 42.0},
+        {"player": "xelex", "team": "MOUZ", "match": "Team Spirit vs MOUZ", "stat_type": "MAPS 1-3 Kills", "line": 43.0, "sharp_line": 40.5},
+        {"player": "zont1x", "team": "Team Spirit", "match": "Team Spirit vs MOUZ", "stat_type": "MAPS 1-3 Kills", "line": 37.5, "sharp_line": 40.0},
+        {"player": "sh1ro", "team": "Team Spirit", "match": "Team Spirit vs MOUZ", "stat_type": "MAPS 1-3 Kills", "line": 48.5, "sharp_line": 51.0},
+        {"player": "zont1x", "team": "Team Spirit", "match": "Team Spirit vs MOUZ", "stat_type": "MAPS 1-3 Headshots", "line": 17.5, "sharp_line": 15.5},
+        {"player": "torzsi", "team": "MOUZ", "match": "Team Spirit vs MOUZ", "stat_type": "MAPS 1-3 Kills", "line": 43.5, "sharp_line": 46.0},
+        {"player": "tN1R", "team": "Team Spirit", "match": "Team Spirit vs MOUZ", "stat_type": "MAPS 1-3 Kills", "line": 42.5, "sharp_line": 40.0},
+        {"player": "Spinx", "team": "MOUZ", "match": "Team Spirit vs MOUZ", "stat_type": "MAPS 1-3 Headshots", "line": 24.5, "sharp_line": 22.0},
+        {"player": "tN1R", "team": "Team Spirit", "match": "Team Spirit vs MOUZ", "stat_type": "MAPS 1-3 Headshots", "line": 25.5, "sharp_line": 23.5},
+        {"player": "xelex", "team": "MOUZ", "match": "Team Spirit vs MOUZ", "stat_type": "MAPS 1-3 Headshots", "line": 27.5, "sharp_line": 25.0},
+        {"player": "PR", "team": "MOUZ", "match": "Team Spirit vs MOUZ", "stat_type": "MAPS 1-3 Kills", "line": 40.0, "sharp_line": 42.5},
 
-        # HAVU vs Privateer
-        {"player": "ottob", "team": "HAVU", "match": "HAVU vs Privateer", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 29.0},
-        {"player": "Alxc", "team": "HAVU", "match": "HAVU vs Privateer", "stat_type": "MAPS 1-2 Kills", "line": 31.0, "sharp_line": 33.5},
-        {"player": "p3kko", "team": "HAVU", "match": "HAVU vs Privateer", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 27.0},
-        {"player": "uli", "team": "HAVU", "match": "HAVU vs Privateer", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 31.0},
-        {"player": "peku", "team": "HAVU", "match": "HAVU vs Privateer", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 28.0},
-
-        # PCIFIC vs KUUSAMO
-        {"player": "lugsen", "team": "PCIFIC", "match": "PCIFIC vs KUUSAMO", "stat_type": "MAPS 1-2 Kills", "line": 32.5, "sharp_line": 30.0},
-        {"player": "scolleN", "team": "PCIFIC", "match": "PCIFIC vs KUUSAMO", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 34.0},
-        {"player": "jresy", "team": "PCIFIC", "match": "PCIFIC vs KUUSAMO", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 28.0},
-        {"player": "eNs", "team": "PCIFIC", "match": "PCIFIC vs KUUSAMO", "stat_type": "MAPS 1-2 Kills", "line": 28.0, "sharp_line": 30.5},
-        {"player": "oyesil", "team": "PCIFIC", "match": "PCIFIC vs KUUSAMO", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 25.0},
-
-        # Bounty Hunters vs Imperial
-        {"player": "pepe", "team": "Bounty Hunters", "match": "Bounty Hunters vs Imperial", "stat_type": "MAPS 1-2 Kills", "line": 24.5, "sharp_line": 27.0},
-        {"player": "urban0", "team": "Bounty Hunters", "match": "Bounty Hunters vs Imperial", "stat_type": "MAPS 1-2 Kills", "line": 23.5, "sharp_line": 21.5},
-        {"player": "ponter", "team": "Bounty Hunters", "match": "Bounty Hunters vs Imperial", "stat_type": "MAPS 1-2 Kills", "line": 23.5, "sharp_line": 26.0}
+        # Other matches from images 52 & 53
+        {"player": "nota", "team": "CYBERSHOKE", "match": "CYBERSHOKE vs SINNERS", "stat_type": "MAP 1 Kills", "line": 13.5, "sharp_line": 12.0},
+        {"player": "NickyB", "team": "BBL", "match": "BBL vs UPGRADE", "stat_type": "MAP 1 Kills", "line": 7.5, "sharp_line": 8.5},
+        {"player": "qw1nk1", "team": "K27", "match": "K27 vs Butterfly", "stat_type": "MAP 1 Headshots", "line": 8.0, "sharp_line": 7.0},
+        {"player": "Fessor", "team": "EAC", "match": "EAC vs HEROIC", "stat_type": "MAP 1 Kills", "line": 13.0, "sharp_line": 14.5},
+        {"player": "BELCHONOKK", "team": "1win", "match": "1win vs GenOne", "stat_type": "MAP 1 Headshots", "line": 8.5, "sharp_line": 7.5},
+        {"player": "bL4SEZ", "team": "GenOne", "match": "GenOne vs 1win", "stat_type": "MAP 1 Kills", "line": 12.5, "sharp_line": 14.0}
     ]
 
     engine = CS2ProjectionEngine(
