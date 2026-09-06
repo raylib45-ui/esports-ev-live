@@ -133,11 +133,11 @@ class CS2ProjectionEngine:
 
 if __name__ == "__main__":
     st.title("LCS Larry 2026: CS2 24/7 Projection Engine")
-    st.markdown("**Stake Ranked Episode 4 Closed Qualifier - Semi-final: Ninjas in Pyjamas vs. fnatic (05:00 ET)**")
-    st.markdown("*Match Context: NiP (53.8% Win Prob, Rank #26) vs. fnatic (46.2% Win Prob, Rank #38) | Volatility Note: Krimbo has played < 5 matches with core*")
+    st.markdown("**Stake Ranked Episode 4 Closed Qualifier - Semi-final: FOKUS vs. Nemiga (07:00 ET)**")
+    st.markdown("*Match Context: FOKUS (62.0% Win Prob, Rank #41, Better Form Ranking) vs. Nemiga (38.0% Win Prob, Rank #63, Won 4/5 & Bookmaker Favorite)*")
 
     st.sidebar.header("⚙️ Model Settings & Rules")
-    volatility_factor = st.sidebar.slider("Roster Volatility Penalty (%) [Krimbo Core Factor]", 0.0, 10.0, 3.5, 0.5)
+    volatility_factor = st.sidebar.slider("Roster Volatility Penalty (%)", 0.0, 10.0, 3.0, 0.5)
     overtime_mode = st.sidebar.checkbox("Include Overtime Projections (Official PP Rule)", value=True)
     strict_filter = st.sidebar.checkbox("Strict Trend Filter (Only Consistent Over/Under Locks)", value=True)
     
@@ -147,38 +147,38 @@ if __name__ == "__main__":
     )
     st.sidebar.caption(f"Connected to official scoring source: **{data_provider}**")
 
-    with st.sidebar.expander("📖 Match & Analytics Insights"):
+    with st.sidebar.expander("📖 Match Analytics & Insights"):
         st.markdown("""
         * **Tournament:** Stake Ranked Episode 4 Closed Qualifier (Semi-final, Bo3 Online)
-        * **Ninjas in Pyjamas Pros:** Won 3 of last 5 matches, better ranked (#26).
-        * **Ninjas in Pyjamas Cons:** Krimbo has played less than 5 matches with the core roster.
-        * **fnatic Pros:** Better form ranking, won 3 of last 5 matches, bookmaker favorite with best odds.
-        * **fnatic Cons:** Worse ranked (#38).
+        * **FOKUS Pros:** Better form ranking, won 4 out of last 5 matches, better ranked (#41), community vote favorite (62.0%).
+        * **Nemiga Pros:** Won 4 out of last 5 matches, bookmaker favorite with best odds.
+        * **Nemiga Cons:** Worse ranked (#63), community vote underdog (38.0%).
         """)
 
+    # Clean wipe of previous slate data, updated completely with FOKUS vs Nemiga matchup and metrics from HLTV screenshots
     master_slate = [
-        # Ninjas in Pyjamas Players
-        {"player": "Krimbo", "team": "Ninjas in Pyjamas", "match": "Ninjas in Pyjamas vs fnatic", "stat_type": "MAPS 1-2 Headshots", "line": 14.5, "sharp_line": 12.0},
-        {"player": "Krimbo", "team": "Ninjas in Pyjamas", "match": "Ninjas in Pyjamas vs fnatic", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 30.0},
-        {"player": "n0te", "team": "Ninjas in Pyjamas", "match": "Ninjas in Pyjamas vs fnatic", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 32.5},
-        {"player": "sjuush", "team": "Ninjas in Pyjamas", "match": "Ninjas in Pyjamas vs fnatic", "stat_type": "MAPS 1-2 Headshots", "line": 16.5, "sharp_line": 14.0},
-        {"player": "sjuush", "team": "Ninjas in Pyjamas", "match": "Ninjas in Pyjamas vs fnatic", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 31.0},
-        {"player": "stavn", "team": "Ninjas in Pyjamas", "match": "Ninjas in Pyjamas vs fnatic", "stat_type": "MAPS 1-2 Headshots", "line": 10.5, "sharp_line": 12.5},
-        {"player": "stavn", "team": "Ninjas in Pyjamas", "match": "Ninjas in Pyjamas vs fnatic", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 28.5},
-        {"player": "xKacpersky", "team": "Ninjas in Pyjamas", "match": "Ninjas in Pyjamas vs fnatic", "stat_type": "MAPS 1-2 Headshots", "line": 16.0, "sharp_line": 18.5},
-        {"player": "xKacpersky", "team": "Ninjas in Pyjamas", "match": "Ninjas in Pyjamas vs fnatic", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 34.0},
+        # Nemiga Players vs FOKUS
+        {"player": "KaiRON-", "team": "Nemiga", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Headshots", "line": 17.5, "sharp_line": 15.0},
+        {"player": "KaiRON-", "team": "Nemiga", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 34.0},
+        {"player": "Xant3r", "team": "Nemiga", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Headshots", "line": 15.5, "sharp_line": 13.5},
+        {"player": "Xant3r", "team": "Nemiga", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "sharp_line": 29.0},
+        {"player": "khaN", "team": "Nemiga", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Headshots", "line": 10.5, "sharp_line": 12.5},
+        {"player": "khaN", "team": "Nemiga", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Kills", "line": 31.0, "sharp_line": 28.5},
+        {"player": "robo", "team": "Nemiga", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Headshots", "line": 14.0, "sharp_line": 16.0},
+        {"player": "robo", "team": "Nemiga", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Kills", "line": 27.0, "sharp_line": 29.5},
+        {"player": "syph0", "team": "Nemiga", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Headshots", "line": 15.5, "sharp_line": 13.5},
+        {"player": "syph0", "team": "Nemiga", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 31.0},
 
-        # fnatic Players
-        {"player": "cairne", "team": "fnatic", "match": "Ninjas in Pyjamas vs fnatic", "stat_type": "MAPS 1-2 Headshots", "line": 16.0, "sharp_line": 13.5},
-        {"player": "cairne", "team": "fnatic", "match": "Ninjas in Pyjamas vs fnatic", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 32.0},
-        {"player": "fear", "team": "fnatic", "match": "Ninjas in Pyjamas vs fnatic", "stat_type": "MAPS 1-2 Headshots", "line": 12.5, "sharp_line": 10.0},
-        {"player": "fear", "team": "fnatic", "match": "Ninjas in Pyjamas vs fnatic", "stat_type": "MAPS 1-2 Kills", "line": 24.5, "sharp_line": 27.0},
-        {"player": "jackasmo", "team": "fnatic", "match": "Ninjas in Pyjamas vs fnatic", "stat_type": "MAPS 1-2 Headshots", "line": 19.0, "sharp_line": 16.5},
-        {"player": "jackasmo", "team": "fnatic", "match": "Ninjas in Pyjamas vs fnatic", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 28.5},
-        {"player": "jambo", "team": "fnatic", "match": "Ninjas in Pyjamas vs fnatic", "stat_type": "MAPS 1-2 Headshots", "line": 10.5, "sharp_line": 12.5},
-        {"player": "jambo", "team": "fnatic", "match": "Ninjas in Pyjamas vs fnatic", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 28.0},
-        {"player": "mazay", "team": "fnatic", "match": "Ninjas in Pyjamas vs fnatic", "stat_type": "MAPS 1-2 Headshots", "line": 17.0, "sharp_line": 14.5},
-        {"player": "mazay", "team": "fnatic", "match": "Ninjas in Pyjamas vs fnatic", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 33.0}
+        # FOKUS Players vs Nemiga
+        {"player": "Banjo", "team": "FOKUS", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 30.0},
+        {"player": "Banjo", "team": "FOKUS", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Headshots", "line": 15.0, "sharp_line": 13.0},
+        {"player": "Matheos", "team": "FOKUS", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Kills", "line": 20.0, "sharp_line": 22.5},
+        {"player": "Matheos", "team": "FOKUS", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Headshots", "line": 31.0, "sharp_line": 28.5},
+        {"player": "jocab", "team": "FOKUS", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 28.0},
+        {"player": "jocab", "team": "FOKUS", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Headshots", "line": 14.5, "sharp_line": 12.5},
+        {"player": "podi", "team": "FOKUS", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 32.0},
+        {"player": "ztr", "team": "FOKUS", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "sharp_line": 24.0},
+        {"player": "ztr", "team": "FOKUS", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Headshots", "line": 12.5, "sharp_line": 14.5}
     ]
 
     engine = CS2ProjectionEngine(
@@ -194,7 +194,7 @@ if __name__ == "__main__":
 
     top_6_batch = board_df.sort_values(by="abs_edge", ascending=False).head(6)
 
-    st.subheader("⚡ Top Strict Trend Locks (NiP vs fnatic - Stake Closed Qualifier)")
+    st.subheader("⚡ Top Strict Trend Locks (FOKUS vs Nemiga - Stake Closed Qualifier)")
     
     cols = st.columns(3)
     for idx, row in enumerate(top_6_batch.to_dict(orient="records")):
