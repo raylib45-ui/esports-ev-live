@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-st.set_page_config(page_title="LCS Larry 2026: CS2 24/7 Engine", layout="wide")
+st.set_page_config(page_title="LCS Larry 2026: Valorant/ESports 24/7 Engine", layout="wide")
 
 st.markdown("""
 <style>
@@ -87,7 +87,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-class CS2ProjectionEngine:
+class ProjectionEngine:
     def __init__(self, slate_data: list, volatility_factor: float, data_provider: str, overtime_mode: bool):
         self.slate_data = slate_data
         self.volatility_factor = volatility_factor
@@ -132,8 +132,8 @@ class CS2ProjectionEngine:
         return df
 
 if __name__ == "__main__":
-    st.title("LCS Larry 2026: CS2 24/7 Projection Engine")
-    st.markdown("**Active 24/7 Slate: Bounty Hunters vs Imperial, ALKA vs Galorys, Isurus vs wachoskys, and more**")
+    st.title("LCS Larry 2026: 24/7 Projection Engine")
+    st.markdown("**Active 24/7 Slate: 100 Thieves vs LOUD**")
 
     st.sidebar.header("⚙️ Model Settings & Rules")
     volatility_factor = st.sidebar.slider("Roster Volatility Penalty (%)", 0.0, 10.0, 3.0, 0.5)
@@ -146,47 +146,21 @@ if __name__ == "__main__":
     )
     st.sidebar.caption(f"Connected to official scoring source: **{data_provider}**")
 
-    # Clean wipe of previous slate, populated completely with new players and lines from images 54, 55, and 56
+    # Clean wipe of previous slate, populated completely with new players and lines from image 43 (100 Thieves vs LOUD)
     master_slate = [
-        # Bounty Hunters vs Imperial (11:00am)
-        {"player": "pepe", "team": "Bounty Hunters", "match": "Bounty Hunters vs Imperial", "stat_type": "MAPS 1-2 Kills", "line": 24.5, "sharp_line": 27.0},
-        {"player": "urban0", "team": "Bounty Hunters", "match": "Bounty Hunters vs Imperial", "stat_type": "MAPS 1-2 Kills", "line": 23.5, "sharp_line": 21.0},
-        {"player": "ponter", "team": "Bounty Hunters", "match": "Bounty Hunters vs Imperial", "stat_type": "MAPS 1-2 Kills", "line": 23.5, "sharp_line": 26.0},
-        {"player": "zock", "team": "Bounty Hunters", "match": "Bounty Hunters vs Imperial", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 23.0},
-        {"player": "KAISER", "team": "Bounty Hunters", "match": "Bounty Hunters vs Imperial", "stat_type": "MAPS 1-2 Kills", "line": 23.5, "sharp_line": 26.0},
-        {"player": "VINI", "team": "Imperial", "match": "Imperial vs Bounty Hunters", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "sharp_line": 24.0},
-        {"player": "saadzin", "team": "Imperial", "match": "Imperial vs Bounty Hunters", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 32.0},
-        {"player": "noway", "team": "Imperial", "match": "Imperial vs Bounty Hunters", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 28.0},
-        {"player": "decenty", "team": "Imperial", "match": "Imperial vs Bounty Hunters", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 34.0},
-        {"player": "chelo", "team": "Imperial", "match": "Imperial vs Bounty Hunters", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 27.0},
-
-        # ALKA vs Galorys (2:00pm)
-        {"player": "PKL", "team": "Galorys", "match": "Galorys vs ALKA", "stat_type": "MAPS 1-2 Kills", "line": 24.5, "sharp_line": 27.0},
-        {"player": "detroittJ", "team": "Galorys", "match": "Galorys vs ALKA", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 27.0},
-        {"player": "tomate", "team": "ALKA", "match": "ALKA vs Galorys", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 34.0},
-        {"player": "gbb", "team": "ALKA", "match": "ALKA vs Galorys", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 28.0},
-        {"player": "destiny", "team": "ALKA", "match": "ALKA vs Galorys", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 32.0},
-        {"player": "bnc", "team": "ALKA", "match": "ALKA vs Galorys", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "sharp_line": 24.0},
-        {"player": "cerolzin", "team": "ALKA", "match": "ALKA vs Galorys", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 28.0},
-        {"player": "puní", "team": "ALKA", "match": "ALKA vs Galorys", "stat_type": "MAPS 1-2 Kills", "line": 22.5, "sharp_line": 25.0},
-        {"player": "vinaabEAST", "team": "ALKA", "match": "ALKA vs Galorys", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "sharp_line": 29.0},
-
-        # Bounty Hunters vs RED Canids Academy (6:00pm)
-        {"player": "pepe", "team": "Bounty Hunters", "match": "Bounty Hunters vs RED Canids Academy", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 26.0},
-        {"player": "urban0", "team": "Bounty Hunters", "match": "Bounty Hunters vs RED Canids Academy", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 31.0},
-        {"player": "ponter", "team": "Bounty Hunters", "match": "Bounty Hunters vs RED Canids Academy", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 25.0},
-        {"player": "zock", "team": "Bounty Hunters", "match": "Bounty Hunters vs RED Canids Academy", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 32.0},
-        {"player": "KAISER", "team": "Bounty Hunters", "match": "Bounty Hunters vs RED Canids Academy", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 27.0},
-
-        # Isurus vs wachoskys (6:00pm)
-        {"player": "Hezz", "team": "Isurus", "match": "Isurus vs wachoskys", "stat_type": "MAPS 1-2 Kills", "line": 24.5, "sharp_line": 27.0},
-        {"player": "dott1", "team": "Isurus", "match": "Isurus vs wachoskys", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 25.0},
-        {"player": "atarax1a", "team": "Isurus", "match": "Isurus vs wachoskys", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 33.0},
-        {"player": "rzk", "team": "Isurus", "match": "Isurus vs wachoskys", "stat_type": "MAPS 1-2 Kills", "line": 28.0, "sharp_line": 25.5},
-        {"player": "deco", "team": "Isurus", "match": "Isurus vs wachoskys", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 28.0}
+        {"player": "Asuna", "team": "100 Thieves", "match": "100 Thieves vs LOUD", "stat_type": "MAP 4 Kills", "line": 15.5, "sharp_line": 17.5},
+        {"player": "bang", "team": "100 Thieves", "match": "100 Thieves vs LOUD", "stat_type": "MAP 4 Kills", "line": 14.5, "sharp_line": 12.5},
+        {"player": "Cryocells", "team": "100 Thieves", "match": "100 Thieves vs LOUD", "stat_type": "MAP 4 Kills", "line": 15.5, "sharp_line": 17.0},
+        {"player": "vora", "team": "100 Thieves", "match": "100 Thieves vs LOUD", "stat_type": "MAP 4 Kills", "line": 13.5, "sharp_line": 15.5},
+        {"player": "Timotino", "team": "100 Thieves", "match": "100 Thieves vs LOUD", "stat_type": "MAP 4 Kills", "line": 15.5, "sharp_line": 13.5},
+        {"player": "Darker", "team": "LOUD", "match": "LOUD vs 100 Thieves", "stat_type": "MAP 4 Kills", "line": 13.5, "sharp_line": 15.5},
+        {"player": "DaviH", "team": "LOUD", "match": "LOUD vs 100 Thieves", "stat_type": "MAP 4 Kills", "line": 11.5, "sharp_line": 13.5},
+        {"player": "lukxo", "team": "LOUD", "match": "LOUD vs 100 Thieves", "stat_type": "MAP 4 Kills", "line": 17.0, "sharp_line": 14.5},
+        {"player": "erde", "team": "LOUD", "match": "LOUD vs 100 Thieves", "stat_type": "MAP 4 Kills", "line": 13.5, "sharp_line": 15.5},
+        {"player": "tkzin", "team": "LOUD", "match": "LOUD vs 100 Thieves", "stat_type": "MAP 4 Kills", "line": 15.5, "sharp_line": 17.5}
     ]
 
-    engine = CS2ProjectionEngine(
+    engine = ProjectionEngine(
         slate_data=master_slate, 
         volatility_factor=volatility_factor, 
         data_provider=data_provider,
