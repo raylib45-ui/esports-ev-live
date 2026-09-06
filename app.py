@@ -133,8 +133,7 @@ class CS2ProjectionEngine:
 
 if __name__ == "__main__":
     st.title("LCS Larry 2026: CS2 24/7 Projection Engine")
-    st.markdown("**Stake Ranked Episode 4 Closed Qualifier - Semi-final: FOKUS vs. Nemiga (07:00 ET)**")
-    st.markdown("*Match Context: FOKUS (62.0% Win Prob, Rank #41, Better Form Ranking) vs. Nemiga (38.0% Win Prob, Rank #63, Won 4/5 & Bookmaker Favorite)*")
+    st.markdown("**Active 24/7 Slate: MOUZ NXT vs Misa, HAVU vs Privateer, PCIFIC vs KUUSAMO, Bounty Hunters vs Imperial**")
 
     st.sidebar.header("⚙️ Model Settings & Rules")
     volatility_factor = st.sidebar.slider("Roster Volatility Penalty (%)", 0.0, 10.0, 3.0, 0.5)
@@ -147,38 +146,33 @@ if __name__ == "__main__":
     )
     st.sidebar.caption(f"Connected to official scoring source: **{data_provider}**")
 
-    with st.sidebar.expander("📖 Match Analytics & Insights"):
-        st.markdown("""
-        * **Tournament:** Stake Ranked Episode 4 Closed Qualifier (Semi-final, Bo3 Online)
-        * **FOKUS Pros:** Better form ranking, won 4 out of last 5 matches, better ranked (#41), community vote favorite (62.0%).
-        * **Nemiga Pros:** Won 4 out of last 5 matches, bookmaker favorite with best odds.
-        * **Nemiga Cons:** Worse ranked (#63), community vote underdog (38.0%).
-        """)
-
-    # Clean wipe of previous slate data, updated completely with FOKUS vs Nemiga matchup and metrics from HLTV screenshots
+    # Clean wipe of previous slate, populated completely with new players and lines from images 50 and 51
     master_slate = [
-        # Nemiga Players vs FOKUS
-        {"player": "KaiRON-", "team": "Nemiga", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Headshots", "line": 17.5, "sharp_line": 15.0},
-        {"player": "KaiRON-", "team": "Nemiga", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 34.0},
-        {"player": "Xant3r", "team": "Nemiga", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Headshots", "line": 15.5, "sharp_line": 13.5},
-        {"player": "Xant3r", "team": "Nemiga", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "sharp_line": 29.0},
-        {"player": "khaN", "team": "Nemiga", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Headshots", "line": 10.5, "sharp_line": 12.5},
-        {"player": "khaN", "team": "Nemiga", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Kills", "line": 31.0, "sharp_line": 28.5},
-        {"player": "robo", "team": "Nemiga", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Headshots", "line": 14.0, "sharp_line": 16.0},
-        {"player": "robo", "team": "Nemiga", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Kills", "line": 27.0, "sharp_line": 29.5},
-        {"player": "syph0", "team": "Nemiga", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Headshots", "line": 15.5, "sharp_line": 13.5},
-        {"player": "syph0", "team": "Nemiga", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 31.0},
+        # MOUZ NXT vs Misa
+        {"player": "Nikodeon", "team": "MOUZ NXT", "match": "MOUZ NXT vs Misa", "stat_type": "MAPS 1-2 Kills", "line": 33.5, "sharp_line": 36.0},
+        {"player": "eSx", "team": "MOUZ NXT", "match": "MOUZ NXT vs Misa", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 28.0},
+        {"player": "ayOk", "team": "MOUZ NXT", "match": "MOUZ NXT vs Misa", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 31.0},
+        {"player": "mixer", "team": "MOUZ NXT", "match": "MOUZ NXT vs Misa", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 25.0},
+        {"player": "AiyvaN", "team": "MOUZ NXT", "match": "MOUZ NXT vs Misa", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 30.0},
 
-        # FOKUS Players vs Nemiga
-        {"player": "Banjo", "team": "FOKUS", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 30.0},
-        {"player": "Banjo", "team": "FOKUS", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Headshots", "line": 15.0, "sharp_line": 13.0},
-        {"player": "Matheos", "team": "FOKUS", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Kills", "line": 20.0, "sharp_line": 22.5},
-        {"player": "Matheos", "team": "FOKUS", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Headshots", "line": 31.0, "sharp_line": 28.5},
-        {"player": "jocab", "team": "FOKUS", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 28.0},
-        {"player": "jocab", "team": "FOKUS", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Headshots", "line": 14.5, "sharp_line": 12.5},
-        {"player": "podi", "team": "FOKUS", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 32.0},
-        {"player": "ztr", "team": "FOKUS", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "sharp_line": 24.0},
-        {"player": "ztr", "team": "FOKUS", "match": "FOKUS vs Nemiga", "stat_type": "MAPS 1-2 Headshots", "line": 12.5, "sharp_line": 14.5}
+        # HAVU vs Privateer
+        {"player": "ottob", "team": "HAVU", "match": "HAVU vs Privateer", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 29.0},
+        {"player": "Alxc", "team": "HAVU", "match": "HAVU vs Privateer", "stat_type": "MAPS 1-2 Kills", "line": 31.0, "sharp_line": 33.5},
+        {"player": "p3kko", "team": "HAVU", "match": "HAVU vs Privateer", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "sharp_line": 27.0},
+        {"player": "uli", "team": "HAVU", "match": "HAVU vs Privateer", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_line": 31.0},
+        {"player": "peku", "team": "HAVU", "match": "HAVU vs Privateer", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "sharp_line": 28.0},
+
+        # PCIFIC vs KUUSAMO
+        {"player": "lugsen", "team": "PCIFIC", "match": "PCIFIC vs KUUSAMO", "stat_type": "MAPS 1-2 Kills", "line": 32.5, "sharp_line": 30.0},
+        {"player": "scolleN", "team": "PCIFIC", "match": "PCIFIC vs KUUSAMO", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_line": 34.0},
+        {"player": "jresy", "team": "PCIFIC", "match": "PCIFIC vs KUUSAMO", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "sharp_line": 28.0},
+        {"player": "eNs", "team": "PCIFIC", "match": "PCIFIC vs KUUSAMO", "stat_type": "MAPS 1-2 Kills", "line": 28.0, "sharp_line": 30.5},
+        {"player": "oyesil", "team": "PCIFIC", "match": "PCIFIC vs KUUSAMO", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_line": 25.0},
+
+        # Bounty Hunters vs Imperial
+        {"player": "pepe", "team": "Bounty Hunters", "match": "Bounty Hunters vs Imperial", "stat_type": "MAPS 1-2 Kills", "line": 24.5, "sharp_line": 27.0},
+        {"player": "urban0", "team": "Bounty Hunters", "match": "Bounty Hunters vs Imperial", "stat_type": "MAPS 1-2 Kills", "line": 23.5, "sharp_line": 21.5},
+        {"player": "ponter", "team": "Bounty Hunters", "match": "Bounty Hunters vs Imperial", "stat_type": "MAPS 1-2 Kills", "line": 23.5, "sharp_line": 26.0}
     ]
 
     engine = CS2ProjectionEngine(
@@ -194,7 +188,7 @@ if __name__ == "__main__":
 
     top_6_batch = board_df.sort_values(by="abs_edge", ascending=False).head(6)
 
-    st.subheader("⚡ Top Strict Trend Locks (FOKUS vs Nemiga - Stake Closed Qualifier)")
+    st.subheader("⚡ Top Strict Trend Locks (New Slate)")
     
     cols = st.columns(3)
     for idx, row in enumerate(top_6_batch.to_dict(orient="records")):
