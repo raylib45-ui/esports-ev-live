@@ -156,75 +156,31 @@ if __name__ == "__main__":
     )
     st.sidebar.success(f"Connected to **{data_provider}**. Continuous 24/7 scan active.")
 
-    # Master slate populated cleanly with players from images 45 through 49 (nota excluded per instructions)
+    # Master slate populated with players from Images 50 and 51
     master_slate = [
-        # Image 45
-        {"player": "TMKj", "team": "Q2 Ares", "match": "TMKj vs WAZABI (Mon 1:00pm)", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "model_line": 34.0, "hit_prob": 63.5},
-        {"player": "m1QUSE", "team": "Nuclear TigerRES", "match": "m1QUSE vs CYBERSHOKE (Mon 2:00pm)", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "model_line": 26.5, "hit_prob": 58.2},
-        {"player": "senka", "team": "Nuclear TigerRES", "match": "senka vs CYBERSHOKE (Mon 2:00pm)", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "model_line": 28.5, "hit_prob": 61.0},
-        {"player": "flouzer", "team": "Nuclear TigerRES", "match": "flouzer vs CYBERSHOKE (Mon 2:00pm)", "stat_type": "MAPS 1-2 Kills", "line": 31.0, "model_line": 34.2, "hit_prob": 62.1},
-        {"player": "z1k4", "team": "Nuclear TigerRES", "match": "z1k4 vs CYBERSHOKE (Mon 2:00pm)", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "model_line": 27.2, "hit_prob": 59.4},
-        {"player": "ayuki", "team": "Nuclear TigerRES", "match": "ayuki vs CYBERSHOKE (Mon 2:00pm)", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "model_line": 33.8, "hit_prob": 60.8},
-        {"player": "H4SAN4TOR", "team": "CYBERSHOKE", "match": "H4SAN4TOR vs Nuclear TigerRES (Mon 2:00pm)", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "model_line": 32.5, "hit_prob": 61.4},
-        {"player": "alpha", "team": "CYBERSHOKE", "match": "alpha vs Nuclear TigerRES (Mon 2:00pm)", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "model_line": 29.2, "hit_prob": 60.2},
-        {"player": "MokujIn", "team": "CYBERSHOKE", "match": "MokujIn vs Nuclear TigerRES (Mon 2:00pm)", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "model_line": 31.5, "hit_prob": 61.8},
-        {"player": "Alkaren", "team": "CYBERSHOKE", "match": "Alkaren vs Nuclear TigerRES (Mon 2:00pm)", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "model_line": 28.2, "hit_prob": 59.1},
+        # Image 50: Isurus vs wachoskys
+        {"player": "Hezz", "team": "Isurus", "match": "Hezz vs wachoskys (Mon 6:00pm)", "stat_type": "MAPS 1-2 Headshots", "line": 12.0, "model_line": 14.2, "hit_prob": 62.4},
+        {"player": "Hezz", "team": "Isurus", "match": "Hezz vs wachoskys (Mon 6:00pm)", "stat_type": "MAPS 1-2 Kills", "line": 24.5, "model_line": 21.2, "hit_prob": 58.9},
+        {"player": "atarax1a", "team": "Isurus", "match": "atarax1a vs wachoskys (Mon 6:00pm)", "stat_type": "MAPS 1-2 Headshots", "line": 10.5, "model_line": 12.8, "hit_prob": 63.1},
+        {"player": "atarax1a", "team": "Isurus", "match": "atarax1a vs wachoskys (Mon 6:00pm)", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "model_line": 34.0, "hit_prob": 62.5},
+        {"player": "deco", "team": "Isurus", "match": "deco vs wachoskys (Mon 6:00pm)", "stat_type": "MAPS 1-2 Headshots", "line": 13.5, "model_line": 11.2, "hit_prob": 58.2},
+        {"player": "deco", "team": "Isurus", "match": "deco vs wachoskys (Mon 6:00pm)", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "model_line": 28.9, "hit_prob": 61.8},
+        {"player": "dott1", "team": "Isurus", "match": "dott1 vs wachoskys (Mon 6:00pm)", "stat_type": "MAPS 1-2 Headshots", "line": 16.0, "model_line": 13.5, "hit_prob": 59.0},
+        {"player": "dott1", "team": "Isurus", "match": "dott1 vs wachoskys (Mon 6:00pm)", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "model_line": 31.0, "hit_prob": 62.0},
+        {"player": "rzk", "team": "Isurus", "match": "rzk vs wachoskys (Mon 6:00pm)", "stat_type": "MAPS 1-2 Headshots", "line": 17.5, "model_line": 20.2, "hit_prob": 63.5},
+        {"player": "rzk", "team": "Isurus", "match": "rzk vs wachoskys (Mon 6:00pm)", "stat_type": "MAPS 1-2 Kills", "line": 28.0, "model_line": 24.8, "hit_prob": 58.7},
 
-        # Image 46
-        {"player": "MoDo", "team": "SINNERS", "match": "MoDo vs Phantom (Mon 8:00am)", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "model_line": 32.8, "hit_prob": 62.0},
-        {"player": "kisserek", "team": "SINNERS", "match": "kisserek vs Phantom (Mon 8:00am)", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "model_line": 26.5, "hit_prob": 58.7},
-        {"player": "beastik", "team": "SINNERS", "match": "beastik vs Phantom (Mon 8:00am)", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "model_line": 28.2, "hit_prob": 60.5},
-        {"player": "stressarN", "team": "SINNERS", "match": "stressarN vs Phantom (Mon 8:00am)", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "model_line": 34.5, "hit_prob": 62.8},
-        {"player": "cejOt", "team": "Phantom", "match": "cejOt vs SINNERS (Mon 8:00am)", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "model_line": 26.5, "hit_prob": 59.0},
-        {"player": "TMB", "team": "Phantom", "match": "TMB vs SINNERS (Mon 8:00am)", "stat_type": "MAPS 1-2 Kills", "line": 26.0, "model_line": 29.0, "hit_prob": 61.2},
-        {"player": "KEi", "team": "Phantom", "match": "KEi vs SINNERS (Mon 8:00am)", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "model_line": 33.5, "hit_prob": 61.9},
-        {"player": "Kylar", "team": "Phantom", "match": "Kylar vs SINNERS (Mon 8:00am)", "stat_type": "MAPS 1-2 Kills", "line": 30.0, "model_line": 27.0, "hit_prob": 58.5},
-        {"player": "nicoodoz", "team": "Phantom", "match": "nicoodoz vs SINNERS (Mon 8:00am)", "stat_type": "MAPS 1-2 Kills", "line": 32.5, "model_line": 35.8, "hit_prob": 63.1},
-        {"player": "joeski", "team": "ENCE", "match": "joeski vs Entropy (Mon 10:00am)", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "model_line": 32.5, "hit_prob": 61.5},
-        {"player": "Schwarz", "team": "ENCE", "match": "Schwarz vs Entropy (Mon 10:00am)", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "model_line": 26.5, "hit_prob": 58.8},
-        {"player": "teme", "team": "ENCE", "match": "teme vs Entropy (Mon 10:00am)", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "model_line": 30.5, "hit_prob": 61.1},
-
-        # Image 47
-        {"player": "r3salt", "team": "Nemesis", "match": "r3salt vs FORZE Reload (Mon 5:00am)", "stat_type": "MAPS 1-2 Kills", "line": 31.0, "model_line": 34.2, "hit_prob": 62.4},
-        {"player": "YumsaN", "team": "FORZE Reload", "match": "YumsaN vs Nemesis (Mon 5:00am)", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "model_line": 23.5, "hit_prob": 58.2},
-        {"player": "HeCkBNk", "team": "FORZE Reload", "match": "HeCkBNk vs Nemesis (Mon 5:00am)", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "model_line": 32.5, "hit_prob": 61.0},
-        {"player": "KusMe", "team": "FORZE Reload", "match": "KusMe vs Nemesis (Mon 5:00am)", "stat_type": "MAPS 1-2 Kills", "line": 26.0, "model_line": 29.0, "hit_prob": 60.8},
-        {"player": "Lack1", "team": "FORZE Reload", "match": "Lack1 vs Nemesis (Mon 5:00am)", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "model_line": 30.5, "hit_prob": 61.2},
-        {"player": "Kaide", "team": "FORZE Reload", "match": "Kaide vs Nemesis (Mon 5:00am)", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "model_line": 28.2, "hit_prob": 59.0},
-        {"player": "MukOs", "team": "Bushido Wildcats", "match": "MukOs vs Azuolas (Mon 7:00am)", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "model_line": 28.5, "hit_prob": 61.9},
-        {"player": "cadnyx", "team": "Bushido Wildcats", "match": "cadnyx vs Azuolas (Mon 7:00am)", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "model_line": 33.8, "hit_prob": 62.5},
-        {"player": "Darendeli", "team": "Bushido Wildcats", "match": "Darendeli vs Azuolas (Mon 7:00am)", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "model_line": 28.2, "hit_prob": 58.9},
-        {"player": "Vej", "team": "Bushido Wildcats", "match": "Vej vs Azuolas (Mon 7:00am)", "stat_type": "MAPS 1-2 Kills", "line": 33.5, "model_line": 37.0, "hit_prob": 63.8},
-        {"player": "cacan", "team": "Bushido Wildcats", "match": "cacan vs Azuolas (Mon 7:00am)", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "model_line": 22.5, "hit_prob": 58.1},
-        {"player": "SHOCK", "team": "SINNERS", "match": "SHOCK vs Phantom (Mon 8:00am)", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "model_line": 29.5, "hit_prob": 61.3},
-
-        # Image 48
-        {"player": "yiksrezo", "team": "ex-RUSTEC", "match": "yiksrezo vs Fortress (Mon 4:00am)", "stat_type": "MAPS 1-2 Kills", "line": 32.5, "model_line": 35.8, "hit_prob": 63.2},
-        {"player": "KIRO", "team": "ex-RUSTEC", "match": "KIRO vs Fortress (Mon 4:00am)", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "model_line": 25.5, "hit_prob": 58.9},
-        {"player": "jakekeS", "team": "ex-RUSTEC", "match": "jakekeS vs Fortress (Mon 4:00am)", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "model_line": 29.5, "hit_prob": 61.3},
-        {"player": "BqreBedre", "team": "Fortress", "match": "BqreBedre vs ex-RUSTEC (Mon 4:00am)", "stat_type": "MAPS 1-2 Kills", "line": 21.5, "model_line": 24.2, "hit_prob": 62.5},
-        {"player": "As K", "team": "Fortress", "match": "As K vs ex-RUSTEC (Mon 4:00am)", "stat_type": "MAPS 1-2 Kills", "line": 20.5, "model_line": 17.8, "hit_prob": 58.4},
-        {"player": "Brand", "team": "Fortress", "match": "Brand vs ex-RUSTEC (Mon 4:00am)", "stat_type": "MAPS 1-2 Kills", "line": 23.5, "model_line": 26.2, "hit_prob": 61.5},
-        {"player": "K1ngShield", "team": "Fortress", "match": "K1ngShield vs ex-RUSTEC (Mon 4:00am)", "stat_type": "MAPS 1-2 Kills", "line": 21.5, "model_line": 24.5, "hit_prob": 62.1},
-        {"player": "GrEnNiE", "team": "Fortress", "match": "GrEnNiE vs ex-RUSTEC (Mon 4:00am)", "stat_type": "MAPS 1-2 Kills", "line": 21.5, "model_line": 18.5, "hit_prob": 58.6},
-        {"player": "mag1k3Y", "team": "Nemesis", "match": "mag1k3Y vs FORZE Reload (Mon 5:00am)", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "model_line": 28.2, "hit_prob": 58.9},
-        {"player": "Sdaim", "team": "Nemesis", "match": "Sdaim vs FORZE Reload (Mon 5:00am)", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "model_line": 32.5, "hit_prob": 61.0},
-        {"player": "textly", "team": "Nemesis", "match": "textly vs FORZE Reload (Mon 5:00am)", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "model_line": 33.8, "hit_prob": 62.0},
-        {"player": "SELLTER", "team": "Nemesis", "match": "SELLTER vs FORZE Reload (Mon 5:00am)", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "model_line": 28.5, "hit_prob": 61.8},
-
-        # Image 49
-        {"player": "pepe", "team": "Bounty Hunters", "match": "pepe vs RED Canids Academy (Mon 6:00pm)", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "model_line": 32.8, "hit_prob": 62.2},
-        {"player": "urban0", "team": "Bounty Hunters", "match": "urban0 vs RED Canids Academy (Mon 6:00pm)", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "model_line": 25.5, "hit_prob": 58.8},
-        {"player": "ponter", "team": "Bounty Hunters", "match": "ponter vs RED Canids Academy (Mon 6:00pm)", "stat_type": "MAPS 1-2 Kills", "line": 28.0, "model_line": 31.0, "hit_prob": 61.4},
-        {"player": "zock", "team": "Bounty Hunters", "match": "zock vs RED Canids Academy (Mon 6:00pm)", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "model_line": 26.5, "hit_prob": 59.0},
-        {"player": "KAISER", "team": "Bounty Hunters", "match": "KAISER vs RED Canids Academy (Mon 6:00pm)", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "model_line": 32.8, "hit_prob": 62.1},
-        {"player": "Hezz", "team": "Isurus", "match": "Hezz vs wachoskys (Mon 6:00pm)", "stat_type": "MAPS 1-2 Kills", "line": 24.5, "model_line": 27.5, "hit_prob": 61.8},
-        {"player": "dott1", "team": "Isurus", "match": "dott1 vs wachoskys (Mon 6:00pm)", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "model_line": 24.5, "hit_prob": 58.9},
-        {"player": "atarax1a", "team": "Isurus", "match": "atarax1a vs wachoskys (Mon 6:00pm)", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "model_line": 33.8, "hit_prob": 62.5},
-        {"player": "rzk", "team": "Isurus", "match": "rzk vs wachoskys (Mon 6:00pm)", "stat_type": "MAPS 1-2 Kills", "line": 28.0, "model_line": 31.2, "hit_prob": 61.5},
-        {"player": "deco", "team": "Isurus", "match": "deco vs wachoskys (Mon 6:00pm)", "stat_type": "MAPS 1-2 Kills", "line": 25.5, "model_line": 22.5, "hit_prob": 58.3},
-        {"player": "Brilliance", "team": "ex-RUSTEC", "match": "Brilliance vs Fortress (Mon 4:00am)", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "model_line": 29.5, "hit_prob": 61.4},
-        {"player": "youka", "team": "ex-RUSTEC", "match": "youka vs Fortress (Mon 4:00am)", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "model_line": 28.2, "hit_prob": 58.9}
+        # Image 51: Bounty Hunters vs RED Canids Academy
+        {"player": "KAISER", "team": "Bounty Hunters", "match": "KAISER vs RED Canids Academy (Mon 6:00pm)", "stat_type": "MAPS 1-2 Headshots", "line": 12.0, "model_line": 14.5, "hit_prob": 63.8},
+        {"player": "KAISER", "team": "Bounty Hunters", "match": "KAISER vs RED Canids Academy (Mon 6:00pm)", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "model_line": 33.2, "hit_prob": 62.1},
+        {"player": "pepe", "team": "Bounty Hunters", "match": "pepe vs RED Canids Academy (Mon 6:00pm)", "stat_type": "MAPS 1-2 Headshots", "line": 17.5, "model_line": 14.8, "hit_prob": 58.4},
+        {"player": "pepe", "team": "Bounty Hunters", "match": "pepe vs RED Canids Academy (Mon 6:00pm)", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "model_line": 33.0, "hit_prob": 61.9},
+        {"player": "ponter", "team": "Bounty Hunters", "match": "ponter vs RED Canids Academy (Mon 6:00pm)", "stat_type": "MAPS 1-2 Headshots", "line": 16.5, "model_line": 19.2, "hit_prob": 63.0},
+        {"player": "ponter", "team": "Bounty Hunters", "match": "ponter vs RED Canids Academy (Mon 6:00pm)", "stat_type": "MAPS 1-2 Kills", "line": 28.0, "model_line": 31.5, "hit_prob": 62.2},
+        {"player": "urban0", "team": "Bounty Hunters", "match": "urban0 vs RED Canids Academy (Mon 6:00pm)", "stat_type": "MAPS 1-2 Headshots", "line": 17.0, "model_line": 14.2, "hit_prob": 58.9},
+        {"player": "urban0", "team": "Bounty Hunters", "match": "urban0 vs RED Canids Academy (Mon 6:00pm)", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "model_line": 32.1, "hit_prob": 61.5},
+        {"player": "zock", "team": "Bounty Hunters", "match": "zock vs RED Canids Academy (Mon 6:00pm)", "stat_type": "MAPS 1-2 Headshots", "line": 16.0, "model_line": 13.2, "hit_prob": 58.1},
+        {"player": "zock", "team": "Bounty Hunters", "match": "zock vs RED Canids Academy (Mon 6:00pm)", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "model_line": 33.1, "hit_prob": 62.4}
     ]
 
     engine = ContinuousDiscrepancyEngine(
@@ -237,7 +193,7 @@ if __name__ == "__main__":
     top_6_df = board_df.head(6)
 
     status_container = st.empty()
-    status_container.markdown(f"🔍 **Scanning active books 24/7 across {len(master_slate)} lines...** Discrepancies locked. Selecting top 6 absolute hammer targets instantly.")
+    status_container.markdown(f"🔍 **Scanning active books 24/7 across Images 50 & 51...** Discrepancies locked. Selecting top 6 absolute hammer targets instantly.")
 
     st.subheader("🎯 Top 6 🔒 Instant Book Exploitation Hammers")
     
