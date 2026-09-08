@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import time
 
-st.set_page_config(page_title="LCS Larry 2026: G2 vs Astralis Discrepancy & Hammer Engine", layout="wide")
+st.set_page_config(page_title="LCS Larry 2026: WW vs NOVAQ Discrepancy Engine", layout="wide")
 
 st.markdown("""
 <style>
@@ -142,8 +142,8 @@ class MatchupDiscrepancyEngine:
         return df
 
 if __name__ == "__main__":
-    st.title("LCS Larry 2026: G2 vs Astralis Matchup Engine 🔂")
-    st.markdown("**Status: FISSURE Playground 3 LAN — G2 (82.6% Favorite, #7) vs Astralis (#12)**")
+    st.title("LCS Larry 2026: WW vs NOVAQ Matchup Engine 🔂")
+    st.markdown("**Status: Fresh Slate Loaded — WW vs NOVAQ CS2 Props (Old Players Purged)**")
 
     st.sidebar.header("⚙️ Matchup Execution Controls")
     edge_threshold = st.sidebar.slider("Minimum Discrepancy Edge (%)", 1.0, 15.0, 2.0, 0.5)
@@ -154,36 +154,20 @@ if __name__ == "__main__":
         "Official Feed Provider",
         ["Bayes Esports (Esports Feed)", "Sportradar", "Genius Sports", "Stats Perform", "Grid"]
     )
-    st.sidebar.success(f"Connected to **{data_provider}**. G2 heavy favorite model weights applied.")
+    st.sidebar.success(f"Connected to **{data_provider}**. WW roster model weights applied.")
 
-    # Master slate exclusively featuring G2 vs Astralis props from Images 40-45.
-    # Note: Astralis players factored toward UNDER due to G2 82.6% blowout risk / round scarcity.
-    # G2 stars factored toward OVER based on superior form and ranking (#7 vs #12).
+    # Master slate exclusively featuring WW vs NOVAQ props from Images 47-49.
     master_slate = [
-        # Astralis Players (Blowout risk -> Under expectation)
-        {"player": "jabbi", "team": "Astralis", "match": "G2 vs Astralis (FISSURE Q-Final)", "stat_type": "MAPS 1-2 Headshots", "line": 17.5, "model_line": 14.2, "hit_prob": 62.4},
-        {"player": "jabbi", "team": "Astralis", "match": "G2 vs Astralis (FISSURE Q-Final)", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "model_line": 23.5, "hit_prob": 63.1},
-        {"player": "Staehr", "team": "Astralis", "match": "G2 vs Astralis (FISSURE Q-Final)", "stat_type": "MAPS 1-2 Headshots", "line": 16.0, "model_line": 13.0, "hit_prob": 61.8},
-        {"player": "Staehr", "team": "Astralis", "match": "G2 vs Astralis (FISSURE Q-Final)", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "model_line": 24.2, "hit_prob": 62.5},
-        {"player": "ryu", "team": "Astralis", "match": "G2 vs Astralis (FISSURE Q-Final)", "stat_type": "MAPS 1-2 Headshots", "line": 13.5, "model_line": 10.8, "hit_prob": 60.9},
-        {"player": "ryu", "team": "Astralis", "match": "G2 vs Astralis (FISSURE Q-Final)", "stat_type": "MAPS 1-2 Kills", "line": 26.0, "model_line": 22.0, "hit_prob": 62.0},
-        {"player": "phzy", "team": "Astralis", "match": "G2 vs Astralis (FISSURE Q-Final)", "stat_type": "MAPS 1-2 Headshots", "line": 8.5, "model_line": 6.5, "hit_prob": 63.5},
-        {"player": "phzy", "team": "Astralis", "match": "G2 vs Astralis (FISSURE Q-Final)", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "model_line": 22.4, "hit_prob": 61.9},
-        {"player": "HooXi", "team": "Astralis", "match": "G2 vs Astralis (FISSURE Q-Final)", "stat_type": "MAPS 1-2 Headshots", "line": 11.0, "model_line": 8.5, "hit_prob": 64.0},
-        {"player": "HooXi", "team": "Astralis", "match": "G2 vs Astralis (FISSURE Q-Final)", "stat_type": "MAPS 1-2 Kills", "line": 21.5, "model_line": 17.8, "hit_prob": 63.2},
-
-        # G2 Players (Superior form & ranking -> Over expectation)
-        {"player": "MATYS", "team": "G2", "match": "G2 vs Astralis (FISSURE Q-Final)", "stat_type": "MAPS 1-2 Headshots", "line": 18.5, "model_line": 21.5, "hit_prob": 63.8},
-        {"player": "MATYS", "team": "G2", "match": "G2 vs Astralis (FISSURE Q-Final)", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "model_line": 31.2, "hit_prob": 62.9},
-        {"player": "huNter-", "team": "G2", "match": "G2 vs Astralis (FISSURE Q-Final)", "stat_type": "MAPS 1-2 Headshots", "line": 15.0, "model_line": 17.8, "hit_prob": 63.0},
-        {"player": "huNter-", "team": "G2", "match": "G2 vs Astralis (FISSURE Q-Final)", "stat_type": "MAPS 1-2 Kills", "line": 29.0, "model_line": 32.8, "hit_prob": 62.4},
-        {"player": "NertZ", "team": "G2", "match": "G2 vs Astralis (FISSURE Q-Final)", "stat_type": "MAPS 1-2 Headshots", "line": 17.0, "model_line": 19.9, "hit_prob": 64.2},
-        {"player": "NertZ", "team": "G2", "match": "G2 vs Astralis (FISSURE Q-Final)", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "model_line": 34.5, "hit_prob": 63.5},
-        {"player": "HeavyGod", "team": "G2", "match": "G2 vs Astralis (FISSURE Q-Final)", "stat_type": "MAPS 1-2 Headshots", "line": 17.5, "model_line": 20.4, "hit_prob": 63.1},
-        {"player": "HeavyGod", "team": "G2", "match": "G2 vs Astralis (FISSURE Q-Final)", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "model_line": 34.2, "hit_prob": 62.8},
-        {"player": "r1nkle", "team": "G2", "match": "G2 vs Astralis (FISSURE Q-Final)", "stat_type": "MAPS 1-2 Headshots", "line": 9.5, "model_line": 11.8, "hit_prob": 61.5},
-        {"player": "r1nkle", "team": "G2", "match": "G2 vs Astralis (FISSURE Q-Final)", "stat_type": "MAPS 1-2 Kills", "line": 30.5, "model_line": 34.0, "hit_prob": 62.2},
-        {"player": "NertZ + HeavyGod", "team": "G2", "match": "G2 vs Astralis (FISSURE Q-Final)", "stat_type": "MAPS 1-2 Kills (Combo)", "line": 61.0, "model_line": 68.5, "hit_prob": 64.5}
+        {"player": "StRoGo", "team": "WW", "match": "WW vs NOVAQ", "stat_type": "MAPS 1-2 Headshots", "line": 11.5, "model_line": 9.2, "hit_prob": 63.4},
+        {"player": "StRoGo", "team": "WW", "match": "WW vs NOVAQ", "stat_type": "MAPS 1-2 Kills", "line": 23.5, "model_line": 20.1, "hit_prob": 62.1},
+        {"player": "kelieN", "team": "WW", "match": "WW vs NOVAQ", "stat_type": "MAPS 1-2 Headshots", "line": 13.5, "model_line": 11.0, "hit_prob": 62.8},
+        {"player": "kelieN", "team": "WW", "match": "WW vs NOVAQ", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "model_line": 22.8, "hit_prob": 63.0},
+        {"player": "ct0m", "team": "WW", "match": "WW vs NOVAQ", "stat_type": "MAPS 1-2 Headshots", "line": 17.5, "model_line": 20.8, "hit_prob": 64.1},
+        {"player": "ct0m", "team": "WW", "match": "WW vs NOVAQ", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "model_line": 35.6, "hit_prob": 63.9},
+        {"player": "m3wsu", "team": "WW", "match": "WW vs NOVAQ", "stat_type": "MAPS 1-2 Headshots", "line": 16.5, "model_line": 13.8, "hit_prob": 61.9},
+        {"player": "m3wsu", "team": "WW", "match": "WW vs NOVAQ", "stat_type": "MAPS 1-2 Kills", "line": 29.5, "model_line": 25.2, "hit_prob": 62.5},
+        {"player": "deko", "team": "WW", "match": "WW vs NOVAQ", "stat_type": "MAPS 1-2 Headshots", "line": 13.5, "model_line": 16.4, "hit_prob": 63.2},
+        {"player": "deko", "team": "WW", "match": "WW vs NOVAQ", "stat_type": "MAPS 1-2 Kills", "line": 35.5, "model_line": 40.2, "hit_prob": 64.8}
     ]
 
     engine = MatchupDiscrepancyEngine(
@@ -196,9 +180,9 @@ if __name__ == "__main__":
     top_6_df = board_df.head(6)
 
     status_container = st.empty()
-    status_container.markdown(f"🔍 **Analyzing G2 vs Astralis (82.6% G2 win probability)...** Old players purged. Top 6 aligned hammer plays locked.")
+    status_container.markdown(f"🔍 **Analyzing WW vs NOVAQ slate...** All old players removed. Top aligned hammer plays locked.")
 
-    st.subheader("🎯 Top 6 🔒 Aligned G2 vs Astralis Hammer Plays")
+    st.subheader("🎯 Top 🔒 Aligned WW vs NOVAQ Hammer Plays")
     
     if top_6_df.empty:
         st.warning("No discrepancies currently meet the strict edge threshold. Adjust threshold in sidebar.")
@@ -238,7 +222,7 @@ if __name__ == "__main__":
                 """, unsafe_allow_html=True)
 
     st.markdown("---")
-    st.subheader("Live Discrepancy Matrix Audit Trail (G2 vs Astralis Aligned Plays)")
+    st.subheader("Live Discrepancy Matrix Audit Trail (WW vs NOVAQ Active Slate)")
     st.dataframe(board_df.drop(columns=["_raw_edge"]), use_container_width=True)
 
     if st.button("🔄 Force Immediate Re-Scan"):
