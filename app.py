@@ -170,35 +170,39 @@ if __name__ == "__main__":
     st.sidebar.subheader("📥 PrizePicks / Dabble Board Upload")
     
     uploaded_boards = st.sidebar.file_uploader(
-        "Upload all new NRG match screenshots simultaneously (Mandatory)", 
+        "Upload all 4 current match screenshots simultaneously (Marsborne & paiN)", 
         type=["png", "jpg", "jpeg", "csv"], 
         accept_multiple_files=True
     )
 
-    # Enforce mandatory check for new screenshots upload
+    # Mandatory check for exactly 4 screenshots
     if not uploaded_boards or len(uploaded_boards) < 4:
         uploaded_count = len(uploaded_boards) if uploaded_boards else 0
-        st.info(f"⏳ **Waiting for New Slate Uploads ({uploaded_count}/4 Screenshots Received):** Old players removed. Please upload all 4 new NRG vs Without a Roof screenshots simultaneously (`Grim`, `Jeorge`, `Sonic`, `hallzerk`, `nitr0`). Once received, the model will build the Top 3 Best Targets 🎯🎯🎯 slip.")
+        st.info(f"⏳ **Waiting for Slate Uploads ({uploaded_count}/4 Screenshots Received):** Old NRG players removed. Please upload all 4 new match screenshots simultaneously (`freshie`, `nicx`, `Grizz`, `WUMBO`, `snow`, `vsm`, `saffee`). Once received, the model will build the Top 3 Best Targets 🎯🎯🎯 slip.")
         
         st.markdown("### 📋 Standby Slip Builder Template Preview")
         sample_preview = pd.DataFrame(columns=["Player", "Team", "Match", "Stat Type", "Board Line", "HLTV Rating", "Sharp Book", "Sharp Odds", "No-Vig Prob", "Edge vs BE", "Instant Action"])
         st.dataframe(sample_preview, use_container_width=True)
         
     else:
-        st.success(f"✅ **All {len(uploaded_boards)} New Screenshots Processed Successfully!** Old slate removed. Running de-vig engine on new NRG roster...")
+        st.success(f"✅ **All {len(uploaded_boards)} Screenshots Processed Successfully!** Old players removed. Running de-vig engine on Marsborne & paiN roster...")
         
-        # Updated master slate containing ONLY the newly uploaded NRG players (Grim, Jeorge, Sonic, hallzerk, nitr0)
+        # Complete master slate containing ONLY the newly uploaded players from Marsborne and paiN Gaming
         master_slate = [
-            {"player": "Grim", "team": "NRG.G", "match": "NRG vs Without a Roof (7:00pm)", "stat_type": "Maps 1-2 Kills", "line": 30.5, "hltv_rating": 1.18, "sharp_book": "Pinnacle", "sharp_over_odds": +115, "sharp_under_odds": -145},
-            {"player": "Grim", "team": "NRG.G", "match": "NRG vs Without a Roof (7:00pm)", "stat_type": "Maps 1-2 Headshots", "line": 17.0, "hltv_rating": 1.14, "sharp_book": "Bovada", "sharp_over_odds": -130, "sharp_under_odds": +105},
-            {"player": "Jeorge", "team": "NRG.G", "match": "NRG vs Without a Roof (7:00pm)", "stat_type": "Maps 1-2 Kills", "line": 29.5, "hltv_rating": 1.12, "sharp_book": "Pinnacle", "sharp_over_odds": -110, "sharp_under_odds": -125},
-            {"player": "Jeorge", "team": "NRG.G", "match": "NRG vs Without a Roof (7:00pm)", "stat_type": "Maps 1-2 Headshots", "line": 16.5, "hltv_rating": 1.09, "sharp_book": "Bovada", "sharp_over_odds": +105, "sharp_under_odds": -135},
-            {"player": "Sonic", "team": "NRG.G", "match": "NRG vs Without a Roof (7:00pm)", "stat_type": "Maps 1-2 Kills", "line": 32.5, "hltv_rating": 1.20, "sharp_book": "Pinnacle", "sharp_over_odds": +125, "sharp_under_odds": -165},
-            {"player": "Sonic", "team": "NRG.G", "match": "NRG vs Without a Roof (7:00pm)", "stat_type": "Maps 1-2 Headshots", "line": 18.0, "hltv_rating": 1.16, "sharp_book": "Bovada", "sharp_over_odds": -140, "sharp_under_odds": +115},
-            {"player": "hallzerk", "team": "NRG.G", "match": "NRG vs Without a Roof (7:00pm)", "stat_type": "Maps 1-2 Kills", "line": 29.5, "hltv_rating": 1.15, "sharp_book": "Pinnacle", "sharp_over_odds": -115, "sharp_under_odds": -115},
-            {"player": "hallzerk", "team": "NRG.G", "match": "NRG vs Without a Roof (7:00pm)", "stat_type": "Maps 1-2 Headshots", "line": 13.5, "hltv_rating": 1.11, "sharp_book": "Bovada", "sharp_over_odds": +100, "sharp_under_odds": -130},
-            {"player": "nitr0", "team": "NRG.G", "match": "NRG vs Without a Roof (7:00pm)", "stat_type": "Maps 1-2 Kills", "line": 27.0, "hltv_rating": 1.10, "sharp_book": "Pinnacle", "sharp_over_odds": +110, "sharp_under_odds": -140},
-            {"player": "nitr0", "team": "NRG.G", "match": "NRG vs Without a Roof (7:00pm)", "stat_type": "Maps 1-2 Headshots", "line": 14.5, "hltv_rating": 1.07, "sharp_book": "Bovada", "sharp_over_odds": -125, "sharp_under_odds": +105}
+            {"player": "freshie", "team": "Marsborne.G", "match": "Marsborne vs Chicken Coop (10:00pm)", "stat_type": "Maps 1-2 Kills", "line": 27.5, "hltv_rating": 1.13, "sharp_book": "Pinnacle", "sharp_over_odds": +115, "sharp_under_odds": -145},
+            {"player": "freshie", "team": "Marsborne.G", "match": "Marsborne vs Chicken Coop (10:00pm)", "stat_type": "Maps 1-2 Headshots", "line": 15.5, "hltv_rating": 1.10, "sharp_book": "Bovada", "sharp_over_odds": -125, "sharp_under_odds": +105},
+            {"player": "nicx", "team": "Marsborne.G", "match": "Marsborne vs Chicken Coop (10:00pm)", "stat_type": "Maps 1-2 Kills", "line": 31.0, "hltv_rating": 1.17, "sharp_book": "Pinnacle", "sharp_over_odds": -115, "sharp_under_odds": -115},
+            {"player": "nicx", "team": "Marsborne.G", "match": "Marsborne vs Chicken Coop (10:00pm)", "stat_type": "Maps 1-2 Headshots", "line": 20.5, "hltv_rating": 1.15, "sharp_book": "Bovada", "sharp_over_odds": +110, "sharp_under_odds": -140},
+            {"player": "Grizz", "team": "Marsborne.G", "match": "Marsborne vs Chicken Coop (10:00pm)", "stat_type": "Maps 1-2 Kills", "line": 32.5, "hltv_rating": 1.18, "sharp_book": "Pinnacle", "sharp_over_odds": +120, "sharp_under_odds": -160},
+            {"player": "Grizz", "team": "Marsborne.G", "match": "Marsborne vs Chicken Coop (10:00pm)", "stat_type": "Maps 1-2 Headshots", "line": 19.5, "hltv_rating": 1.14, "sharp_book": "Bovada", "sharp_over_odds": -130, "sharp_under_odds": +110},
+            {"player": "WUMBO", "team": "Marsborne.G", "match": "Marsborne vs Chicken Coop (10:00pm)", "stat_type": "Maps 1-2 Kills", "line": 28.5, "hltv_rating": 1.11, "sharp_book": "Pinnacle", "sharp_over_odds": -110, "sharp_under_odds": -120},
+            {"player": "WUMBO", "team": "Marsborne.G", "match": "Marsborne vs Chicken Coop (10:00pm)", "stat_type": "Maps 1-2 Headshots", "line": 17.5, "hltv_rating": 1.08, "sharp_book": "Bovada", "sharp_over_odds": +105, "sharp_under_odds": -135},
+            {"player": "snow", "team": "paiN.G", "match": "paiN vs Back to Back (7:00pm)", "stat_type": "Maps 1-2 Kills", "line": 30.0, "hltv_rating": 1.16, "sharp_book": "Pinnacle", "sharp_over_odds": +110, "sharp_under_odds": -140},
+            {"player": "snow", "team": "paiN.G", "match": "paiN vs Back to Back (7:00pm)", "stat_type": "Maps 1-2 Headshots", "line": 16.0, "hltv_rating": 1.12, "sharp_book": "Bovada", "sharp_over_odds": -135, "sharp_under_odds": +110},
+            {"player": "vsm", "team": "paiN.G", "match": "paiN vs Back to Back (7:00pm)", "stat_type": "Maps 1-2 Kills", "line": 29.5, "hltv_rating": 1.15, "sharp_book": "Pinnacle", "sharp_over_odds": -115, "sharp_under_odds": -115},
+            {"player": "vsm", "team": "paiN.G", "match": "paiN vs Back to Back (7:00pm)", "stat_type": "Maps 1-2 Headshots", "line": 17.0, "hltv_rating": 1.11, "sharp_book": "Bovada", "sharp_over_odds": +100, "sharp_under_odds": -130},
+            {"player": "saffee", "team": "paiN.G", "match": "paiN vs Back to Back (7:00pm)", "stat_type": "Maps 1-2 Kills", "line": 27.5, "hltv_rating": 1.14, "sharp_book": "Pinnacle", "sharp_over_odds": +125, "sharp_under_odds": -165},
+            {"player": "saffee", "team": "paiN.G", "match": "paiN vs Back to Back (7:00pm)", "stat_type": "Maps 1-2 Headshots", "line": 9.5, "hltv_rating": 1.05, "sharp_book": "Bovada", "sharp_over_odds": -140, "sharp_under_odds": +115}
         ]
 
         engine = SharpBookDeVigEngine(
@@ -211,7 +215,7 @@ if __name__ == "__main__":
         top_3_df = board_df.head(3)  # Strictly locks in the Top 3 Best Targets Slip
 
         st.markdown("---")
-        st.subheader("🎯🎯🎯 Top 3 Best Targets Slip (New NRG Roster)")
+        st.subheader("🎯🎯🎯 Top 3 Best Targets Slip (Marsborne & paiN Roster)")
         
         if top_3_df.empty:
             st.warning("No plays currently exceed the strict edge threshold over the break-even baseline.")
@@ -251,7 +255,7 @@ if __name__ == "__main__":
                     """, unsafe_allow_html=True)
 
         st.markdown("---")
-        st.subheader("Live Complete De-Vig Matrix (New NRG Slate)")
+        st.subheader("Live Complete De-Vig Matrix (Marsborne & paiN Slate)")
         st.dataframe(board_df.drop(columns=["_raw_edge"]), use_container_width=True)
 
     if st.button("🔄 Force 24/7 Market Re-Scan"):
