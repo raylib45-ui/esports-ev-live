@@ -157,28 +157,23 @@ class SharpBookDeVigEngine:
 
 if __name__ == "__main__":
     st.title("LCS Larry 2026: 24/7 Sharp De-Vig & EV Engine ⚡")
-    st.markdown("**Status: 24/7 Autonomous Mode Active — Apex Genesis, MOUZ & GL Slate Loaded (Old Players Purged)**")
+    st.markdown("**Status: 24/7 Autonomous Mode Active — Titan Esports Club Slate Loaded (Old Players Purged)**")
 
     st.sidebar.header("⚙️ 24/7 Engine Controls")
     auto_247 = st.sidebar.toggle("🔄 24/7 Autonomous De-Vig Scanner", value=True)
-    edge_threshold = st.sidebar.slider("Min Edge vs Break-Even (%)", 0.0, 10.0, 1.5, 0.5)
+    edge_threshold = st.sidebar.slider("Min Edge vs Break-Even (%)", 0.0, 10.0, 1.0, 0.5)
     break_even_target = st.sidebar.slider("PrizePicks Break-Even Target (%)", 50.0, 56.0, 54.2, 0.1)
     sharp_benchmark = st.sidebar.selectbox("Primary Sharp Benchmark", ["Pinnacle (Sharpest)", "Bovada", "DraftKings / Bet365"])
     
     st.sidebar.success(f"24/7 Monitoring active via **{sharp_benchmark}**. Juice stripping algorithm online.")
 
-    # Master active slate updated exclusively with Apex Genesis, MOUZ, and GL players from Images 47-49.
+    # Master active slate updated exclusively with Titan Esports Club players from Images 40-41.
     active_slate = [
-        {"player": "Fayde", "team": "Apex Genesis", "match": "Apex Genesis vs MOUZ", "stat_type": "MAPS 1-2 Kills", "line": 10.5, "sharp_book": "Pinnacle", "sharp_over_odds": +130, "sharp_under_odds": -165},
-        {"player": "Bignum", "team": "Apex Genesis", "match": "Apex Genesis vs MOUZ", "stat_type": "MAPS 1-2 Kills", "line": 8.0, "sharp_book": "Bovada", "sharp_over_odds": -155, "sharp_under_odds": +125},
-        {"player": "RCY", "team": "Apex Genesis", "match": "Apex Genesis vs MOUZ", "stat_type": "MAPS 1-2 Kills", "line": 18.0, "sharp_book": "Pinnacle", "sharp_over_odds": +122, "sharp_under_odds": -152},
-        {"player": "No!ob", "team": "MOUZ", "match": "MOUZ vs GL", "stat_type": "MAPS 1-2 Kills", "line": 11.5, "sharp_book": "Pinnacle", "sharp_over_odds": -170, "sharp_under_odds": +138},
-        {"player": "BOOM", "team": "MOUZ", "match": "MOUZ vs GL", "stat_type": "MAPS 1-2 Kills", "line": 9.5, "sharp_book": "Bovada", "sharp_over_odds": +135, "sharp_under_odds": -170},
-        {"player": "Speeed", "team": "Apex Genesis", "match": "Apex Genesis vs MOUZ", "stat_type": "MAPS 1-2 Kills", "line": 6.5, "sharp_book": "Pinnacle", "sharp_over_odds": +125, "sharp_under_odds": -158},
-        {"player": "MoOz", "team": "MOUZ", "match": "MOUZ vs GL", "stat_type": "MAPS 1-2 Kills", "line": 5.0, "sharp_book": "Pinnacle", "sharp_over_odds": -180, "sharp_under_odds": +145},
-        {"player": "xsvampire", "team": "MOUZ", "match": "MOUZ vs GL", "stat_type": "MAPS 1-2 Kills", "line": 6.0, "sharp_book": "Bovada", "sharp_over_odds": -165, "sharp_under_odds": +135},
-        {"player": "Darklord", "team": "MOUZ", "match": "MOUZ vs GL", "stat_type": "MAPS 1-2 Kills", "line": 14.0, "sharp_book": "Pinnacle", "sharp_over_odds": +128, "sharp_under_odds": -160},
-        {"player": "Timado", "team": "GL", "match": "GL vs MOUZ", "stat_type": "MAPS 1-2 Kills", "line": 19.5, "sharp_book": "Pinnacle", "sharp_over_odds": -175, "sharp_under_odds": +140}
+        {"player": "ra1ny", "team": "Titan Esports Club", "match": "Titan Esports Club vs Unsettle", "stat_type": "MAP 3 Kills", "line": 16.0, "sharp_book": "Pinnacle", "sharp_over_odds": -165, "sharp_under_odds": +132},
+        {"player": "Dynamite", "team": "Titan Esports Club", "match": "Titan Esports Club vs Unsettle", "stat_type": "MAP 3 Kills", "line": 15.5, "sharp_book": "Bovada", "sharp_over_odds": +130, "sharp_under_odds": -165},
+        {"player": "lucas", "team": "Titan Esports Club", "match": "Titan Esports Club vs Unsettle", "stat_type": "MAP 3 Kills", "line": 14.5, "sharp_book": "Pinnacle", "sharp_over_odds": +125, "sharp_under_odds": -155},
+        {"player": "CoCo", "team": "Titan Esports Club", "match": "Titan Esports Club vs Unsettle", "stat_type": "MAP 3 Kills", "line": 14.5, "sharp_book": "Pinnacle", "sharp_over_odds": -160, "sharp_under_odds": +130},
+        {"player": "Haodong", "team": "Titan Esports Club", "match": "Titan Esports Club vs Unsettle", "stat_type": "MAP 3 Kills", "line": 14.5, "sharp_book": "Bovada", "sharp_over_odds": +135, "sharp_under_odds": -170}
     ]
 
     engine = SharpBookDeVigEngine(
