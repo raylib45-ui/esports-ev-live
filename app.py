@@ -141,7 +141,7 @@ class SharpBookDeVigEngine:
                 "Team": item["team"],
                 "Match": item["match"],
                 "Stat Type": item["stat_type"],
-                "PrizePicks Line": item["line"],
+                "Dabble Line": item["line"],
                 "Sharp Book": item["sharp_book"],
                 "Sharp Odds": f"O {item['sharp_over_odds']} / U {item['sharp_under_odds']}",
                 "No-Vig Prob": f"{model_prob}%",
@@ -157,35 +157,27 @@ class SharpBookDeVigEngine:
 
 if __name__ == "__main__":
     st.title("LCS Larry 2026: 24/7 Sharp De-Vig & EV Engine ⚡")
-    st.markdown("**Status: 24/7 Autonomous Mode Active — GamerLegion vs TYLOO Slate Loaded (Old Players Purged)**")
+    st.markdown("**Status: 24/7 Autonomous Mode Active — PRV vs FURIA Slate Loaded (Dabble Game 1+2 Kills)**")
 
     st.sidebar.header("⚙️ 24/7 Engine Controls")
     auto_247 = st.sidebar.toggle("🔄 24/7 Autonomous De-Vig Scanner", value=True)
     edge_threshold = st.sidebar.slider("Min Edge vs Break-Even (%)", 0.0, 10.0, 1.0, 0.5)
-    break_even_target = st.sidebar.slider("PrizePicks Break-Even Target (%)", 50.0, 56.0, 54.2, 0.1)
+    break_even_target = st.sidebar.slider("Break-Even Target (%)", 50.0, 56.0, 54.2, 0.1)
     sharp_benchmark = st.sidebar.selectbox("Primary Sharp Benchmark", ["Pinnacle (Sharpest)", "Bovada", "DraftKings / Bet365"])
     
     st.sidebar.success(f"24/7 Monitoring active via **{sharp_benchmark}**. Juice stripping algorithm online.")
 
-    # Master active slate updated exclusively with GamerLegion vs TYLOO players from Images 43-47.
+    # Master active slate updated exclusively with PRV vs FURIA players and lines from Image 45 (Game 1+2 Kills).
     active_slate = [
-        {"player": "Tauson", "team": "GamerLegion", "match": "GamerLegion vs TYLOO", "stat_type": "MAP 3 Headshots", "line": 7.0, "sharp_book": "Pinnacle", "sharp_over_odds": -165, "sharp_under_odds": +132},
-        {"player": "REZ", "team": "GamerLegion", "match": "GamerLegion vs TYLOO", "stat_type": "MAP 3 Headshots", "line": 8.0, "sharp_book": "Bovada", "sharp_over_odds": +130, "sharp_under_odds": -165},
-        {"player": "hypex", "team": "GamerLegion", "match": "GamerLegion vs TYLOO", "stat_type": "MAP 3 Headshots", "line": 5.0, "sharp_book": "Pinnacle", "sharp_over_odds": +125, "sharp_under_odds": -155},
-        {"player": "Mercury", "team": "TYLOO", "match": "TYLOO vs GamerLegion", "stat_type": "MAP 3 Headshots", "line": 7.5, "sharp_book": "Pinnacle", "sharp_over_odds": -160, "sharp_under_odds": +130},
-        {"player": "FL4MUS", "team": "GamerLegion", "match": "GamerLegion vs TYLOO", "stat_type": "MAP 3 Headshots", "line": 9.0, "sharp_book": "Bovada", "sharp_over_odds": +135, "sharp_under_odds": -170},
-        {"player": "hypex (Kills)", "team": "GamerLegion", "match": "GamerLegion vs TYLOO", "stat_type": "MAP 3 Kills", "line": 13.5, "sharp_book": "Pinnacle", "sharp_over_odds": +122, "sharp_under_odds": -152},
-        {"player": "Moseyuh", "team": "TYLOO", "match": "TYLOO vs GamerLegion", "stat_type": "MAP 3 Headshots", "line": 8.0, "sharp_book": "Pinnacle", "sharp_over_odds": -170, "sharp_under_odds": +138},
-        {"player": "Zero", "team": "TYLOO", "match": "TYLOO vs GamerLegion", "stat_type": "MAP 3 Headshots", "line": 7.5, "sharp_book": "Bovada", "sharp_over_odds": +132, "sharp_under_odds": -168},
-        {"player": "JamYoung", "team": "TYLOO", "match": "TYLOO vs GamerLegion", "stat_type": "MAP 3 Headshots", "line": 9.0, "sharp_book": "Pinnacle", "sharp_over_odds": -175, "sharp_under_odds": +140},
-        {"player": "Mercury (Kills)", "team": "TYLOO", "match": "TYLOO vs GamerLegion", "stat_type": "MAP 3 Kills", "line": 13.0, "sharp_book": "Pinnacle", "sharp_over_odds": +128, "sharp_under_odds": -160},
-        {"player": "FL4MUS (Kills)", "team": "GamerLegion", "match": "GamerLegion vs TYLOO", "stat_type": "MAP 3 Kills", "line": 15.5, "sharp_book": "Bovada", "sharp_over_odds": -180, "sharp_under_odds": +145},
-        {"player": "Tauson (Kills)", "team": "GamerLegion", "match": "GamerLegion vs TYLOO", "stat_type": "MAP 3 Kills", "line": 14.0, "sharp_book": "Pinnacle", "sharp_over_odds": +120, "sharp_under_odds": -150},
-        {"player": "REZ (Kills)", "team": "GamerLegion", "match": "GamerLegion vs TYLOO", "stat_type": "MAP 3 Kills", "line": 15.5, "sharp_book": "Pinnacle", "sharp_over_odds": -185, "sharp_under_odds": +150},
-        {"player": "Moseyuh (Kills)", "team": "TYLOO", "match": "TYLOO vs GamerLegion", "stat_type": "MAP 3 Kills", "line": 13.5, "sharp_book": "Bovada", "sharp_over_odds": +135, "sharp_under_odds": -170},
-        {"player": "Jee", "team": "TYLOO", "match": "TYLOO vs GamerLegion", "stat_type": "MAP 3 Kills", "line": 15.0, "sharp_book": "Pinnacle", "sharp_over_odds": -165, "sharp_under_odds": +132},
-        {"player": "Zero (Kills)", "team": "TYLOO", "match": "TYLOO vs GamerLegion", "stat_type": "MAP 3 Kills", "line": 14.0, "sharp_book": "Pinnacle", "sharp_over_odds": +125, "sharp_under_odds": -155},
-        {"player": "JamYoung (Kills)", "team": "TYLOO", "match": "TYLOO vs GamerLegion", "stat_type": "MAP 3 Kills", "line": 15.0, "sharp_book": "Bovada", "sharp_over_odds": -160, "sharp_under_odds": +130}
+        {"player": "molodoy", "team": "FURIA", "match": "PRV vs FURIA", "stat_type": "Game 1+2 Kills", "line": 34.5, "sharp_book": "Pinnacle", "sharp_over_odds": -165, "sharp_under_odds": +132},
+        {"player": "KSCERATO", "team": "FURIA", "match": "PRV vs FURIA", "stat_type": "Game 1+2 Kills", "line": 31.5, "sharp_book": "Bovada", "sharp_over_odds": +130, "sharp_under_odds": -165},
+        {"player": "YEKINDAR", "team": "FURIA", "match": "PRV vs FURIA", "stat_type": "Game 1+2 Kills", "line": 30.5, "sharp_book": "Pinnacle", "sharp_over_odds": +125, "sharp_under_odds": -155},
+        {"player": "Jame", "team": "PARIVISION", "match": "PRV vs FURIA", "stat_type": "Game 1+2 Kills", "line": 28.5, "sharp_book": "Pinnacle", "sharp_over_odds": -160, "sharp_under_odds": +130},
+        {"player": "FL1T", "team": "PARIVISION", "match": "PRV vs FURIA", "stat_type": "Game 1+2 Kills", "line": 28.5, "sharp_book": "Bovada", "sharp_over_odds": +135, "sharp_under_odds": -170},
+        {"player": "slaxejezzz", "team": "PARIVISION", "match": "PRV vs FURIA", "stat_type": "Game 1+2 Kills", "line": 28.5, "sharp_book": "Pinnacle", "sharp_over_odds": +122, "sharp_under_odds": -152},
+        {"player": "xiELO", "team": "PARIVISION", "match": "PRV vs FURIA", "stat_type": "Game 1+2 Kills", "line": 27.5, "sharp_book": "Pinnacle", "sharp_over_odds": -170, "sharp_under_odds": +138},
+        {"player": "zweih", "team": "PARIVISION", "match": "PRV vs FURIA", "stat_type": "Game 1+2 Kills", "line": 27.5, "sharp_book": "Bovada", "sharp_over_odds": +132, "sharp_under_odds": -168},
+        {"player": "FalleN", "team": "FURIA", "match": "PRV vs FURIA", "stat_type": "Game 1+2 Kills", "line": 25.5, "sharp_book": "Pinnacle", "sharp_over_odds": -175, "sharp_under_odds": +140}
     ]
 
     engine = SharpBookDeVigEngine(
@@ -198,7 +190,7 @@ if __name__ == "__main__":
     top_6_df = board_df.head(6)
 
     status_container = st.empty()
-    status_container.markdown(f"🟢 **24/7 De-Vig Loop Active:** De-viging Pinnacle/Bovada markets against PrizePicks break-even threshold ({break_even_target}%).")
+    status_container.markdown(f"🟢 **24/7 De-Vig Loop Active:** De-viging Pinnacle/Bovada markets against break-even threshold ({break_even_target}%).")
 
     st.subheader("🎯 Top 24/7 De-Vigged +EV Hammer Plays")
     
@@ -214,7 +206,7 @@ if __name__ == "__main__":
                         <div class="card-header">{row['Match']} • {row['Sharp Book']}</div>
                         <div class="player-name">{row['Player']}</div>
                         <div class="stat-type">{row['Stat Type']} • Odds: {row['Sharp Odds']}</div>
-                        <div class="line-display">Line: {row['PrizePicks Line']}</div>
+                        <div class="line-display">Line: {row['Dabble Line']}</div>
                         <div class="metric-grid">
                             <div class="metric-box">
                                 <div class="metric-title">No-Vig Prob</div>
