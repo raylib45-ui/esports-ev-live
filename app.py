@@ -168,17 +168,18 @@ if __name__ == "__main__":
     
     st.sidebar.markdown("---")
     st.sidebar.subheader("📥 PrizePicks / Dabble Board Upload")
-    uploaded_board = st.sidebar.file_uploader("Upload incoming board screenshots / data feed", type=["png", "jpg", "jpeg", "csv"])
+    # accept_multiple_files=True enables uploading multiple images/files simultaneously
+    uploaded_boards = st.sidebar.file_uploader("Upload incoming board screenshots / data feed (Multiple allowed)", type=["png", "jpg", "jpeg", "csv"], accept_multiple_files=True)
 
-    if uploaded_board is None:
-        st.info("⏳ **Waiting Mode Active:** Model is primed and operating in 24/7 autonomous loop, waiting until you send or upload the PrizePicks/Dabble esports board to execute slip builder analysis.")
+    if not uploaded_boards:
+        st.info("⏳ **Waiting Mode Active:** Model is primed and operating in 24/7 autonomous loop, waiting until you send or upload the PrizePicks/Dabble esports board(s) to execute slip builder analysis.")
         
         st.markdown("### 📋 Standby Slip Builder Template Preview")
         sample_preview = pd.DataFrame(columns=["Player", "Team", "Match", "Stat Type", "Board Line", "HLTV Rating", "Sharp Book", "Sharp Odds", "No-Vig Prob", "Edge vs BE", "Instant Action"])
         st.dataframe(sample_preview, use_container_width=True)
         
     else:
-        st.success("✅ **Board Received!** Processing uploaded slate through 24/7 de-vig and slip builder engine...")
+        st.success(f"✅ **{len(uploaded_boards)} Board File(s) Received!** Processing uploaded slates through 24/7 de-vig and slip builder engine...")
         
         # Updated roster from current board captures: Voca.G (nosraC, snav, junior, MarKE, dare) vs Villainous
         active_slate = [
