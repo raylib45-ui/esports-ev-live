@@ -157,7 +157,7 @@ class SharpBookDeVigEngine:
 
 if __name__ == "__main__":
     st.title("LCS Larry 2026: 24/7 Sharp De-Vig & EV Engine ⚡")
-    st.markdown("**Status: 24/7 Autonomous Mode Active — PRV vs FURIA Slate Loaded (Dabble Game 2 Kills)**")
+    st.markdown("**Status: 24/7 Autonomous Mode Active — PRV vs FURIA Slate Loaded (Dabble Game 1 Headshots)**")
 
     st.sidebar.header("⚙️ 24/7 Engine Controls")
     auto_247 = st.sidebar.toggle("🔄 24/7 Autonomous De-Vig Scanner", value=True)
@@ -167,15 +167,11 @@ if __name__ == "__main__":
     
     st.sidebar.success(f"24/7 Monitoring active via **{sharp_benchmark}**. Juice stripping algorithm online.")
 
-    # Master active slate updated exclusively with PRV vs FURIA Game 2 Kills players and lines from Image 49.
+    # Master active slate updated exclusively with PRV vs FURIA Game 1 Headshots players and lines from Image 46.
     active_slate = [
-        {"player": "molodoy", "team": "FURIA", "match": "PRV vs FURIA", "stat_type": "Game 2 Kills", "line": 17.5, "sharp_book": "Pinnacle", "sharp_over_odds": -165, "sharp_under_odds": +132},
-        {"player": "KSCERATO", "team": "FURIA", "match": "PRV vs FURIA", "stat_type": "Game 2 Kills", "line": 15.5, "sharp_book": "Bovada", "sharp_over_odds": +130, "sharp_under_odds": -165},
-        {"player": "YEKINDAR", "team": "FURIA", "match": "PRV vs FURIA", "stat_type": "Game 2 Kills", "line": 15.5, "sharp_book": "Pinnacle", "sharp_over_odds": +125, "sharp_under_odds": -155},
-        {"player": "yuurih", "team": "FURIA", "match": "PRV vs FURIA", "stat_type": "Game 2 Kills", "line": 13.5, "sharp_book": "Pinnacle", "sharp_over_odds": -160, "sharp_under_odds": +130},
-        {"player": "zweih", "team": "PARIVISION", "match": "PRV vs FURIA", "stat_type": "Game 2 Kills", "line": 13.5, "sharp_book": "Bovada", "sharp_over_odds": +135, "sharp_under_odds": -170},
-        {"player": "xiELO", "team": "PARIVISION", "match": "PRV vs FURIA", "stat_type": "Game 2 Kills", "line": 13.5, "sharp_book": "Pinnacle", "sharp_over_odds": +122, "sharp_under_odds": -152},
-        {"player": "FalleN", "team": "FURIA", "match": "PRV vs FURIA", "stat_type": "Game 2 Kills", "line": 12.5, "sharp_book": "Pinnacle", "sharp_over_odds": -170, "sharp_under_odds": +138}
+        {"player": "FL1T", "team": "PARIVISION", "match": "PRV vs FURIA", "stat_type": "Game 1 Headshots", "line": 7.5, "sharp_book": "Pinnacle", "sharp_over_odds": -165, "sharp_under_odds": +132},
+        {"player": "FalleN", "team": "FURIA", "match": "PRV vs FURIA", "stat_type": "Game 1 Headshots", "line": 6.5, "sharp_book": "Bovada", "sharp_over_odds": +130, "sharp_under_odds": -165},
+        {"player": "Jame", "team": "PARIVISION", "match": "PRV vs FURIA", "stat_type": "Game 1 Headshots", "line": 4.5, "sharp_book": "Pinnacle", "sharp_over_odds": +125, "sharp_under_odds": -155}
     ]
 
     engine = SharpBookDeVigEngine(
