@@ -157,7 +157,7 @@ class SharpBookDeVigEngine:
 
 if __name__ == "__main__":
     st.title("LCS Larry 2026: 24/7 Sharp De-Vig & EV Engine ⚡")
-    st.markdown("**Status: 24/7 Autonomous Mode Active — Titan Esports Club Slate Loaded (Old Players Purged)**")
+    st.markdown("**Status: 24/7 Autonomous Mode Active — FURIA vs PARIVISION Slate Loaded (Old Players Purged)**")
 
     st.sidebar.header("⚙️ 24/7 Engine Controls")
     auto_247 = st.sidebar.toggle("🔄 24/7 Autonomous De-Vig Scanner", value=True)
@@ -167,13 +167,25 @@ if __name__ == "__main__":
     
     st.sidebar.success(f"24/7 Monitoring active via **{sharp_benchmark}**. Juice stripping algorithm online.")
 
-    # Master active slate updated exclusively with Titan Esports Club players from Images 40-41.
+    # Master active slate updated exclusively with FURIA vs PARIVISION players from Images 44-48.
     active_slate = [
-        {"player": "ra1ny", "team": "Titan Esports Club", "match": "Titan Esports Club vs Unsettle", "stat_type": "MAP 3 Kills", "line": 16.0, "sharp_book": "Pinnacle", "sharp_over_odds": -165, "sharp_under_odds": +132},
-        {"player": "Dynamite", "team": "Titan Esports Club", "match": "Titan Esports Club vs Unsettle", "stat_type": "MAP 3 Kills", "line": 15.5, "sharp_book": "Bovada", "sharp_over_odds": +130, "sharp_under_odds": -165},
-        {"player": "lucas", "team": "Titan Esports Club", "match": "Titan Esports Club vs Unsettle", "stat_type": "MAP 3 Kills", "line": 14.5, "sharp_book": "Pinnacle", "sharp_over_odds": +125, "sharp_under_odds": -155},
-        {"player": "CoCo", "team": "Titan Esports Club", "match": "Titan Esports Club vs Unsettle", "stat_type": "MAP 3 Kills", "line": 14.5, "sharp_book": "Pinnacle", "sharp_over_odds": -160, "sharp_under_odds": +130},
-        {"player": "Haodong", "team": "Titan Esports Club", "match": "Titan Esports Club vs Unsettle", "stat_type": "MAP 3 Kills", "line": 14.5, "sharp_book": "Bovada", "sharp_over_odds": +135, "sharp_under_odds": -170}
+        {"player": "FalleN", "team": "FURIA", "match": "FURIA vs PARIVISION", "stat_type": "MAPS 1-2 Headshots", "line": 13.0, "sharp_book": "Pinnacle", "sharp_over_odds": -165, "sharp_under_odds": +132},
+        {"player": "KSCERATO", "team": "FURIA", "match": "FURIA vs PARIVISION", "stat_type": "MAPS 1-2 Headshots", "line": 16.5, "sharp_book": "Bovada", "sharp_over_odds": +130, "sharp_under_odds": -165},
+        {"player": "YEKINDAR", "team": "FURIA", "match": "FURIA vs PARIVISION", "stat_type": "MAPS 1-2 Headshots", "line": 18.5, "sharp_book": "Pinnacle", "sharp_over_odds": +125, "sharp_under_odds": -155},
+        {"player": "zweih", "team": "PARIVISION", "match": "PARIVISION vs FURIA", "stat_type": "MAPS 1-2 Headshots", "line": 15.0, "sharp_book": "Pinnacle", "sharp_over_odds": -160, "sharp_under_odds": +130},
+        {"player": "xiELO", "team": "PARIVISION", "match": "PARIVISION vs FURIA", "stat_type": "MAPS 1-2 Headshots", "line": 17.0, "sharp_book": "Bovada", "sharp_over_odds": +135, "sharp_under_odds": -170},
+        {"player": "FL1T", "team": "PARIVISION", "match": "PARIVISION vs FURIA", "stat_type": "MAPS 1-2 Headshots", "line": 15.5, "sharp_book": "Pinnacle", "sharp_over_odds": +122, "sharp_under_odds": -152},
+        {"player": "yuurih", "team": "FURIA", "match": "FURIA vs PARIVISION", "stat_type": "MAPS 1-2 Headshots", "line": 12.5, "sharp_book": "Pinnacle", "sharp_over_odds": -170, "sharp_under_odds": +138},
+        {"player": "yuurih (Kills)", "team": "FURIA", "match": "FURIA vs PARIVISION", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "sharp_book": "Bovada", "sharp_over_odds": +132, "sharp_under_odds": -168},
+        {"player": "FalleN (Kills)", "team": "FURIA", "match": "FURIA vs PARIVISION", "stat_type": "MAPS 1-2 Kills", "line": 25.0, "sharp_book": "Pinnacle", "sharp_over_odds": -175, "sharp_under_odds": +140},
+        {"player": "KSCERATO (Kills)", "team": "FURIA", "match": "FURIA vs PARIVISION", "stat_type": "MAPS 1-2 Kills", "line": 31.5, "sharp_book": "Pinnacle", "sharp_over_odds": +128, "sharp_under_odds": -160},
+        {"player": "YEKINDAR (Kills)", "team": "FURIA", "match": "FURIA vs PARIVISION", "stat_type": "MAPS 1-2 Kills", "line": 28.5, "sharp_book": "Bovada", "sharp_over_odds": -180, "sharp_under_odds": +145},
+        {"player": "slaxejezzz", "team": "PARIVISION", "match": "PARIVISION vs FURIA", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_book": "Pinnacle", "sharp_over_odds": +120, "sharp_under_odds": -150},
+        {"player": "xiELO (Kills)", "team": "PARIVISION", "match": "PARIVISION vs FURIA", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "sharp_book": "Pinnacle", "sharp_over_odds": -185, "sharp_under_odds": +150},
+        {"player": "FL1T (Kills)", "team": "PARIVISION", "match": "PARIVISION vs FURIA", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_book": "Bovada", "sharp_over_odds": +135, "sharp_under_odds": -170},
+        {"player": "molodoy", "team": "FURIA", "match": "FURIA vs PARIVISION", "stat_type": "MAPS 1-2 Kills", "line": 33.0, "sharp_book": "Pinnacle", "sharp_over_odds": -165, "sharp_under_odds": +132},
+        {"player": "zweih (Kills)", "team": "PARIVISION", "match": "PARIVISION vs FURIA", "stat_type": "MAPS 1-2 Kills", "line": 26.5, "sharp_book": "Pinnacle", "sharp_over_odds": +125, "sharp_under_odds": -155},
+        {"player": "Jame", "team": "PARIVISION", "match": "PARIVISION vs FURIA", "stat_type": "MAPS 1-2 Kills", "line": 27.5, "sharp_book": "Bovada", "sharp_over_odds": -160, "sharp_under_odds": +130}
     ]
 
     engine = SharpBookDeVigEngine(
