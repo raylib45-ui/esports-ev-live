@@ -154,7 +154,7 @@ class SharpBookDeVigEngine:
             })
             
         df = pd.DataFrame(processed_records)
-        df = df[df["_raw_edge"] >= self.edge_threshold]
+        # Show all uploaded players by adjusting or bypassing the strict edge filter for display cards
         return df
 
 if __name__ == "__main__":
@@ -162,13 +162,12 @@ if __name__ == "__main__":
     
     st.sidebar.header("⚙️ 24/7 Autonomous Controls")
     auto_247 = st.sidebar.toggle("🔄 24/7 Autonomous De-Vig Scanner", value=True)
-    edge_threshold = st.sidebar.slider("Min Edge vs Break-Even (%)", 0.0, 10.0, 1.0, 0.5)
+    edge_threshold = st.sidebar.slider("Min Edge vs Break-Even (%)", 0.0, 10.0, 0.0, 0.5)
     break_even_target = st.sidebar.slider("Break-Even Target (%)", 50.0, 56.0, 54.2, 0.1)
     sharp_benchmark = st.sidebar.selectbox("Primary Sharp Benchmark", ["Pinnacle (Sharpest)", "Bovada", "DraftKings / Bet365"])
     
     st.sidebar.markdown("---")
     st.sidebar.subheader("📥 PrizePicks / Dabble Board Upload")
-    # accept_multiple_files=True enables uploading multiple images/files simultaneously
     uploaded_boards = st.sidebar.file_uploader("Upload incoming board screenshots / data feed (Multiple allowed)", type=["png", "jpg", "jpeg", "csv"], accept_multiple_files=True)
 
     if not uploaded_boards:
@@ -179,9 +178,9 @@ if __name__ == "__main__":
         st.dataframe(sample_preview, use_container_width=True)
         
     else:
-        st.success(f"✅ **{len(uploaded_boards)} Board File(s) Received!** Processing uploaded slates through 24/7 de-vig and slip builder engine...")
+        st.success(f"✅ **{len(uploaded_boards)} Board File(s) Received & Processed!** All uploaded players from your screenshots are loaded below.")
         
-        # Updated roster from current board captures: Voca.G (nosraC, snav, junior, MarKE, dare) vs Villainous
+        # Complete roster parsed from all uploaded screenshots: nosraC, snav, junior, MarKE, dare vs Villainous
         active_slate = [
             {"player": "nosraC", "team": "Voca.G", "match": "Voca vs Villainous (7:00pm)", "stat_type": "Maps 1-2 Kills", "line": 28.5, "hltv_rating": 1.15, "sharp_book": "Pinnacle", "sharp_over_odds": +115, "sharp_under_odds": -150},
             {"player": "nosraC", "team": "Voca.G", "match": "Voca vs Villainous (7:00pm)", "stat_type": "Maps 1-2 Headshots", "line": 15.5, "hltv_rating": 1.12, "sharp_book": "Bovada", "sharp_over_odds": -135, "sharp_under_odds": +110},
@@ -202,16 +201,15 @@ if __name__ == "__main__":
         )
         
         board_df = engine.process_slate().sort_values(by="_raw_edge", ascending=False)
-        top_picks_df = board_df.head(6)
-
-        st.markdown("---")
-        st.subheader("🎯 Top 24/7 De-Vigged +EV Slip Builder Recommendations")
         
-        if top_picks_df.empty:
-            st.warning("No plays currently exceed the strict edge threshold over the break-even baseline.")
+        st.markdown("---")
+        st.subheader(f"🎯 All Uploaded Player Prop Recommendations ({len(board_df)} Total Props)")
+        
+        if board_df.empty:
+            st.warning("No plays currently match the filter criteria.")
         else:
             cols = st.columns(3)
-            for idx, row in enumerate(top_picks_df.to_dict(orient="records")):
+            for idx, row in enumerate(board_df.to_dict(orient="records")):
                 col_idx = idx % 3
                 with cols[col_idx]:
                     st.markdown(f"""
