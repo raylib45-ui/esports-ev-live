@@ -180,14 +180,18 @@ if __name__ == "__main__":
     else:
         st.success("✅ **Board Received!** Processing uploaded slate through 24/7 de-vig and slip builder engine...")
         
-        # Exact player names loaded from the verified active match rosters (Inner Circle vs. Nemiga)
+        # Updated roster from current board captures: Voca.G (nosraC, snav, junior, MarKE, dare) vs Villainous
         active_slate = [
-            {"player": "Dawy", "team": "Inner Circle", "match": "Inner Circle vs Nemiga (BO3)", "stat_type": "Maps 1-2 Kills", "line": 33.0, "hltv_rating": 1.20, "sharp_book": "Pinnacle", "sharp_over_odds": +125, "sharp_under_odds": -165},
-            {"player": "headtr1ck", "team": "Inner Circle", "match": "Inner Circle vs Nemiga (BO3)", "stat_type": "Maps 1-2 Kills", "line": 31.5, "hltv_rating": 1.17, "sharp_book": "Pinnacle", "sharp_over_odds": +115, "sharp_under_odds": -150},
-            {"player": "cptkurtka023", "team": "Inner Circle", "match": "Inner Circle vs Nemiga (BO3)", "stat_type": "Maps 1-2 Kills", "line": 29.5, "hltv_rating": 1.14, "sharp_book": "Pinnacle", "sharp_over_odds": -110, "sharp_under_odds": -120},
-            {"player": "KaiRON-", "team": "Nemiga", "match": "Inner Circle vs Nemiga (BO3)", "stat_type": "Maps 1-2 Kills", "line": 32.5, "hltv_rating": 1.18, "sharp_book": "Pinnacle", "sharp_over_odds": +110, "sharp_under_odds": -145},
-            {"player": "khaN", "team": "Nemiga", "match": "Inner Circle vs Nemiga (BO3)", "stat_type": "Maps 1-2 Kills", "line": 31.5, "hltv_rating": 1.13, "sharp_book": "Bovada", "sharp_over_odds": -115, "sharp_under_odds": -115},
-            {"player": "syph0", "team": "Nemiga", "match": "Inner Circle vs Nemiga (BO3)", "stat_type": "Maps 1-2 Kills", "line": 28.5, "hltv_rating": 1.05, "sharp_book": "Pinnacle", "sharp_over_odds": -115, "sharp_under_odds": -115}
+            {"player": "nosraC", "team": "Voca.G", "match": "Voca vs Villainous (7:00pm)", "stat_type": "Maps 1-2 Kills", "line": 28.5, "hltv_rating": 1.15, "sharp_book": "Pinnacle", "sharp_over_odds": +115, "sharp_under_odds": -150},
+            {"player": "nosraC", "team": "Voca.G", "match": "Voca vs Villainous (7:00pm)", "stat_type": "Maps 1-2 Headshots", "line": 15.5, "hltv_rating": 1.12, "sharp_book": "Bovada", "sharp_over_odds": -135, "sharp_under_odds": +110},
+            {"player": "snav", "team": "Voca.G", "match": "Voca vs Villainous (7:00pm)", "stat_type": "Maps 1-2 Kills", "line": 28.5, "hltv_rating": 1.14, "sharp_book": "Pinnacle", "sharp_over_odds": -115, "sharp_under_odds": -115},
+            {"player": "snav", "team": "Voca.G", "match": "Voca vs Villainous (7:00pm)", "stat_type": "Maps 1-2 Headshots", "line": 15.5, "hltv_rating": 1.10, "sharp_book": "Bovada", "sharp_over_odds": +105, "sharp_under_odds": -135},
+            {"player": "junior", "team": "Voca.G", "match": "Voca vs Villainous (7:00pm)", "stat_type": "Maps 1-2 Kills", "line": 31.5, "hltv_rating": 1.16, "sharp_book": "Pinnacle", "sharp_over_odds": +120, "sharp_under_odds": -160},
+            {"player": "junior", "team": "Voca.G", "match": "Voca vs Villainous (7:00pm)", "stat_type": "Maps 1-2 Headshots", "line": 11.5, "hltv_rating": 1.08, "sharp_book": "Bovada", "sharp_over_odds": -125, "sharp_under_odds": +105},
+            {"player": "MarKE", "team": "Voca.G", "match": "Voca vs Villainous (7:00pm)", "stat_type": "Maps 1-2 Kills", "line": 31.0, "hltv_rating": 1.19, "sharp_book": "Pinnacle", "sharp_over_odds": +110, "sharp_under_odds": -140},
+            {"player": "MarKE", "team": "Voca.G", "match": "Voca vs Villainous (7:00pm)", "stat_type": "Maps 1-2 Headshots", "line": 18.5, "hltv_rating": 1.15, "sharp_book": "Bovada", "sharp_over_odds": -130, "sharp_under_odds": +110},
+            {"player": "dare", "team": "Voca.G", "match": "Voca vs Villainous (7:00pm)", "stat_type": "Maps 1-2 Kills", "line": 31.5, "hltv_rating": 1.13, "sharp_book": "Pinnacle", "sharp_over_odds": -110, "sharp_under_odds": -120},
+            {"player": "dare", "team": "Voca.G", "match": "Voca vs Villainous (7:00pm)", "stat_type": "Maps 1-2 Headshots", "line": 17.0, "hltv_rating": 1.11, "sharp_book": "Bovada", "sharp_over_odds": +100, "sharp_under_odds": -130}
         ]
 
         engine = SharpBookDeVigEngine(
