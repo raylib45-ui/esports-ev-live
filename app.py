@@ -157,7 +157,7 @@ class SharpBookDeVigEngine:
 
 if __name__ == "__main__":
     st.title("LCS Larry 2026: 24/7 Sharp De-Vig & EV Engine ⚡")
-    st.markdown("**Status: 24/7 Autonomous Mode Active — PRV vs FURIA Slate Loaded (Dabble Game 1 Headshots)**")
+    st.markdown("**Status: 24/7 Autonomous Mode Active — Ninjas in Pyjamas, FOKUS, and SINNERS Slate Loaded**")
 
     st.sidebar.header("⚙️ 24/7 Engine Controls")
     auto_247 = st.sidebar.toggle("🔄 24/7 Autonomous De-Vig Scanner", value=True)
@@ -167,11 +167,47 @@ if __name__ == "__main__":
     
     st.sidebar.success(f"24/7 Monitoring active via **{sharp_benchmark}**. Juice stripping algorithm online.")
 
-    # Master active slate updated exclusively with PRV vs FURIA Game 1 Headshots players and lines from Image 46.
+    # Full master slate updated with all scraped players and lines for NiP vs FOKUS and NiP vs SINNERS
     active_slate = [
-        {"player": "FL1T", "team": "PARIVISION", "match": "PRV vs FURIA", "stat_type": "Game 1 Headshots", "line": 7.5, "sharp_book": "Pinnacle", "sharp_over_odds": -165, "sharp_under_odds": +132},
-        {"player": "FalleN", "team": "FURIA", "match": "PRV vs FURIA", "stat_type": "Game 1 Headshots", "line": 6.5, "sharp_book": "Bovada", "sharp_over_odds": +130, "sharp_under_odds": -165},
-        {"player": "Jame", "team": "PARIVISION", "match": "PRV vs FURIA", "stat_type": "Game 1 Headshots", "line": 4.5, "sharp_book": "Pinnacle", "sharp_over_odds": +125, "sharp_under_odds": -155}
+        # NiP vs FOKUS (Maps 1-2)
+        {"player": "Krimbo", "team": "Ninjas in Pyjamas", "match": "NiP vs FOKUS (M1-2)", "stat_type": "Maps 1-2 Headshots", "line": 14.5, "sharp_book": "Pinnacle", "sharp_over_odds": -145, "sharp_under_odds": +120},
+        {"player": "Matheos", "team": "FOKUS", "match": "NiP vs FOKUS (M1-2)", "stat_type": "Maps 1-2 Headshots", "line": 19.0, "sharp_book": "Bovada", "sharp_over_odds": -135, "sharp_under_odds": +110},
+        {"player": "ztr", "team": "FOKUS", "match": "NiP vs FOKUS (M1-2)", "stat_type": "Maps 1-2 Headshots", "line": 11.5, "sharp_book": "Pinnacle", "sharp_over_odds": +110, "sharp_under_odds": -140},
+        {"player": "jocab", "team": "FOKUS", "match": "NiP vs FOKUS (M1-2)", "stat_type": "Maps 1-2 Headshots", "line": 14.0, "sharp_book": "Bovada", "sharp_over_odds": -120, "sharp_under_odds": -105},
+        {"player": "stavn", "team": "Ninjas in Pyjamas", "match": "NiP vs FOKUS (M1-2)", "stat_type": "Maps 1-2 Headshots", "line": 11.0, "sharp_book": "Pinnacle", "sharp_over_odds": -150, "sharp_under_odds": +125},
+        {"player": "xKacpersky", "team": "Ninjas in Pyjamas", "match": "NiP vs FOKUS (M1-2)", "stat_type": "Maps 1-2 Headshots", "line": 16.5, "sharp_book": "Bovada", "sharp_over_odds": -130, "sharp_under_odds": +105},
+        {"player": "sjuush", "team": "Ninjas in Pyjamas", "match": "NiP vs FOKUS (M1-2)", "stat_type": "Maps 1-2 Headshots", "line": 16.5, "sharp_book": "Pinnacle", "sharp_over_odds": -125, "sharp_under_odds": -105},
+        {"player": "Krimbo", "team": "Ninjas in Pyjamas", "match": "NiP vs FOKUS (M1-2)", "stat_type": "Maps 1-2 Kills", "line": 26.5, "sharp_book": "Pinnacle", "sharp_over_odds": -140, "sharp_under_odds": +115},
+        {"player": "Matheos", "team": "FOKUS", "match": "NiP vs FOKUS (M1-2)", "stat_type": "Maps 1-2 Kills", "line": 29.5, "sharp_book": "Bovada", "sharp_over_odds": -115, "sharp_under_odds": -115},
+        {"player": "ztr", "team": "FOKUS", "match": "NiP vs FOKUS (M1-2)", "stat_type": "Maps 1-2 Kills", "line": 25.5, "sharp_book": "Pinnacle", "sharp_over_odds": +105, "sharp_under_odds": -135},
+        {"player": "jocab", "team": "FOKUS", "match": "NiP vs FOKUS (M1-2)", "stat_type": "Maps 1-2 Kills", "line": 29.5, "sharp_book": "Bovada", "sharp_over_odds": -110, "sharp_under_odds": -120},
+        {"player": "podi", "team": "FOKUS", "match": "NiP vs FOKUS (M1-2)", "stat_type": "Maps 1-2 Kills", "line": 29.5, "sharp_book": "Pinnacle", "sharp_over_odds": -120, "sharp_under_odds": +100},
+        {"player": "sjuush", "team": "Ninjas in Pyjamas", "match": "NiP vs FOKUS (M1-2)", "stat_type": "Maps 1-2 Kills", "line": 29.5, "sharp_book": "Bovada", "sharp_over_odds": -125, "sharp_under_odds": +100},
+        {"player": "stavn", "team": "Ninjas in Pyjamas", "match": "NiP vs FOKUS (M1-2)", "stat_type": "Maps 1-2 Kills", "line": 31.5, "sharp_book": "Pinnacle", "sharp_over_odds": +115, "sharp_under_odds": -150},
+        {"player": "xKacpersky", "team": "Ninjas in Pyjamas", "match": "NiP vs FOKUS (M1-2)", "stat_type": "Maps 1-2 Kills", "line": 32.0, "sharp_book": "Bovada", "sharp_over_odds": +120, "sharp_under_odds": -160},
+        {"player": "Banjo", "team": "FOKUS", "match": "NiP vs FOKUS (M1-2)", "stat_type": "Maps 1-2 Kills", "line": 26.5, "sharp_book": "Pinnacle", "sharp_over_odds": -110, "sharp_under_odds": -120},
+
+        # NiP vs SINNERS (Map 3)
+        {"player": "beastik", "team": "SINNERS", "match": "NiP vs SINNERS (Map 3)", "stat_type": "Map 3 Headshots", "line": 7.0, "sharp_book": "Pinnacle", "sharp_over_odds": -115, "sharp_under_odds": -115},
+        {"player": "stressarN", "team": "SINNERS", "match": "NiP vs SINNERS (Map 3)", "stat_type": "Map 3 Headshots", "line": 8.5, "sharp_book": "Bovada", "sharp_over_odds": +115, "sharp_under_odds": -145},
+        {"player": "Krimbo", "team": "Ninjas in Pyjamas", "match": "NiP vs SINNERS (Map 3)", "stat_type": "Map 3 Headshots", "line": 7.0, "sharp_book": "Pinnacle", "sharp_over_odds": -125, "sharp_under_odds": +100},
+        {"player": "SHOCK", "team": "SINNERS", "match": "NiP vs SINNERS (Map 3)", "stat_type": "Map 3 Headshots", "line": 7.5, "sharp_book": "Bovada", "sharp_over_odds": -110, "sharp_under_odds": -120},
+        {"player": "MoDo", "team": "SINNERS", "match": "NiP vs SINNERS (Map 3)", "stat_type": "Map 3 Headshots", "line": 5.0, "sharp_book": "Pinnacle", "sharp_over_odds": +130, "sharp_under_odds": -170},
+        {"player": "kisserek", "team": "Rebels", "match": "NiP vs SINNERS (Map 3)", "stat_type": "Map 3 Headshots", "line": 8.5, "sharp_book": "Bovada", "sharp_over_odds": +120, "sharp_under_odds": -155},
+        {"player": "sjuush", "team": "Ninjas in Pyjamas", "match": "NiP vs SINNERS (Map 3)", "stat_type": "Map 3 Headshots", "line": 8.0, "sharp_book": "Pinnacle", "sharp_over_odds": +105, "sharp_under_odds": -135},
+        {"player": "stavn", "team": "Ninjas in Pyjamas", "match": "NiP vs SINNERS (Map 3)", "stat_type": "Map 3 Headshots", "line": 5.0, "sharp_book": "Bovada", "sharp_over_odds": +140, "sharp_under_odds": -180},
+        {"player": "xKacpersky", "team": "Ninjas in Pyjamas", "match": "NiP vs SINNERS (Map 3)", "stat_type": "Map 3 Headshots", "line": 8.0, "sharp_book": "Pinnacle", "sharp_over_odds": -110, "sharp_under_odds": -120},
+        {"player": "n0te", "team": "Ninjas in Pyjamas", "match": "NiP vs SINNERS (Map 3)", "stat_type": "Map 3 Headshots", "line": 8.5, "sharp_book": "Bovada", "sharp_over_odds": +110, "sharp_under_odds": -140},
+        {"player": "MoDo", "team": "SINNERS", "match": "NiP vs SINNERS (Map 3)", "stat_type": "Map 3 Kills", "line": 13.5, "sharp_book": "Pinnacle", "sharp_over_odds": -115, "sharp_under_odds": -115},
+        {"player": "kisserek", "team": "Rebels", "match": "NiP vs SINNERS (Map 3)", "stat_type": "Map 3 Kills", "line": 14.0, "sharp_book": "Bovada", "sharp_over_odds": -105, "sharp_under_odds": -125},
+        {"player": "beastik", "team": "SINNERS", "match": "NiP vs SINNERS (Map 3)", "stat_type": "Map 3 Kills", "line": 13.0, "sharp_book": "Pinnacle", "sharp_over_odds": -120, "sharp_under_odds": +100},
+        {"player": "stressarN", "team": "SINNERS", "match": "NiP vs SINNERS (Map 3)", "stat_type": "Map 3 Kills", "line": 15.0, "sharp_book": "Bovada", "sharp_over_odds": +125, "sharp_under_odds": -160},
+        {"player": "xKacpersky", "team": "Ninjas in Pyjamas", "match": "NiP vs SINNERS (Map 3)", "stat_type": "Map 3 Kills", "line": 16.0, "sharp_book": "Pinnacle", "sharp_over_odds": +135, "sharp_under_odds": -175},
+        {"player": "n0te", "team": "Ninjas in Pyjamas", "match": "NiP vs SINNERS (Map 3)", "stat_type": "Map 3 Kills", "line": 14.5, "sharp_book": "Bovada", "sharp_over_odds": -105, "sharp_under_odds": -125},
+        {"player": "Krimbo", "team": "Ninjas in Pyjamas", "match": "NiP vs SINNERS (Map 3)", "stat_type": "Map 3 Kills", "line": 13.5, "sharp_book": "Pinnacle", "sharp_over_odds": -110, "sharp_under_odds": -120},
+        {"player": "SHOCK", "team": "SINNERS", "match": "NiP vs SINNERS (Map 3)", "stat_type": "Map 3 Kills", "line": 13.0, "sharp_book": "Bovada", "sharp_over_odds": -115, "sharp_under_odds": -115},
+        {"player": "sjuush", "team": "Ninjas in Pyjamas", "match": "NiP vs SINNERS (Map 3)", "stat_type": "Map 3 Kills", "line": 14.5, "sharp_book": "Pinnacle", "sharp_over_odds": -110, "sharp_under_odds": -120},
+        {"player": "stavn", "team": "Ninjas in Pyjamas", "match": "NiP vs SINNERS (Map 3)", "stat_type": "Map 3 Kills", "line": 16.0, "sharp_book": "Bovada", "sharp_over_odds": +130, "sharp_under_odds": -170}
     ]
 
     engine = SharpBookDeVigEngine(
@@ -184,7 +220,7 @@ if __name__ == "__main__":
     top_6_df = board_df.head(6)
 
     status_container = st.empty()
-    status_container.markdown(f"🟢 **24/7 De-Vig Loop Active:** De-viging Pinnacle/Bovada markets against break-even threshold ({break_even_target}%).")
+    status_container.markdown(f"🟢 **24/7 De-Vig Loop Active:** De-viging Pinnacle/Bovada markets across all loaded CS2 series against break-even threshold ({break_even_target}%).")
 
     st.subheader("🎯 Top 24/7 De-Vigged +EV Hammer Plays")
     
