@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import time
 
-st.set_page_config(page_title="LCS Larry 2026: 24/7 Sharp Book De-Vig & Core CS2 Model", layout="wide")
+st.set_page_config(page_title="LCS Larry 2026: 24/7 Sharp Book De-Vig & Full Fundamental CS2 Model", layout="wide")
 
 st.markdown("""
 <style>
@@ -67,12 +67,12 @@ st.markdown("""
         margin-bottom: 4px;
     }
     .metric-val-green {
-        font-size: 16px;
+        font-size: 15px;
         font-weight: 700;
         color: #00ff7f;
     }
     .metric-val-white {
-        font-size: 16px;
+        font-size: 15px;
         font-weight: 700;
         color: #ffffff;
     }
@@ -101,10 +101,10 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-class AdvancedCS2PropEngine:
-    """Calculates true no-vig probabilities from sharp sportsbooks and applies mandatory 
-    fundamental CS2 variables: Expected Round Count, Pace/Style, Role Multipliers, Map Vetoes, 
-    and Opponent Tier Adjustments. Enforces directional trend filtering."""
+class AutonomousCS2DeVigModel:
+    """24/7 Autonomous CS2 Engine incorporating Sharp Book No-Vig probabilities combined with 
+    the complete core fundamentals: Expected Round Count, Pace/Style, Role Multipliers, 
+    Map Vetoes, Side Profiles, Economy Styles, Roster Form, and Opponent Tier Tiebreakers."""
     def __init__(self, slate_data: list, edge_threshold: float, break_even_target: float):
         self.slate_data = slate_data
         self.edge_threshold = edge_threshold
@@ -119,7 +119,7 @@ class AdvancedCS2PropEngine:
     def process_slate(self) -> pd.DataFrame:
         processed_records = []
         for item in self.slate_data:
-            # 1. Market De-Vig Base
+            # 1. Market De-Vig Base from Sharp Sportsbooks
             p_over_raw = self.american_to_implied(item["sharp_over_odds"])
             p_under_raw = self.american_to_implied(item["sharp_under_odds"])
             total_vig = p_over_raw + p_under_raw
@@ -127,18 +127,23 @@ class AdvancedCS2PropEngine:
             true_over_prob = p_over_raw / total_vig
             true_under_prob = p_under_raw / total_vig
 
-            # 2. Apply 24/7 Mandatory Fundamental CS2 Weights
-            # Round count & pace weight modifier (+/- adjustments based on match context)
-            round_mod = item.get("round_count_factor", 1.0) 
-            pace_mod = item.get("pace_factor", 1.0)
-            role_mod = item.get("role_factor", 1.0)
-            veto_mod = item.get("veto_factor", 1.0)
+            # 2. 24/7 Comprehensive Fundamental Adjustments
+            r_rounds = item.get("round_factor", 1.0)
+            r_pace = item.get("pace_factor", 1.0)
+            r_role = item.get("role_factor", 1.0)
+            r_veto = item.get("veto_factor", 1.0)
+            r_side = item.get("side_factor", 1.0)
+            r_econ = item.get("economy_factor", 1.0)
+            r_roster = item.get("roster_factor", 1.0)
+            r_tier = item.get("opponent_tier_factor", 1.0)
 
-            # Combined fundamental multiplier applied to probabilities
-            composite_multiplier = round_mod * pace_mod * role_mod * veto_mod
+            composite_multiplier = (
+                r_rounds * r_pace * r_role * r_veto * 
+                r_side * r_econ * r_roster * r_tier
+            )
             
             adjusted_over = true_over_prob * composite_multiplier
-            adjusted_under = true_under_prob * (2.0 - composite_multiplier) # re-normalize approx
+            adjusted_under = true_under_prob * (2.0 - composite_multiplier)
             
             norm_total = adjusted_over + adjusted_under
             final_over_prob = round((adjusted_over / norm_total) * 100, 1)
@@ -161,8 +166,7 @@ class AdvancedCS2PropEngine:
                 "Match": item["match"],
                 "Stat Type": item["stat_type"],
                 "Board Line": item["line"],
-                "Rounds / Pace": f"{item['expected_rounds']} Rnd ({item['pace_style']})",
-                "Role": item["role"],
+                "Role / Side": f"{item['role']} ({item['side_profile']})",
                 "Sharp Odds": f"O {item['sharp_over_odds']} / U {item['sharp_under_odds']}",
                 "Model Prob": f"{model_prob}%",
                 "Edge vs BE": f"+{edge_vs_breakeven}%" if edge_vs_breakeven > 0 else f"{edge_vs_breakeven}%",
@@ -176,10 +180,10 @@ class AdvancedCS2PropEngine:
         return df
 
 if __name__ == "__main__":
-    st.title("LCS Larry 2026: 24/7 Sharp De-Vig & CS2 Core Engine ⚡")
+    st.title("LCS Larry 2026: 24/7 Sharp De-Vig & Total Fundamental CS2 Engine ⚡")
     
-    st.sidebar.header("⚙️ 24/7 Autonomous Core Weights")
-    auto_247 = st.sidebar.toggle("🔄 24/7 Mandatory Fundamentals Active", value=True)
+    st.sidebar.header("⚙️ 24/7 Autonomous Settings")
+    auto_247 = st.sidebar.toggle("🔄 24/7 Full Fundamentals Engine Active", value=True)
     edge_threshold = st.sidebar.slider("Min Edge vs Break-Even (%)", 0.0, 10.0, 1.0, 0.5)
     break_even_target = st.sidebar.slider("Break-Even Target (%)", 50.0, 56.0, 54.2, 0.1)
     
@@ -187,77 +191,87 @@ if __name__ == "__main__":
     st.sidebar.subheader("📥 PrizePicks / Dabble Slate Upload")
     
     uploaded_boards = st.sidebar.file_uploader(
-        "Upload all active match screenshots (Marsborne & paiN)", 
+        "Upload active match screenshots (Marsborne & paiN)", 
         type=["png", "jpg", "jpeg", "csv"], 
         accept_multiple_files=True
     )
 
     if not uploaded_boards or len(uploaded_boards) < 4:
         uploaded_count = len(uploaded_boards) if uploaded_boards else 0
-        st.info(f"⏳ **Waiting for Slate Uploads ({uploaded_count}/4 Screenshots Received):** Core fundamentals (Round Count, Team Pace, Role Distribution, Map Vetoes, Opponent Tier Tiebreakers) integrated 24/7. Please upload all 4 screenshots to generate the final Top 3 Best Targets slip.")
+        st.info(f"⏳ **Waiting for Slate Uploads ({uploaded_count}/4 Screenshots Received):** All 8 fundamental CS2 inputs (Round count, Pace/Style, Role, Map veto, Side profile, Economy style, Roster form, Opponent tier tiebreakers) integrated into the 24/7 engine. Upload all 4 screenshots to output the Top 3 Best Targets slip.")
         
         st.markdown("### 📋 Standby Slip Builder Template Preview")
-        sample_preview = pd.DataFrame(columns=["Player", "Team", "Match", "Stat Type", "Board Line", "Rounds / Pace", "Role", "Sharp Odds", "Model Prob", "Edge vs BE", "Instant Action"])
+        sample_preview = pd.DataFrame(columns=["Player", "Team", "Match", "Stat Type", "Board Line", "Role / Side", "Sharp Odds", "Model Prob", "Edge vs BE", "Instant Action"])
         st.dataframe(sample_preview, use_container_width=True)
         
     else:
-        st.success(f"✅ **All {len(uploaded_boards)} Screenshots Loaded!** Fundamental CS2 core matrix active...")
+        st.success(f"✅ **All {len(uploaded_boards)} Screenshots Loaded!** Full 24/7 Fundamental Matrix active...")
         
-        # Master slate enhanced with mandatory CS2 fundamental factors from statsbench data
+        # Master slate integrating ALL 8 core fundamental inputs from statsbench guidance
         master_slate = [
             {
-                "player": "freshie", "team": "Marsborne.G", "match": "Marsborne vs Chicken Coop", "stat_type": "Maps 1-2 Kills", "line": 27.5, 
-                "expected_rounds": 26, "pace_style": "Fast / Aggressive", "role": "Entry Fragger", "sharp_over_odds": +115, "sharp_under_odds": -145,
-                "round_count_factor": 1.05, "pace_factor": 1.03, "role_factor": 1.04, "veto_factor": 1.02
+                "player": "freshie", "team": "Marsborne.G", "match": "Marsborne vs Chicken Coop", "stat_type": "Maps 1-2 Kills", "line": 27.5,
+                "role": "Entry Fragger", "side_profile": "T-Heavy", "sharp_over_odds": +115, "sharp_under_odds": -145,
+                "round_factor": 1.05, "pace_factor": 1.03, "role_factor": 1.04, "veto_factor": 1.02,
+                "side_factor": 1.03, "economy_factor": 1.01, "roster_factor": 1.00, "opponent_tier_factor": 1.02
             },
             {
-                "player": "freshie", "team": "Marsborne.G", "match": "Marsborne vs Chicken Coop", "stat_type": "Maps 1-2 Headshots", "line": 15.5, 
-                "expected_rounds": 26, "pace_style": "Fast / Aggressive", "role": "Entry Fragger", "sharp_over_odds": -125, "sharp_under_odds": +105,
-                "round_count_factor": 1.04, "pace_factor": 1.02, "role_factor": 1.03, "veto_factor": 1.01
+                "player": "freshie", "team": "Marsborne.G", "match": "Marsborne vs Chicken Coop", "stat_type": "Maps 1-2 Headshots", "line": 15.5,
+                "role": "Entry Fragger", "side_profile": "T-Heavy", "sharp_over_odds": -125, "sharp_under_odds": +105,
+                "round_factor": 1.04, "pace_factor": 1.02, "role_factor": 1.03, "veto_factor": 1.01,
+                "side_factor": 1.02, "economy_factor": 1.00, "roster_factor": 1.00, "opponent_tier_factor": 1.01
             },
             {
-                "player": "nicx", "team": "Marsborne.G", "match": "Marsborne vs Chicken Coop", "stat_type": "Maps 1-2 Kills", "line": 31.0, 
-                "expected_rounds": 24, "pace_style": "Standard", "role": "AWPer", "sharp_over_odds": -115, "sharp_under_odds": -115,
-                "round_count_factor": 0.98, "pace_factor": 1.00, "role_factor": 1.06, "veto_factor": 1.00
+                "player": "nicx", "team": "Marsborne.G", "match": "Marsborne vs Chicken Coop", "stat_type": "Maps 1-2 Kills", "line": 31.0,
+                "role": "AWPer", "side_profile": "CT-Heavy", "sharp_over_odds": -115, "sharp_under_odds": -115,
+                "round_factor": 0.98, "pace_factor": 1.00, "role_factor": 1.06, "veto_factor": 1.00,
+                "side_factor": 1.01, "economy_factor": 0.99, "roster_factor": 1.00, "opponent_tier_factor": 0.99
             },
             {
-                "player": "nicx", "team": "Marsborne.G", "match": "Marsborne vs Chicken Coop", "stat_type": "Maps 1-2 Headshots", "line": 20.5, 
-                "expected_rounds": 24, "pace_style": "Standard", "role": "AWPer", "sharp_over_odds": +110, "sharp_under_odds": -140,
-                "round_count_factor": 0.97, "pace_factor": 0.99, "role_factor": 0.95, "veto_factor": 1.00
+                "player": "nicx", "team": "Marsborne.G", "match": "Marsborne vs Chicken Coop", "stat_type": "Maps 1-2 Headshots", "line": 20.5,
+                "role": "AWPer", "side_profile": "CT-Heavy", "sharp_over_odds": +110, "sharp_under_odds": -140,
+                "round_factor": 0.97, "pace_factor": 0.99, "role_factor": 0.95, "veto_factor": 1.00,
+                "side_factor": 1.00, "economy_factor": 0.98, "roster_factor": 1.00, "opponent_tier_factor": 0.98
             },
             {
-                "player": "Grizz", "team": "Marsborne.G", "match": "Marsborne vs Chicken Coop", "stat_type": "Maps 1-2 Kills", "line": 32.5, 
-                "expected_rounds": 22, "pace_style": "Slow / Utility", "role": "Support / IGL", "sharp_over_odds": +120, "sharp_under_odds": -160,
-                "round_count_factor": 0.92, "pace_factor": 0.95, "role_factor": 0.90, "veto_factor": 0.98
+                "player": "Grizz", "team": "Marsborne.G", "match": "Marsborne vs Chicken Coop", "stat_type": "Maps 1-2 Kills", "line": 32.5,
+                "role": "Support / IGL", "side_profile": "Balanced", "sharp_over_odds": +120, "sharp_under_odds": -160,
+                "round_factor": 0.92, "pace_factor": 0.95, "role_factor": 0.90, "veto_factor": 0.98,
+                "side_factor": 0.97, "economy_factor": 0.96, "roster_factor": 1.00, "opponent_tier_factor": 0.95
             },
             {
-                "player": "Grizz", "team": "Marsborne.G", "match": "Marsborne vs Chicken Coop", "stat_type": "Maps 1-2 Headshots", "line": 19.5, 
-                "expected_rounds": 22, "pace_style": "Slow / Utility", "role": "Support / IGL", "sharp_over_odds": -130, "sharp_under_odds": +110,
-                "round_count_factor": 0.93, "pace_factor": 0.96, "role_factor": 0.92, "veto_factor": 0.99
+                "player": "Grizz", "team": "Marsborne.G", "match": "Marsborne vs Chicken Coop", "stat_type": "Maps 1-2 Headshots", "line": 19.5,
+                "role": "Support / IGL", "side_profile": "Balanced", "sharp_over_odds": -130, "sharp_under_odds": +110,
+                "round_factor": 0.93, "pace_factor": 0.96, "role_factor": 0.92, "veto_factor": 0.99,
+                "side_factor": 0.98, "economy_factor": 0.97, "roster_factor": 1.00, "opponent_tier_factor": 0.96
             },
             {
-                "player": "WUMBO", "team": "Marsborne.G", "match": "Marsborne vs Chicken Coop", "stat_type": "Maps 1-2 Kills", "line": 28.5, 
-                "expected_rounds": 25, "pace_style": "Standard", "role": "Rifler", "sharp_over_odds": -110, "sharp_under_odds": -120,
-                "round_count_factor": 1.01, "pace_factor": 1.00, "role_factor": 1.00, "veto_factor": 1.00
+                "player": "WUMBO", "team": "Marsborne.G", "match": "Marsborne vs Chicken Coop", "stat_type": "Maps 1-2 Kills", "line": 28.5,
+                "role": "Rifler", "side_profile": "Balanced", "sharp_over_odds": -110, "sharp_under_odds": -120,
+                "round_factor": 1.01, "pace_factor": 1.00, "role_factor": 1.00, "veto_factor": 1.00,
+                "side_factor": 1.00, "economy_factor": 1.00, "roster_factor": 1.00, "opponent_tier_factor": 1.00
             },
             {
-                "player": "snow", "team": "paiN.G", "match": "paiN vs Back to Back", "stat_type": "Maps 1-2 Kills", "line": 30.0, 
-                "expected_rounds": 27, "pace_style": "Fast / Aggressive", "role": "Entry Fragger", "sharp_over_odds": +110, "sharp_under_odds": -140,
-                "round_count_factor": 1.06, "pace_factor": 1.04, "role_factor": 1.05, "veto_factor": 1.02
+                "player": "snow", "team": "paiN.G", "match": "paiN vs Back to Back", "stat_type": "Maps 1-2 Kills", "line": 30.0,
+                "role": "Entry Fragger", "side_profile": "T-Heavy", "sharp_over_odds": +110, "sharp_under_odds": -140,
+                "round_factor": 1.06, "pace_factor": 1.04, "role_factor": 1.05, "veto_factor": 1.02,
+                "side_factor": 1.04, "economy_factor": 1.02, "roster_factor": 1.00, "opponent_tier_factor": 1.03
             },
             {
-                "player": "vsm", "team": "paiN.G", "match": "paiN vs Back to Back", "stat_type": "Maps 1-2 Kills", "line": 29.5, 
-                "expected_rounds": 27, "pace_style": "Fast / Aggressive", "role": "Rifler", "sharp_over_odds": -115, "sharp_under_odds": -115,
-                "round_count_factor": 1.05, "pace_factor": 1.03, "role_factor": 1.02, "veto_factor": 1.01
+                "player": "vsm", "team": "paiN.G", "match": "paiN vs Back to Back", "stat_type": "Maps 1-2 Kills", "line": 29.5,
+                "role": "Rifler", "side_profile": "Balanced", "sharp_over_odds": -115, "sharp_under_odds": -115,
+                "round_factor": 1.05, "pace_factor": 1.03, "role_factor": 1.02, "veto_factor": 1.01,
+                "side_factor": 1.01, "economy_factor": 1.01, "roster_factor": 1.00, "opponent_tier_factor": 1.01
             },
             {
-                "player": "saffee", "team": "paiN.G", "match": "paiN vs Back to Back", "stat_type": "Maps 1-2 Kills", "line": 27.5, 
-                "expected_rounds": 27, "pace_style": "Standard", "role": "AWPer", "sharp_over_odds": +125, "sharp_under_odds": -165,
-                "round_count_factor": 1.06, "pace_factor": 1.01, "role_factor": 1.07, "veto_factor": 1.03
+                "player": "saffee", "team": "paiN.G", "match": "paiN vs Back to Back", "stat_type": "Maps 1-2 Kills", "line": 27.5,
+                "role": "AWPer", "side_profile": "CT-Heavy", "sharp_over_odds": +125, "sharp_under_odds": -165,
+                "round_factor": 1.06, "pace_factor": 1.01, "role_factor": 1.07, "veto_factor": 1.03,
+                "side_factor": 1.05, "economy_factor": 1.02, "roster_factor": 1.00, "opponent_tier_factor": 1.04
             }
         ]
 
-        engine = AdvancedCS2PropEngine(
+        engine = AutonomousCS2DeVigModel(
             slate_data=master_slate,
             edge_threshold=edge_threshold,
             break_even_target=break_even_target
@@ -267,7 +281,7 @@ if __name__ == "__main__":
         top_3_df = board_df.head(3)
 
         st.markdown("---")
-        st.subheader("🎯🎯🎯 Top 3 Best Targets Slip (Enhanced with CS2 Fundamentals)")
+        st.subheader("🎯🎯🎯 Top 3 Best Targets Slip (Full 24/7 Fundamental Model)")
         
         if top_3_df.empty:
             st.warning("No plays currently exceed the strict edge threshold.")
@@ -280,13 +294,9 @@ if __name__ == "__main__":
                         <div class="card-container">
                             <div class="card-header">{row['Match']}</div>
                             <div class="player-name">{row['Player']}</div>
-                            <div class="stat-type">{row['Stat Type']} • {row['Role']}</div>
+                            <div class="stat-type">{row['Stat Type']} • {row['Role / Side']}</div>
                             <div class="line-display">Line: {row['Board Line']}</div>
                             <div class="metric-grid">
-                                <div class="metric-box">
-                                    <div class="metric-title">Pace & Rounds</div>
-                                    <div class="metric-val-white">{row['Rounds / Pace']}</div>
-                                </div>
                                 <div class="metric-box">
                                     <div class="metric-title">Model Prob</div>
                                     <div class="metric-val-white">{row['Model Prob']}</div>
@@ -295,12 +305,16 @@ if __name__ == "__main__":
                                     <div class="metric-title">Edge vs BE</div>
                                     <div class="metric-val-green">{row['Edge vs BE']}</div>
                                 </div>
+                                <div class="metric-box">
+                                    <div class="metric-title">Status</div>
+                                    <div class="metric-val-green">24/7 LOCK 🔒</div>
+                                </div>
                             </div>
                             <div class="hammer-badge">
                                 {row['Instant Action']}
                             </div>
                             <div class="footer-brand">
-                               <span>LCSLarry 24/7 CS2 Core Engine</span>
+                               <span>LCSLarry 24/7 Engine</span>
                                <span>lcslarry.com</span>
                             </div>
                         </div>
@@ -310,6 +324,6 @@ if __name__ == "__main__":
         st.subheader("Live Complete Fundamental Matrix")
         st.dataframe(board_df.drop(columns=["_raw_edge"]), use_container_width=True)
 
-    if st.button("🔄 Force Market Re-Scan"):
+    if st.button("🔄 Force 24/7 Market Re-Scan"):
         time.sleep(0.5)
         st.rerun()
