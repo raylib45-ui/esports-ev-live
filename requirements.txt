@@ -1,1 +1,4 @@
 tabulate
+streamlit
+pandas
+numpy
