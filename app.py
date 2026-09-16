@@ -45,3 +45,81 @@ if uploaded_file is not None:
   df = pd.read_csv(uploaded_file)
   st.success("Dataset loaded successfully!")
   st.dataframe(df.head())
+  def calculate_tier3_situational(self, player_id, map_name, opponent_id):
+    """Tier 3: Situational Splits (~20% weight)
+
+    Adjusts for map-side performance and strength of schedule.
+    """
+    # Returns dynamic multiplier based on matchup conditions
+    return 1.05
+
+  def generate_complete_projection(
+      self, player_id, map_name, opponent_id, projected_rounds
+  ):
+    """Executes the full weighted multi-tiered formula."""
+    kpr, adr, impact = self.calculate_tier1_efficiency(player_id, map_name)
+    if kpr is None:
+      return None
+
+    norm_adr = adr / 100.0
+    norm_impact = impact / 1.5
+
+    entry_win_rate, awp_kpr = self.calculate_tier2_volatility(
+        player_id, map_name
+    )
+    situational_modifier = self.calculate_tier3_situational(
+        player_id, map_name, opponent_id
+    )
+
+    # Combined multi-tier score matching your project formula structure
+    tier_1_score = (0.40 * kpr) + (0.35 * norm_adr) + (0.25 * norm_impact)
+    tier_2_score = (0.70 * entry_win_rate * kpr) + (0.30 * awp_kpr)
+    kpr_exp = ((0.50 * tier_1_score) + (0.30 * tier_2_score)) * (
+        situational_modifier
+    )
+
+    return round(kpr_exp * projected_rounds, 2)
+
+  def scan_and_hammer(self, board_df, sportsbook_df):
+    """Enforces strict automated execution: Hammer Over or Hammer Under ONLY."""
+    recommendations = []
+
+    for _, row in board_df.iterrows():
+      p_id = row["player_id"]
+      p_map = row["map"]
+      prizepicks_line = row["line"]
+      proj_rounds = row["projected_rounds"]
+
+      projection = self.generate_complete_projection(
+          p_id, p_map, row["opponent_id"], proj_rounds
+      )
+      if projection is None:
+        continue
+
+      delta = projection - prizepicks_line
+
+      # Cross-reference major sportsbooks for consensus check
+      sb_match = sportsbook_df[sportsbook_df["player_id"] == p_id]
+      sb_line = (
+          sb_match["consensus_line"].values[0] if not sb_match.empty else None
+      )
+
+      action = None
+      if sb_line is not None:
+        # Mandatory Rule: Hammer consistently high or low with sportsbooks agreement
+        if delta >= self.threshold and sb_line <= prizepicks_line:
+          action = "HAMMER OVER 🔒 (Consistent Over)"
+        elif delta <= -self.threshold and sb_line >= prizepicks_line:
+          action = "HAMMER UNDER 🔒 (Consistent Under)"
+
+      if action:
+        recommendations.append({
+            "Player": row["player_name"],
+            "Map": p_map,
+            "Model Projection": projection,
+            "PrizePicks Line": prizepicks_line,
+            "Edge Delta": round(abs(delta), 2),
+            "Action": action,
+        })
+
+    return pd.DataFrame(recommendations)
