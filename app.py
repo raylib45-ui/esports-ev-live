@@ -33,7 +33,7 @@ class CS2WeightedScanner:
     """
     df = self.historical_data[
         (self.historical_data["player_id"] == player_id)
-        & (self.historical_data["map"] == map_name]
+        & (self.historical_data["map"] == map_name)
     ]
     if df.empty:
       return 0.5, 0.0  # Default neutral win rate, zero AWP skew
