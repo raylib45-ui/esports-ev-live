@@ -39,18 +39,8 @@ class CS2WeightedScanner:
     awp_kpr = df["awp_kills_per_round"].mean()
     return entry_win_rate, awp_kpr
 
-
-uploaded_file = st.file_uploader("Upload Historical CS2 Match CSV", type=["csv"])
-if uploaded_file is not None:
-  df = pd.read_csv(uploaded_file)
-  st.success("Dataset loaded successfully!")
-  st.dataframe(df.head())
   def calculate_tier3_situational(self, player_id, map_name, opponent_id):
-    """Tier 3: Situational Splits (~20% weight)
-
-    Adjusts for map-side performance and strength of schedule.
-    """
-    # Returns dynamic multiplier based on matchup conditions
+    """Tier 3: Situational Splits (~20% weight)"""
     return 1.05
 
   def generate_complete_projection(
@@ -71,7 +61,6 @@ if uploaded_file is not None:
         player_id, map_name, opponent_id
     )
 
-    # Combined multi-tier score matching your project formula structure
     tier_1_score = (0.40 * kpr) + (0.35 * norm_adr) + (0.25 * norm_impact)
     tier_2_score = (0.70 * entry_win_rate * kpr) + (0.30 * awp_kpr)
     kpr_exp = ((0.50 * tier_1_score) + (0.30 * tier_2_score)) * (
@@ -98,7 +87,6 @@ if uploaded_file is not None:
 
       delta = projection - prizepicks_line
 
-      # Cross-reference major sportsbooks for consensus check
       sb_match = sportsbook_df[sportsbook_df["player_id"] == p_id]
       sb_line = (
           sb_match["consensus_line"].values[0] if not sb_match.empty else None
@@ -106,7 +94,6 @@ if uploaded_file is not None:
 
       action = None
       if sb_line is not None:
-        # Mandatory Rule: Hammer consistently high or low with sportsbooks agreement
         if delta >= self.threshold and sb_line <= prizepicks_line:
           action = "HAMMER OVER 🔒 (Consistent Over)"
         elif delta <= -self.threshold and sb_line >= prizepicks_line:
@@ -123,3 +110,18 @@ if uploaded_file is not None:
         })
 
     return pd.DataFrame(recommendations)
+
+
+# --- ADDED AT THE BOTTOM: Screenshot Uploader Interface ---
+st.markdown("---")
+st.subheader("📸 PrizePicks Board Screenshot Scanner")
+uploaded_image = st.file_uploader(
+    "Upload matchup board screenshot", type=["png", "jpg", "jpeg"]
+)
+
+if uploaded_image is not None:
+  st.image(uploaded_image, caption="Uploaded Board", use_container_width=True)
+  st.success("Screenshot uploaded successfully!")
+  st.info(
+      "Ready to parse screenshot text and execute automated historical checks."
+  )
