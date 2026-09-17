@@ -29,10 +29,10 @@ if uploaded_images:
     with cols[i % 6]:
       st.image(img, caption=f"File {i+1}", use_container_width=True)
 
+  # Fixed string concatenation to prevent TypeError
   st.info(
-      "🔄 Evaluating head-to-head history and map-pool win rates (Aurora 83% Nuke"
-      ,
-      "71% Anubis vs NaVi metrics)...",
+      "🔄 Evaluating head-to-head history and map-pool win rates (Aurora 83%"
+      " Nuke, 71% Anubis vs NaVi metrics)..."
   )
 
   st.markdown(
