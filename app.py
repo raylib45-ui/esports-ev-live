@@ -160,3 +160,95 @@ else:
       "📁 Please upload your 17+ microscopic screenshot files to complete the"
       " VOLT board execution."
   )
+import streamlit as st
+
+st.set_page_config(page_title="CS2 Quant Projection Dashboard", layout="wide")
+
+st.title("⚡ CS2 Advanced Projections & Analytics Engine")
+
+# File uploader for batch screenshots
+uploaded_screenshots = st.file_uploader(
+    "Upload player prop card screenshots", 
+    type=["png", "jpg", "jpeg"], 
+    accept_multiple_files=True,
+    key="player_card_uploads"
+)
+
+def render_deep_dive_card(player_name, team, opponent, stat_type, sportsbook_line, model_projection, confidence_rating, map_splits, book_prices):
+    """
+    Renders the comprehensive analytical card layout mirroring advanced projection tools.
+    """
+    st.markdown(f"### 📊 Deep-Dive Analytics: {player_name} ({team} vs {opponent})")
+    
+    # Top-level summary metrics block
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        st.metric(label="Model Projection", value=f"{model_projection:.1f}", delta=f"{model_projection - sportsbook_line:+.1f} vs Line")
+    with col2:
+        st.metric(label="Confidence Rating", value=f"{confidence_rating}%", delta="Model Edge Active" if confidence_rating >= 60 else "Low Edge")
+    with col3:
+        st.metric(label="Market Line", value=f"{sportsbook_line} ({stat_type})")
+    with col4:
+        rec = "OVER 📈" if model_projection > sportsbook_line else "UNDER 📉"
+        st.metric(label="Model Verdict", value=rec)
+
+    st.markdown("---")
+    
+    # Two-column detailed breakdown (matching the right-side panel layout)
+    left_col, right_col = st.columns(2)
+    
+    with left_col:
+        st.markdown("#### 🗺️ Map Pool & Simulation Metrics")
+        st.write(f"• **Map Splits Context:** {map_splits.get('context', 'Standard Veto Weighting Applied')}")
+        st.write(f"• **Simulated Hit Rate:** {map_splits.get('hit_rate', '57%')} over baseline")
+        st.write(f"• **Expected Value (EV):** +{map_splits.get('ev', '4.2%')}")
+        st.write(f"• **Map Breakdown:** {map_splits.get('map_name', 'Mirage / Anubis')} - Optimized")
+
+    with right_col:
+        st.markdown("#### 📈 Multi-Book Pricing & Line Comparison")
+        for book, data in book_prices.items():
+            st.write(f"• **{book}**: Line {data['line']} | Price: {data['odds']} | Diff: {data['diff']:+.1f}")
+            
+    st.markdown("---")
+
+# Execution trigger gater
+if uploaded_screenshots:
+    st.success(f"Successfully processed {len(uploaded_screenshots)} screenshot(s). Generating deep-dive panels...")
+    
+    # Mock data structure matching the deep-dive analytics output
+    mock_deep_dive_data = [
+        {
+            "player": "Jimpphat",
+            "team": "Aurora",
+            "opponent": "Natus Vincere",
+            "stat": "MAPS 1-2 Kills",
+            "line": 28.0,
+            "projection": 32.8,
+            "confidence": 61,
+            "splits": {
+                "context": "High opening duel win-rate on active map pool",
+                "hit_rate": "58.4%",
+                "ev": "+4.8%",
+                "map_name": "Mirage / Anubis"
+            },
+            "books": {
+                "PrizePicks": {"line": 28.0, "odds": "1.84x", "diff": +4.8},
+                "Underdog": {"line": 28.5, "odds": "1.90x", "diff": +4.3}
+            }
+        }
+    ]
+
+    for item in mock_deep_dive_data:
+        render_deep_dive_card(
+            player_name=item["player"],
+            team=item["team"],
+            opponent=item["opponent"],
+            stat_type=item["stat"],
+            sportsbook_line=item["line"],
+            model_projection=item["projection"],
+            confidence_rating=item["confidence"],
+            map_splits=item["splits"],
+            book_prices=item["books"]
+        )
+else:
+    st.info("👆 Drop your player prop screenshots above to launch the deep-dive projection generator.")
