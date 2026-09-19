@@ -11,10 +11,9 @@ st.set_page_config(
     page_title="CS2 Prop Scanner",
     page_icon="🎯",
     layout="wide",
-    initial_sidebar_state="collapsed",  # Automatically collapses sidebar on mobile so dashboard displays instantly
+    initial_sidebar_state="collapsed",  # Automatically collapses sidebar on mobile
 )
 
-# Custom CSS styling for metric cards and tags
 st.markdown(
     """
     <style>
@@ -34,7 +33,7 @@ st.markdown(
 
 st.title("🎯 CS2 Full-Board Prop Scanner")
 st.caption(
-    "Quantitative engine evaluating CS2 props using Scorpio projections and strict Capricorn 80%+ consistency filters."
+    "Quantitative engine evaluating CS2 props using Scorpio projections and strict 80%+ consistency filters."
 )
 
 
@@ -44,30 +43,32 @@ st.caption(
 def scan_cs2_props(
     props_df: pd.DataFrame, min_gap: float = 2.5, min_hit_rate: float = 0.80
 ) -> pd.DataFrame:
-    """Evaluates an entire slate of CS2 props:
+    """Evaluates an entire slate of CS2 props (Kills & Headshots):
 
-    1. Projects total kills based on KPR, Expected Rounds, Map Factor, and Opponent Adjustments.
+    1. Projects expected value based on Stat Per Round (KPR/HPR), Expected Rounds, Map Multiplier, and Opponent Adjustments.
     2. Calculates directional hit rates over the last 10 logs.
     3. Requires BOTH a projection gap (>= min_gap) AND high consistency (>= min_hit_rate).
     """
     df = props_df.copy()
 
-    # --- STEP 1: SCORPIO PROJECTION ENGINE ---
-    # Formula: (KPR * Expected Rounds) * Map Multiplier * Opponent Adjustment
-    df["projected_kills"] = (
-        df["kpr_l15"]
+    # Allow fallback for legacy 'kpr_l15' column name if present
+    if "stat_per_round" not in df.columns and "kpr_l15" in df.columns:
+        df["stat_per_round"] = df["kpr_l15"]
+
+    # --- STEP 1: PROJECTION ENGINE ---
+    df["projected_stat"] = (
+        df["stat_per_round"]
         * df["expected_rounds"]
         * df["map_factor"]
         * df["opponent_adj"]
     )
-    df["proj_gap"] = (df["projected_kills"] - df["line"]).round(2)
-    df["projected_kills"] = df["projected_kills"].round(2)
+    df["proj_gap"] = (df["projected_stat"] - df["line"]).round(2)
+    df["projected_stat"] = df["projected_stat"].round(2)
 
-    # --- STEP 2: CAPRICORN CONSISTENCY AUDIT ---
+    # --- STEP 2: CONSISTENCY AUDIT ---
     def audit_logs(row):
         logs = row["last_10_logs"]
 
-        # Parse stringified lists or comma-separated numbers if uploaded via CSV/JSON
         if isinstance(logs, str):
             try:
                 logs = json.loads(logs)
@@ -91,7 +92,6 @@ def scan_cs2_props(
     df[["over_hit_rate", "under_hit_rate"]] = df.apply(audit_logs, axis=1)
 
     # --- STEP 3: STRICT BINARY FILTERING ---
-    # Must meet BOTH the gap threshold AND the 80%+ consistency rule in one direction
     qualify_over = (df["proj_gap"] >= min_gap) & (
         df["over_hit_rate"] >= min_hit_rate
     )
@@ -114,7 +114,7 @@ def scan_cs2_props(
 st.sidebar.header("⚙️ Scanner Settings")
 
 gap_threshold = st.sidebar.slider(
-    "Min Projection Gap (+/- Kills)", 1.0, 5.0, 2.5, 0.5
+    "Min Projection Gap (+/- Stat)", 1.0, 5.0, 2.5, 0.5
 )
 hit_rate_threshold = st.sidebar.slider(
     "Min Consistency Hit Rate (%)", 0.60, 0.90, 0.80, 0.05
@@ -123,7 +123,6 @@ hit_rate_threshold = st.sidebar.slider(
 st.sidebar.markdown("---")
 st.sidebar.header("📥 Board Data Source")
 
-# Default index=0 loads Demo Board immediately so screen is never blank
 data_source = st.sidebar.radio(
     "Select Ingestion Method:",
     [
@@ -136,92 +135,250 @@ data_source = st.sidebar.radio(
 
 board_df = None
 
-# --- SOURCE 1: DEMO BOARD (DEFAULT) ---
+# --- SOURCE 1: FULL DEMO BOARD (ALL PROPS FROM SLATE) ---
 if data_source == "Load Sample Demo Board":
     demo_data = [
+        # ex-Zero Tenacity vs PCIFIC
         {
-            "player": "b1t",
-            "team": "NAVI",
-            "opponent": "FaZe",
+            "player": "Dragon",
+            "team": "ex-Zero Tenacity",
+            "opponent": "PCIFIC",
             "prop_type": "Maps 1-2 Kills",
-            "line": 32.5,
-            "kpr_l15": 0.74,
-            "expected_rounds": 46.0,
+            "line": 30.5,
+            "stat_per_round": 0.76,
+            "expected_rounds": 45.0,
             "map_factor": 1.05,
             "opponent_adj": 1.00,
-            "last_10_logs": [35, 38, 33, 36, 29, 34, 37, 33, 31, 35],
+            "last_10_logs": [34, 38, 32, 35, 31, 36, 33, 37, 32, 36],
         },
         {
-            "player": "apEX",
-            "team": "Vitality",
-            "opponent": "G2",
-            "prop_type": "Map 1 Kills",
-            "line": 14.5,
-            "kpr_l15": 0.52,
-            "expected_rounds": 19.5,
-            "map_factor": 0.95,
-            "opponent_adj": 0.90,
-            "last_10_logs": [11, 12, 10, 13, 16, 12, 9, 11, 14, 10],
+            "player": "Dragon",
+            "team": "ex-Zero Tenacity",
+            "opponent": "PCIFIC",
+            "prop_type": "Maps 1-2 Headshots",
+            "line": 15.5,
+            "stat_per_round": 0.42,
+            "expected_rounds": 45.0,
+            "map_factor": 1.05,
+            "opponent_adj": 1.00,
+            "last_10_logs": [18, 20, 16, 19, 17, 21, 18, 19, 16, 20],
         },
         {
-            "player": "m0NESY",
-            "team": "G2",
-            "opponent": "Vitality",
-            "prop_type": "Map 1 Kills",
-            "line": 18.5,
-            "kpr_l15": 0.85,
-            "expected_rounds": 22.0,
+            "player": "Kind0",
+            "team": "ex-Zero Tenacity",
+            "opponent": "PCIFIC",
+            "prop_type": "Maps 1-2 Kills",
+            "line": 28.5,
+            "stat_per_round": 0.70,
+            "expected_rounds": 44.0,
             "map_factor": 1.00,
             "opponent_adj": 1.00,
-            "last_10_logs": [19, 14, 22, 12, 20, 15, 21, 13, 18, 17],
+            "last_10_logs": [30, 29, 31, 27, 32, 30, 29, 33, 28, 31],
         },
         {
-            "player": "ZywOo",
-            "team": "Vitality",
-            "opponent": "MOUZ",
+            "player": "Kind0",
+            "team": "ex-Zero Tenacity",
+            "opponent": "PCIFIC",
+            "prop_type": "Maps 1-2 Headshots",
+            "line": 13.5,
+            "stat_per_round": 0.35,
+            "expected_rounds": 44.0,
+            "map_factor": 1.00,
+            "opponent_adj": 1.00,
+            "last_10_logs": [15, 14, 16, 12, 15, 14, 17, 13, 15, 16],
+        },
+        {
+            "player": "brutmonster",
+            "team": "ex-Zero Tenacity",
+            "opponent": "PCIFIC",
             "prop_type": "Maps 1-2 Kills",
-            "line": 36.5,
-            "kpr_l15": 0.88,
+            "line": 29.5,
+            "stat_per_round": 0.71,
+            "expected_rounds": 44.0,
+            "map_factor": 1.02,
+            "opponent_adj": 1.00,
+            "last_10_logs": [31, 33, 30, 32, 28, 34, 31, 30, 32, 33],
+        },
+        {
+            "player": "brutmonster",
+            "team": "ex-Zero Tenacity",
+            "opponent": "PCIFIC",
+            "prop_type": "Maps 1-2 Headshots",
+            "line": 10.5,
+            "stat_per_round": 0.20,
+            "expected_rounds": 44.0,
+            "map_factor": 0.95,
+            "opponent_adj": 1.00,
+            "last_10_logs": [7, 8, 9, 10, 6, 8, 9, 11, 7, 8],
+        },
+        {
+            "player": "Cjoffo",
+            "team": "ex-Zero Tenacity",
+            "opponent": "PCIFIC",
+            "prop_type": "Maps 1-2 Kills",
+            "line": 30.5,
+            "stat_per_round": 0.75,
             "expected_rounds": 45.0,
-            "map_factor": 1.08,
-            "opponent_adj": 0.98,
-            "last_10_logs": [38, 41, 37, 39, 35, 40, 38, 37, 42, 39],
+            "map_factor": 1.05,
+            "opponent_adj": 1.00,
+            "last_10_logs": [36, 32, 38, 31, 34, 37, 33, 35, 29, 36],
         },
         {
-            "player": "frozen",
-            "team": "FaZe",
-            "opponent": "NAVI",
-            "prop_type": "Map 1 Kills",
-            "line": 16.5,
-            "kpr_l15": 0.68,
-            "expected_rounds": 22.5,
-            "map_factor": 0.92,
-            "opponent_adj": 0.95,
-            "last_10_logs": [14, 13, 15, 12, 18, 14, 15, 13, 16, 12],
+            "player": "Cjoffo",
+            "team": "ex-Zero Tenacity",
+            "opponent": "PCIFIC",
+            "prop_type": "Maps 1-2 Headshots",
+            "line": 18.5,
+            "stat_per_round": 0.44,
+            "expected_rounds": 45.0,
+            "map_factor": 1.05,
+            "opponent_adj": 1.00,
+            "last_10_logs": [21, 19, 22, 20, 19, 23, 18, 21, 20, 22],
         },
         {
-            "player": "Lake",
-            "team": "M80",
-            "opponent": "3DMAX",
+            "player": "emi",
+            "team": "ex-Zero Tenacity",
+            "opponent": "PCIFIC",
             "prop_type": "Maps 1-2 Kills",
-            "line": 31.5,
-            "kpr_l15": 0.78,
+            "line": 25.0,
+            "stat_per_round": 0.48,
+            "expected_rounds": 44.0,
+            "map_factor": 0.95,
+            "opponent_adj": 0.95,
+            "last_10_logs": [18, 20, 22, 19, 23, 21, 24, 17, 19, 20],
+        },
+        {
+            "player": "emi",
+            "team": "ex-Zero Tenacity",
+            "opponent": "PCIFIC",
+            "prop_type": "Maps 1-2 Headshots",
+            "line": 12.5,
+            "stat_per_round": 0.22,
+            "expected_rounds": 44.0,
+            "map_factor": 0.95,
+            "opponent_adj": 0.95,
+            "last_10_logs": [8, 9, 10, 7, 11, 9, 12, 8, 10, 9],
+        },
+        # PCIFIC vs ex-Zero Tenacity
+        {
+            "player": "jresy",
+            "team": "PCIFIC",
+            "opponent": "ex-Zero Tenacity",
+            "prop_type": "Maps 1-2 Kills",
+            "line": 27.5,
+            "stat_per_round": 0.72,
             "expected_rounds": 45.0,
             "map_factor": 1.02,
             "opponent_adj": 1.00,
-            "last_10_logs": [34, 38, 32, 36, 29, 37, 35, 33, 31, 36],
+            "last_10_logs": [31, 29, 34, 30, 28, 32, 35, 29, 33, 31],
         },
         {
-            "player": "Graviti",
-            "team": "3DMAX",
-            "opponent": "M80",
-            "prop_type": "Maps 1-2 Kills",
-            "line": 26.0,
-            "kpr_l15": 0.51,
-            "expected_rounds": 44.0,
-            "map_factor": 0.98,
+            "player": "jresy",
+            "team": "PCIFIC",
+            "opponent": "ex-Zero Tenacity",
+            "prop_type": "Maps 1-2 Headshots",
+            "line": 13.5,
+            "stat_per_round": 0.38,
+            "expected_rounds": 45.0,
+            "map_factor": 1.02,
             "opponent_adj": 1.00,
-            "last_10_logs": [21, 24, 25, 27, 20, 22, 23, 28, 19, 22],
+            "last_10_logs": [16, 15, 18, 14, 17, 15, 19, 16, 14, 17],
+        },
+        {
+            "player": "l0gicman",
+            "team": "PCIFIC",
+            "opponent": "ex-Zero Tenacity",
+            "prop_type": "Maps 1-2 Kills",
+            "line": 23.5,
+            "stat_per_round": 0.44,
+            "expected_rounds": 43.0,
+            "map_factor": 0.95,
+            "opponent_adj": 0.95,
+            "last_10_logs": [17, 19, 18, 20, 16, 21, 18, 19, 17, 22],
+        },
+        {
+            "player": "l0gicman",
+            "team": "PCIFIC",
+            "opponent": "ex-Zero Tenacity",
+            "prop_type": "Maps 1-2 Headshots",
+            "line": 16.0,
+            "stat_per_round": 0.25,
+            "expected_rounds": 43.0,
+            "map_factor": 0.95,
+            "opponent_adj": 0.95,
+            "last_10_logs": [9, 11, 10, 12, 8, 13, 10, 11, 9, 12],
+        },
+        {
+            "player": "lugseN",
+            "team": "PCIFIC",
+            "opponent": "ex-Zero Tenacity",
+            "prop_type": "Maps 1-2 Kills",
+            "line": 28.0,
+            "stat_per_round": 0.72,
+            "expected_rounds": 44.0,
+            "map_factor": 1.02,
+            "opponent_adj": 1.00,
+            "last_10_logs": [31, 30, 33, 29, 34, 32, 30, 35, 29, 32],
+        },
+        {
+            "player": "lugseN",
+            "team": "PCIFIC",
+            "opponent": "ex-Zero Tenacity",
+            "prop_type": "Maps 1-2 Headshots",
+            "line": 9.0,
+            "stat_per_round": 0.18,
+            "expected_rounds": 44.0,
+            "map_factor": 0.95,
+            "opponent_adj": 0.95,
+            "last_10_logs": [6, 5, 7, 8, 6, 7, 5, 8, 6, 7],
+        },
+        {
+            "player": "oyesil",
+            "team": "PCIFIC",
+            "opponent": "ex-Zero Tenacity",
+            "prop_type": "Maps 1-2 Kills",
+            "line": 23.5,
+            "stat_per_round": 0.45,
+            "expected_rounds": 43.0,
+            "map_factor": 0.95,
+            "opponent_adj": 0.95,
+            "last_10_logs": [18, 20, 17, 19, 21, 18, 16, 20, 19, 22],
+        },
+        {
+            "player": "oyesil",
+            "team": "PCIFIC",
+            "opponent": "ex-Zero Tenacity",
+            "prop_type": "Maps 1-2 Headshots",
+            "line": 15.0,
+            "stat_per_round": 0.24,
+            "expected_rounds": 43.0,
+            "map_factor": 0.95,
+            "opponent_adj": 0.95,
+            "last_10_logs": [8, 10, 9, 11, 12, 9, 10, 8, 11, 10],
+        },
+        {
+            "player": "scolleN",
+            "team": "PCIFIC",
+            "opponent": "ex-Zero Tenacity",
+            "prop_type": "Maps 1-2 Kills",
+            "line": 26.5,
+            "stat_per_round": 0.52,
+            "expected_rounds": 44.0,
+            "map_factor": 0.95,
+            "opponent_adj": 0.95,
+            "last_10_logs": [21, 22, 19, 23, 20, 24, 18, 22, 21, 25],
+        },
+        {
+            "player": "scolleN",
+            "team": "PCIFIC",
+            "opponent": "ex-Zero Tenacity",
+            "prop_type": "Maps 1-2 Headshots",
+            "line": 16.0,
+            "stat_per_round": 0.28,
+            "expected_rounds": 44.0,
+            "map_factor": 0.95,
+            "opponent_adj": 0.95,
+            "last_10_logs": [10, 12, 11, 13, 9, 14, 11, 12, 10, 13],
         },
     ]
     board_df = pd.DataFrame(demo_data)
@@ -270,7 +427,6 @@ elif data_source == "Fetch Live API / Paste JSON":
 # ==========================================
 if board_df is not None and not board_df.empty:
 
-    # Execute full board scanner calculations
     processed_df = scan_cs2_props(
         board_df, min_gap=gap_threshold, min_hit_rate=hit_rate_threshold
     )
@@ -310,18 +466,17 @@ if board_df is not None and not board_df.empty:
                 "opponent",
                 "prop_type",
                 "line",
-                "projected_kills",
+                "projected_stat",
                 "proj_gap",
                 "over_hit_rate",
                 "under_hit_rate",
                 "recommendation",
             ]
 
-            # Interactive formatted table
             st.dataframe(
                 qualified_df[display_cols].style.format({
                     "line": "{:.1f}",
-                    "projected_kills": "{:.2f}",
+                    "projected_stat": "{:.2f}",
                     "proj_gap": "{:+.2f}",
                     "over_hit_rate": "{:.0%}",
                     "under_hit_rate": "{:.0%}",
@@ -329,7 +484,6 @@ if board_df is not None and not board_df.empty:
                 use_container_width=True,
             )
 
-            # Export ready-to-bet CSV
             csv_export = (
                 qualified_df[display_cols].to_csv(index=False).encode("utf-8")
             )
@@ -345,7 +499,7 @@ if board_df is not None and not board_df.empty:
         st.dataframe(
             processed_df.style.format({
                 "line": "{:.1f}",
-                "projected_kills": "{:.2f}",
+                "projected_stat": "{:.2f}",
                 "proj_gap": "{:+.2f}",
                 "over_hit_rate": "{:.0%}",
                 "under_hit_rate": "{:.0%}",
