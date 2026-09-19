@@ -1,8 +1,9 @@
 import json
-import re
-import cv2
-import easyocr
+import numpy as np
 import pandas as pd
+import requests
+import streamlit as st
+
 
 # Initialize EasyOCR reader (English)
 reader = easyocr.Reader(['en'], gpu=False)
